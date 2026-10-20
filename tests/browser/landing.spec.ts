@@ -24,7 +24,7 @@ test("the server gate protects HTML, RSC, and invalid sessions", async ({
   });
   expect(await rsc.text()).not.toContain("Skip the back-and-forth");
   expect(await rsc.text()).not.toContain("Pay. Get paid.");
-  expect(await rsc.text()).not.toContain("Cake Wallet");
+  expect(await rsc.text()).not.toContain("BitBox");
   const calendar = await request.get("/api/calendar", { maxRedirects: 0 });
   expect(calendar.status()).toBe(303);
   expect(calendar.headers().location).toContain("/access");
@@ -203,7 +203,7 @@ test("the payment story separates discovery from payment and supports reduced mo
     loadedScripts.some((code) => code.includes("payment-story-toggle")),
   ).toBe(true);
   for (const code of loadedScripts) {
-    expect(code).not.toContain("Cake Wallet");
+    expect(code).not.toContain("BitBox");
     expect(code).not.toContain("Alice wants to pay");
   }
   const route = story.getByTestId("payment-route");
@@ -303,8 +303,8 @@ test("the payment story separates discovery from payment and supports reduced mo
           ].sort(),
         );
       expect(connectedWallets).toEqual([
+        "BitBox",
         "Bitkit",
-        "Cake Wallet",
         "PayPal",
         "Revolut",
         "WDK",
@@ -342,15 +342,15 @@ test("the payment story separates discovery from payment and supports reduced mo
   expect((await bitkit.boundingBox())!.y).toBeLessThan(
     (await paypal.boundingBox())!.y,
   );
-  const cake = story.locator('[data-wallet="Cake Wallet"]');
+  const bitbox = story.locator('[data-wallet="BitBox"]');
   const wdk = story.locator('[data-wallet="WDK"]');
   expect((await wdk.boundingBox())!.y).toBeGreaterThan(
-    (await cake.boundingBox())!.y,
+    (await bitbox.boundingBox())!.y,
   );
   for (const [wallet, currencies] of [
     ["Bitkit", ["BTC", "USDT"]],
     ["Wise", ["USD", "GBP"]],
-    ["Cake Wallet", ["ETH", "XMR"]],
+    ["BitBox", ["ETH", "XMR"]],
     ["WDK", ["BTC", "ETH"]],
     ["Revolut", ["EUR", "CHF"]],
   ] as const) {

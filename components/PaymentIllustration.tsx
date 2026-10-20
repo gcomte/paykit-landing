@@ -15,7 +15,7 @@ const profiles = [
   {
     person: "Bob",
     methods: [
-      { name: "Cake Wallet", currencies: ["ETH", "XMR"], shared: false },
+      { name: "BitBox", currencies: ["ETH", "XMR"], shared: false },
       { name: "Revolut", currencies: ["EUR", "CHF"], shared: false },
       { name: "WDK", currencies: ["BTC", "ETH"], shared: true },
     ],
@@ -25,7 +25,7 @@ const walletLogos: Record<string, string> = {
   Bitkit: "/wallets/bitkit.svg",
   PayPal: "/wallets/paypal.svg",
   Wise: "/wallets/wise.svg",
-  "Cake Wallet": "/wallets/cake-wallet.svg",
+  "BitBox": "/wallets/bitbox.png",
   Revolut: "/wallets/revolut.svg",
   WDK: "/wallets/wdk.svg",
 };
@@ -72,7 +72,7 @@ const discoveryLinks = [
     mobile: "M0 377C33 377 22 74 43 -66",
   },
   {
-    wallet: "Cake Wallet",
+    wallet: "BitBox",
     desktop: "M100 173C86 173 86 116 70 116",
     mobile: "M100 173C86 173 92 50 88 -66",
   },

@@ -384,7 +384,8 @@ h3 {
   gap: 24px;
 }
 .how .section-heading > p {
-  max-width: 680px;
+  max-width: none;
+  text-wrap: pretty;
 }
 #how-title {
   max-width: 1000px;

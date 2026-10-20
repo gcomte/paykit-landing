@@ -1,6 +1,6 @@
 # Wallet logo sources
 
-Downloaded 2026-10-20. All six files are official SVG symbols/app icons rather than long wordmarks. Their original geometry and colors are preserved. These marks identify the illustrative profiles; they do not assert integrations or endorsement.
+Downloaded 2026-10-20. The six active wallet marks are five official SVG symbols/app icons and the official BitBox PNG app icon. Cake Wallet's earlier SVG is retained for rollback. Original geometry and colors are preserved. These marks identify the illustrative profiles; they do not assert integrations or endorsement.
 
 | Local asset | Official source | Selected artwork |
 | --- | --- | --- |
@@ -12,3 +12,11 @@ Downloaded 2026-10-20. All six files are official SVG symbols/app icons rather t
 | `public/wallets/wdk.svg` | [WDK by Tether official website](https://wdk.tether.io/), [official SVG app icon](https://wdk.tether.io/icon.svg?icon.3zxrjexf3btyf.svg) | Orange 48 × 48 rounded app icon with white geometric WDK mark |
 
 The SVGs were parsed and inspected for scripts, event handlers, external resource references, foreign objects, document entities, and executable URLs. They contain no scripts or external resources; any `url(...)` references point to local SVG definitions. No third-party logo aggregators, recreated marks, raster wrappers, or generated logos were used.
+
+## BitBox replacement
+
+- Asset: `public/wallets/bitbox.png` (1024 × 1024 PNG, unchanged official artwork).
+- Official product: [BitBox](https://bitbox.swiss/).
+- Source: [BitBoxSwiss official app repository](https://github.com/BitBoxSwiss/bitbox-wallet-app/blob/master/frontends/ios/BitBoxApp/BitBoxApp/Assets.xcassets/AppIcon.appiconset/bbapp_ios_icon_light_1024px.png), [raw PNG](https://raw.githubusercontent.com/BitBoxSwiss/bitbox-wallet-app/master/frontends/ios/BitBoxApp/BitBoxApp/Assets.xcassets/AppIcon.appiconset/bbapp_ios_icon_light_1024px.png).
+- Selected the actual square BitBoxApp icon instead of the repository's long SVG wordmarks. The original PNG's geometry and colors are preserved, with no image edits or SVG wrapper. Checked PNG signature and 1024 × 1024 dimensions; this static raster asset has no SVG scripts or external resource references.
+- The earlier `cake-wallet.svg` remains available for rollback. Brand appearance does not assert a Paykit integration.
