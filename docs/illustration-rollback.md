@@ -46,3 +46,22 @@ npx --yes vercel@64.7.0 --prod --yes --no-wait
 This restores the static component, its styling, and its explanatory text while
 preserving the earlier illustration history. Confirm the deployment reaches Ready
 and the canonical domain points to it.
+
+## Glass scene and looping autoplay
+
+The first animation is preserved in the pushed tag
+`illustration-before-lively-animation` (commit `9f9b039`). The subsequent glass
+scene and looping autoplay version is tagged `illustration-lively-animation-v1`.
+
+To restore the first animation:
+
+```sh
+git revert --no-commit illustration-before-lively-animation..illustration-lively-animation-v1
+git commit -m "Restore first Paykit animation"
+git push origin HEAD:refs/heads/feat/paykit-landing
+npx --yes vercel@64.7.0 --prod --yes --no-wait
+```
+
+To return all the way to the static image after this update, revert the complete
+range `illustration-before-animation..illustration-lively-animation-v1` instead.
+Future edits may require resolving a normal revert conflict.

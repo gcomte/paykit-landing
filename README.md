@@ -7,8 +7,8 @@ The design uses graphite surfaces, Geist typography, and orange accents. Body co
 The payment explanation is a four-state HTML/SVG animation: starting options,
 protocol discovery, finding a shared rail, and direct wallet payment. Its copy and
 profiles stay in the server component; the client controller handles playback
-only. Visitors can select steps, pause, or replay. Autoplay runs once while the
-scene is visible and is disabled for reduced-motion preferences. Previous static
+only. Visitors can select steps, pause, or replay. Autoplay loops while the
+scene is visible, preserves progress when paused, and is disabled for reduced-motion preferences. Previous static
 assets and [rollback instructions](docs/illustration-rollback.md) are preserved.
 
 Production URL: [paykit-landing-page.vercel.app](https://paykit-landing-page.vercel.app).

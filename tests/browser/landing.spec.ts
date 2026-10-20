@@ -270,7 +270,7 @@ test("the payment story separates discovery from payment and supports reduced mo
   ).toBe(true);
 });
 
-test("the payment story can play, pause, replay, and pause outside the viewport", async ({
+test("the payment story autoplays, loops, pauses, and replays", async ({
   page,
 }) => {
   test.setTimeout(60_000);
@@ -282,7 +282,8 @@ test("the payment story can play, pause, replay, and pause outside the viewport"
   await page.getByRole("button", { name: "Enter Paykit" }).click();
   const story = page.getByTestId("payment-story");
   await story.scrollIntoViewIfNeeded();
-  await story.getByTestId("payment-story-replay").click();
+  await expect(story).toHaveAttribute("data-playing", "true");
+  await expect(story.getByText("Auto-playing", { exact: true })).toBeVisible();
   await expect(story).toHaveAttribute("data-active-step", "0");
   await expect(story).toHaveAttribute("data-active-step", "1", {
     timeout: 9_000,
@@ -290,8 +291,16 @@ test("the payment story can play, pause, replay, and pause outside the viewport"
   await story.getByTestId("payment-story-toggle").click();
   await expect(story).toHaveAttribute("data-playing", "false");
   const pausedStep = await story.getAttribute("data-active-step");
+  const pausedProgress = await story.evaluate((element) =>
+    (element as HTMLElement).style.getPropertyValue("--story-progress"),
+  );
   await page.waitForTimeout(5_500);
   await expect(story).toHaveAttribute("data-active-step", pausedStep!);
+  expect(
+    await story.evaluate((element) =>
+      (element as HTMLElement).style.getPropertyValue("--story-progress"),
+    ),
+  ).toBe(pausedProgress);
   expect(
     await story.evaluate((element) =>
       element
@@ -313,13 +322,32 @@ test("the payment story can play, pause, replay, and pause outside the viewport"
   await story.getByTestId("payment-story-toggle").click();
   await expect(story).toHaveAttribute("data-playing", "true");
   await expect(story).toHaveAttribute("data-active-step", "3");
-  await expect(story).toHaveAttribute("data-playing", "false", {
-    timeout: 7_000,
+  await expect(story).toHaveAttribute("data-active-step", "0", {
+    timeout: 8_000,
   });
+  await expect(story).toHaveAttribute("data-playing", "true");
   await story.getByTestId("payment-story-replay").click();
   await expect(story).toHaveAttribute("data-active-step", "0");
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   await page.waitForTimeout(5_500);
   await expect(story).toHaveAttribute("data-active-step", "0");
   await expect(story).toHaveAttribute("data-playing", "false");
+  await story.scrollIntoViewIfNeeded();
+  await story.locator('button[data-step="0"]').click();
+  await expect(story).toHaveAttribute("data-playing", "false");
+  for (const wallet of ["Bitkit", "WDK"]) {
+    await expect
+      .poll(() =>
+        story.locator(`[data-wallet="${wallet}"]`).evaluate((row) => {
+          let opacity = 1;
+          let element: Element | null = row;
+          while (element) {
+            opacity *= Number(getComputedStyle(element).opacity);
+            element = element.parentElement;
+          }
+          return opacity;
+        }),
+      )
+      .toBeGreaterThan(0.95);
+  }
 });

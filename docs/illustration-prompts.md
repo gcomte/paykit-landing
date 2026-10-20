@@ -239,3 +239,21 @@ Center "I want to pay" above the existing upper arrow using the same clean large
 Preserve EVERYTHING ELSE as closely as possible, unchanged: exact 1774x887 wide composition; upper right-facing intent arrow; Alice and Bob names/portraits; Alice row order Bitkit / PayPal / Wise; Bob row order Cake Wallet / Revolut / WDK; vertically stacked currencies BTC above Tether, USD alone, USD above GBP, Ether above XMR, EUR above CHF, BTC above Ether; beautiful premium graphite smoked-glass 3D rendering; all orange highlights; the single uninterrupted direct orange BTC curve from Alice's top Bitkit row to Bob's bottom WDK row with its BTC label and arrow; subtle discovery frame surrounding wallet options only; exact lower caption "Wallets use Paykit to find a shared payment rail."; shadows, reflections, lighting and all object positions.
 No other changes, additions or removals. No central box/hub, no faint wallet links. The ONLY changed content is the heading, now EXACTLY "I want to pay".
 ```
+
+## Animated walkthrough: physical glass identity sculpture
+
+- Project asset: `public/illustrations/glass-person-v1.png`
+- Dimensions: 1254 × 1254 pixels, RGBA PNG with transparent background.
+- Tool: built-in `image_gen.imagegen`, with v7 as material/art-direction reference and `transparent_background: true`. No API or CLI fallback.
+- Original: `/home/gaib/.codex/generated_images/01a15889-4dcc-7812-b0f4-610e6d6824d9/exec-6457e92e-997b-47f0-b503-2f755135871c.png`.
+- Inspected with `view_image`; selected without image processing. The asset is a physical frosted-glass/silver person silhouette with restrained orange edge reflections, no text or logos. The transparent cutout sits inside responsive HTML/CSS glass identity plaques; names, currencies, and payment steps remain accessible HTML. Delivered through Next Image at display-appropriate sizes.
+
+Exact generation prompt:
+
+```text
+Use case: stylized-concept.
+Asset type: transparent-background 3D person/identity sculpture for an animated premium technology website. The attached image is a MATERIAL AND ART-DIRECTION REFERENCE ONLY.
+Generate ONE beautiful standalone three-dimensional person silhouette sculpture: simple round head above broad curved shoulders and chest, like an elegant universally recognizable contact icon made physical. No facial features, no gender traits, no real person. Thick dimensional translucent smoked crystal body, cool-white frosted glass front with subtly brushed-silver edges, meticulously beveled rim, soft clean studio edge light, a tiny restrained warm orange #ff6b3d reflected edge along its lower right. Quiet refined premium product-render quality, realistic depth and material sparkle, not flat vector art.
+Composition: icon entirely visible, centered, head and shoulder sculpture together as one coherent object, nearly frontal three-quarter view with only slight perspective so silhouette remains very clear. Object fills about 75 percent of square canvas. Genuine TRANSPARENT BACKGROUND / alpha, isolated cutout, no floor, no backdrop, no pedestal, no surrounding tile or plaque, no rectangular frame, no drop shadow outside the object, no text, no letters, no logo, no watermark, no extra symbols, no coins or tokens. Preserve clean smooth edges and glass translucency so this asset can sit naturally on a dark graphite #090b10 website.
+Create a polished tangible object with depth and beautiful highlights, not a screen/UI illustration.
+```

@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import styles from "./PaymentStory.module.css";
 
 type Step = { label: ReactNode; title: ReactNode; description: ReactNode };
@@ -15,6 +21,9 @@ type Props = {
     replay: string;
     navigation: string;
     reducedMotion: string;
+    autoplay: string;
+    paused: string;
+    manual: string;
   };
 };
 
@@ -27,8 +36,9 @@ export default function PaymentStoryController({
 }: Props) {
   const root = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
-  const [requestedPlay, setRequestedPlay] = useState(false);
-  const [completed, setCompleted] = useState(false);
+  const [requestedPlay, setRequestedPlay] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const elapsed = useRef(0);
   const [inView, setInView] = useState(false);
   const [pageVisible, setPageVisible] = useState(true);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -39,19 +49,27 @@ export default function PaymentStoryController({
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const updatePreference = () => {
       setReducedMotion(preference.matches);
-      setCompleted(false);
       setRequestedPlay(!preference.matches);
-      if (preference.matches) setActive(steps.length - 1);
+      if (preference.matches) {
+        setActive(steps.length - 1);
+        elapsed.current = 0;
+        setProgress(0);
+      }
     };
     updatePreference();
     const updateVisibility = () =>
       setPageVisible(document.visibilityState === "visible");
     updateVisibility();
     const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.intersectionRatio >= 0.25),
-      { threshold: 0.25 },
+      ([entry]) => setInView(entry.intersectionRatio >= 0.2),
+      { threshold: 0.2 },
     );
-    if (root.current) observer.observe(root.current);
+    if (root.current) {
+      observer.observe(
+        root.current.querySelector('[data-testid="payment-scene"]') ||
+          root.current,
+      );
+    }
     preference.addEventListener("change", updatePreference);
     document.addEventListener("visibilitychange", updateVisibility);
     return () => {
@@ -63,30 +81,41 @@ export default function PaymentStoryController({
 
   useEffect(() => {
     if (!playing) return;
-    const timer = window.setTimeout(() => {
-      if (active >= steps.length - 1) {
-        setRequestedPlay(false);
-        setCompleted(true);
-      } else setActive(active + 1);
-    }, 5000);
-    return () => window.clearTimeout(timer);
+    const duration =
+      active === 0 ? 4000 : active === steps.length - 1 ? 6000 : 5000;
+    let lastTick = performance.now();
+    const timer = window.setInterval(() => {
+      const now = performance.now();
+      elapsed.current += now - lastTick;
+      lastTick = now;
+      if (elapsed.current >= duration) {
+        elapsed.current = 0;
+        setProgress(0);
+        setActive((step) => (step + 1) % steps.length);
+        window.clearInterval(timer);
+      } else {
+        setProgress((elapsed.current / duration) * 100);
+      }
+    }, 100);
+    return () => window.clearInterval(timer);
   }, [playing, active, steps.length]);
 
   function select(index: number) {
     setActive(index);
     setRequestedPlay(false);
-    setCompleted(false);
+    elapsed.current = 0;
+    setProgress(0);
     setManualAnnouncement(steps[index].description);
   }
   function replay() {
     setActive(0);
-    setCompleted(false);
+    elapsed.current = 0;
+    setProgress(0);
     setRequestedPlay(!reducedMotion);
     setManualAnnouncement(steps[0].description);
   }
   function toggle() {
-    if (completed) replay();
-    else setRequestedPlay(!requestedPlay);
+    setRequestedPlay(!requestedPlay);
   }
   return (
     <figure
@@ -98,6 +127,7 @@ export default function PaymentStoryController({
       data-in-view={inView}
       data-page-visible={pageVisible}
       data-reduced-motion={reducedMotion}
+      style={{ "--story-progress": `${progress}%` } as CSSProperties}
     >
       <div className={styles.heading}>{heading}</div>
       {children}
@@ -108,6 +138,9 @@ export default function PaymentStoryController({
             <p>{step.description}</p>
           </div>
         ))}
+      </div>
+      <div className={styles.progressTrack} aria-hidden="true">
+        <span className={styles.progressFill} />
       </div>
       <div className={styles.controls}>
         <nav className={styles.steps} aria-label={labels.navigation}>
@@ -127,6 +160,13 @@ export default function PaymentStoryController({
           ))}
         </nav>
         <div className={styles.playback}>
+          <span className={styles.playbackStatus}>
+            {reducedMotion
+              ? labels.manual
+              : playing
+                ? labels.autoplay
+                : labels.paused}
+          </span>
           <button
             type="button"
             onClick={toggle}

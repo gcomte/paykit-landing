@@ -1,4 +1,5 @@
 import "server-only";
+import Image from "next/image";
 import PaymentStoryController from "./PaymentStoryController";
 import styles from "./PaymentStory.module.css";
 
@@ -48,16 +49,14 @@ const steps = [
 ];
 function Person() {
   return (
-    <svg
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
-      fill="none"
-      aria-hidden="true"
-    >
-      <circle cx="16" cy="10" r="5" fill="currentColor" />
-      <path d="M6 28v-3a10 10 0 0 1 20 0v3H6Z" fill="currentColor" />
-    </svg>
+    <Image
+      src="/illustrations/glass-person-v1.png"
+      width={112}
+      height={112}
+      sizes="(max-width: 700px) 56px, 112px"
+      alt=""
+      draggable={false}
+    />
   );
 }
 export default function PaymentIllustration() {
@@ -69,8 +68,10 @@ export default function PaymentIllustration() {
         pause: "Pause payment walkthrough",
         replay: "Replay payment walkthrough",
         navigation: "Payment walkthrough steps",
-        reducedMotion:
-          "Animation is off because you prefer reduced motion. Choose any step to explore.",
+        autoplay: "Auto-playing",
+        paused: "Paused",
+        manual: "Manual steps",
+        reducedMotion: "Choose a step to explore at your own pace.",
       }}
       heading={
         <>
@@ -86,12 +87,17 @@ export default function PaymentIllustration() {
         </p>
       }
     >
-      <div className={styles.scene}>
+      <div className={styles.scene} data-testid="payment-scene">
         <div className={styles.discovery} aria-hidden="true">
+          <div className={styles.discoveryScan} />
           <span>Wallets use Paykit to discover payment options.</span>
         </div>
         {profiles.map((profile) => (
-          <div className={styles.profile} key={profile.person}>
+          <div
+            className={styles.profile}
+            data-person={profile.person}
+            key={profile.person}
+          >
             <div className={styles.person}>
               <span className={styles.avatar}>
                 <Person />
@@ -128,17 +134,17 @@ export default function PaymentIllustration() {
           data-testid="payment-route"
           aria-hidden="true"
         >
-          <svg viewBox="0 0 100 378" preserveAspectRatio="none" fill="none">
+          <svg viewBox="0 0 100 422" preserveAspectRatio="none" fill="none">
             <path
               className={styles.routeLine}
-              d="M0 129C45 129 55 333 100 333"
+              d="M0 173C45 173 55 377 100 377"
             />
             <path
               className={styles.routePulse}
-              d="M0 129C45 129 55 333 100 333"
+              d="M0 173C45 173 55 377 100 377"
               pathLength="1"
             />
-            <path className={styles.arrow} d="m94 327 5 6-5 6" />
+            <path className={styles.arrow} d="m94 371 5 6-5 6" />
           </svg>
           <span className={styles.btc}>BTC</span>
         </div>
