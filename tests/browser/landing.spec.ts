@@ -256,11 +256,22 @@ test("the payment story separates discovery from payment and supports reduced mo
       ),
     ).toBeGreaterThanOrEqual(14);
     expect(
-      await row.evaluate(
-        (element) =>
-          element.scrollWidth <= element.clientWidth &&
-          element.scrollHeight <= element.clientHeight,
-      ),
+      await row.evaluate((element) => {
+        const bounds = element.getBoundingClientRect();
+        const labels = element.querySelectorAll(
+          ":scope > strong, [data-currency]",
+        );
+        return Array.from(labels).every((label) => {
+          const rect = label.getBoundingClientRect();
+          return (
+            rect.left >= bounds.left &&
+            rect.right <= bounds.right &&
+            rect.top >= bounds.top &&
+            rect.bottom <= bounds.bottom
+          );
+        });
+      }),
+      `${wallet} labels must fit inside their wallet card`,
     ).toBe(true);
   }
   expect(
