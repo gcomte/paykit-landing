@@ -543,8 +543,8 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             <div className="foundation-visual">
               <div className="foundation-art">
                 <Image
-                  src="/illustrations/pubky-homeserver-network-v2.png"
-                  alt="A decentralized peer network connected to a homeserver inside a home."
+                  src="/illustrations/pubky-homeserver-network-v3.png"
+                  alt="A decentralized mesh of small peer nodes connected to a homeserver inside a home."
                   width={1536}
                   height={1024}
                   sizes="(max-width: 800px) 100vw, 50vw"
