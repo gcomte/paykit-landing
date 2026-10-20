@@ -44,7 +44,7 @@ const steps = [
     label: "Enter Paykit",
     title: "Paykit indexes payment options",
     description:
-      "Wallets implement the Paykit protocol to discover Alice’s and Bob’s payment options and exchange the details. This step shares information, not funds.",
+      "Wallets can register their supported payment rails with Paykit so other wallets can discover them. This step shares information, not funds.",
   },
   {
     label: "Choose who to pay",
