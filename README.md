@@ -4,7 +4,9 @@ A password-protected Paykit landing page built with Next.js 16 App Router, React
 
 The design uses graphite surfaces, Geist typography, and orange accents. Body copy is at least 16px and labels/secondary links at least 14px. The introductory video appears in the opening section. Original generated illustration assets and their exact prompts are documented in [docs/illustration-prompts.md](docs/illustration-prompts.md). Use the plain **Paykit** name; there is no Paykit logo yet.
 
-Production URL: [paykit-landing-ten.vercel.app](https://paykit-landing-ten.vercel.app).
+Production URL: [paykit-landing-page.vercel.app](https://paykit-landing-page.vercel.app).
+
+This address is registered as a verified production domain on the existing Vercel project, so production deployments update it automatically.
 
 ## Run locally
 

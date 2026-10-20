@@ -529,9 +529,6 @@ h3 {
 .foundation-copy h2 {
   max-width: 440px;
 }
-.foundation-copy h2 br:nth-of-type(2) {
-  display: none;
-}
 .foundation-copy > p:not(.eyebrow) {
   color: var(--muted);
   margin-top: 22px;
@@ -1193,14 +1190,8 @@ h3 {
     grid-template-columns: 1fr;
     gap: 36px;
   }
-  .foundation-copy h2 br {
-    display: none;
-  }
   .foundation-copy h2 {
     max-width: none;
-  }
-  .foundation-copy h2 br::after {
-    content: " ";
   }
 
   .marketplace-action {
@@ -1664,5 +1655,18 @@ h3 {
     font-size: 14px;
     gap: 8px;
     padding: 16px 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+  .hero-actions > .button {
+    width: 100%;
+    white-space: nowrap;
   }
 }

@@ -160,7 +160,7 @@ The Vercel project has a published persistent WAF rule limiting `/api/access` to
 
 Validation includes session integrity/expiry/configuration tests, TypeScript checking, a production build, and browser checks for password access, desktop/mobile layout, contact-draft behavior, and click-to-load video. Review the implemented authentication and data handling before deployment. Check deployed headers, unauthenticated redirects, failed/successful login, and protected responses on the final Vercel URL.
 
-Verified production URL: [paykit-landing-ten.vercel.app](https://paykit-landing-ten.vercel.app).
+Verified production URL: [paykit-landing-page.vercel.app](https://paykit-landing-page.vercel.app).
 
 
 ## Delivery verification — 20 October 2026
