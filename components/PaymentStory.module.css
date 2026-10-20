@@ -583,7 +583,8 @@
   color: #b3bfd0;
   font-size: 16px;
   line-height: 1.65;
-  max-width: 820px;
+  max-width: none;
+  text-wrap: pretty;
 }
 .progressTrack {
   height: 1px;
