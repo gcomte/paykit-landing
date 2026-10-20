@@ -321,7 +321,9 @@ test("the payment story separates discovery from payment and supports reduced mo
     }
     if (step === 3) {
       await expect(title).toContainText(/rail/i);
-      expect(await cardStyles()).toEqual(neutralCards);
+      const discoveryCards = await cardStyles();
+      expect(discoveryCards[0]).not.toEqual(neutralCards[0]);
+      expect(discoveryCards.slice(1)).toEqual(neutralCards.slice(1));
       const btcLabels = story.locator('[data-wallet] [data-currency="BTC"]');
       await expect(btcLabels).toHaveCount(2);
       for (const btc of await btcLabels.all()) {

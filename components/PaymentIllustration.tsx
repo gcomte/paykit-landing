@@ -346,6 +346,16 @@ export default function PaymentIllustration() {
               d="M60 -66C60 30 26 160 0 160"
               pathLength="1"
             />
+            <path
+              className={`${styles.queryPulse} ${styles.queryRequestPulse}`}
+              d="M0 140C24 140 28 40 28 -66"
+              pathLength="1"
+            />
+            <path
+              className={`${styles.queryPulse} ${styles.queryResponsePulse}`}
+              d="M60 -66C60 30 26 160 0 160"
+              pathLength="1"
+            />
           </svg>
           <span className={styles.mobileQueryRequestHead} />
           <span className={styles.mobileQueryResponseHead} />

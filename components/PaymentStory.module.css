@@ -494,8 +494,9 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #d5e7f4;
-  box-shadow: 0 0 7px #c8e7ff45;
+  background: var(--accent);
+  border: 1px solid #ffe1c2;
+  box-shadow: 0 0 8px #ff754a80;
 }
 .query::before {
   top: 137px;
@@ -513,14 +514,14 @@
   left: 0;
   width: 100%;
   height: 1px;
-  border-top: 1.5px dashed #c6dced;
+  border-top: 1.5px solid var(--accent);
+  filter: drop-shadow(0 0 5px #ff754a88);
 }
 .queryRequestLine {
   top: 140px;
 }
 .queryResponseLine {
   top: 160px;
-  border-color: #a5bfd5;
 }
 .queryRequestLine::after,
 .queryResponseLine::after {
@@ -529,8 +530,8 @@
   width: 6px;
   height: 6px;
   top: -4px;
-  border-top: 1.5px solid #dceeff;
-  border-right: 1.5px solid #dceeff;
+  border-top: 1.5px solid var(--accent);
+  border-right: 1.5px solid var(--accent);
 }
 .queryRequestLine::after {
   right: 0;
@@ -547,8 +548,8 @@
   left: 0;
   width: 12px;
   height: 2px;
-  background: #e3f3ff;
-  box-shadow: 0 0 5px #c8e7ff70;
+  background: #fff5e6;
+  box-shadow: 0 0 6px #ffdcb9;
   opacity: 0;
 }
 .mobileQueryRequestHead,
@@ -557,13 +558,19 @@
 }
 .queryRequest,
 .queryResponse {
-  stroke: #d5e7f4;
+  stroke: var(--accent);
   stroke-width: 1.5;
-  stroke-dasharray: 0.06 0.055;
   vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 5px #ff754a88);
 }
-.queryResponse {
-  stroke: #a5bfd5;
+.queryPulse {
+  stroke: #fff5e6;
+  stroke-width: 2.5;
+  stroke-dasharray: 0.14 0.86;
+  stroke-dashoffset: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: 0;
+  filter: drop-shadow(0 0 5px #ffdcb9) drop-shadow(0 0 9px #ff754a);
 }
 .queryLabel,
 .optionsLabel {
@@ -594,6 +601,12 @@
 }
 .story[data-active-step="3"] .queryResponseTravel {
   animation: optionsAcross 6.5s linear 1 both;
+}
+.story[data-active-step="3"] .queryRequestPulse {
+  animation: queryOutbound 6.5s linear 1 both;
+}
+.story[data-active-step="3"] .queryResponsePulse {
+  animation: queryInbound 6.5s linear 1 both;
 }
 .route {
   position: absolute;
@@ -705,6 +718,8 @@
   opacity: 0.75;
 }
 .story[data-active-step="2"] [data-person="Alice"] [data-wallet="Bitkit"],
+.story[data-active-step="3"] [data-person="Alice"] [data-wallet="Bitkit"],
+.story[data-active-step="3"] .discoveryNode,
 .story[data-active-step="4"] [data-shared="true"] {
   border-color: #ff9a6fe0;
   background:
@@ -978,6 +993,38 @@
     opacity: 0;
   }
 }
+@keyframes queryOutbound {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  45% {
+    stroke-dashoffset: -0.14;
+    opacity: 1;
+  }
+  46%,
+  100% {
+    stroke-dashoffset: -0.14;
+    opacity: 0;
+  }
+}
+@keyframes queryInbound {
+  0%,
+  45% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -0.14;
+    opacity: 0;
+  }
+}
 @keyframes optionsAcross {
   0%,
   45% {
@@ -1066,8 +1113,8 @@
     position: absolute;
     width: 6px;
     height: 6px;
-    border-top: 1.5px solid #dceeff;
-    border-right: 1.5px solid #dceeff;
+    border-top: 1.5px solid var(--accent);
+    border-right: 1.5px solid var(--accent);
   }
   .mobileQueryRequestHead {
     left: calc(28% - 3px);
