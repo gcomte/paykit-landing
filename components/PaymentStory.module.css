@@ -298,7 +298,7 @@
     text-shadow 0.5s;
 }
 .discoveryNetwork {
-  --node-inset: max(16px, calc((100% - 260px) / 2));
+  --node-inset: max(16px, calc((100% - 300px) / 2));
   position: absolute;
   left: var(--card-width);
   right: var(--card-width);
@@ -359,7 +359,7 @@
   left: 50%;
   top: -16px;
   width: calc(100% - 32px);
-  max-width: 260px;
+  max-width: 300px;
   height: auto;
   padding: 20px 12px;
   transform: translateX(-50%);
@@ -396,10 +396,11 @@
 }
 .discoverySummary {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 100px));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 60px;
+  width: 100%;
   justify-content: center;
   align-items: start;
-  gap: 16px;
+  gap: 10px;
 }
 .discoverySummaryPerson {
   display: grid;
@@ -421,24 +422,12 @@
   text-align: center;
   letter-spacing: -0.02em;
 }
-.discoverySummaryMore {
-  grid-column: 1 / -1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 14px;
-  padding-top: 8px;
-  border-top: 1px solid #d8eaff26;
+.discoverySummaryPlaceholder {
   font-size: 14px;
+  font-weight: 400;
   line-height: 1.2;
-  letter-spacing: 0;
+  letter-spacing: 0.08em;
   color: #c4d0df;
-}
-.discoverySummaryMore > strong {
-  font-size: 16px;
-  font-weight: 650;
-  color: #eef5ff;
-  letter-spacing: -0.02em;
 }
 .discoverySummaryMethods {
   width: 100%;
@@ -453,7 +442,7 @@
   grid-template-columns: 22px max-content;
   justify-items: start;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 .discoverySummaryCurrencies {
   display: flex;
@@ -526,7 +515,7 @@
   animation-delay: 2.25s;
 }
 .query {
-  --node-inset: max(16px, calc((100% - 260px) / 2));
+  --node-inset: max(16px, calc((100% - 300px) / 2));
   position: absolute;
   left: var(--card-width);
   right: var(--card-width);
@@ -1130,7 +1119,7 @@
 }
 @media (max-width: 1200px) {
   .scene {
-    margin-top: 358px;
+    margin-top: 314px;
   }
   .instructionArrow {
     left: calc(100% - 2px);
@@ -1148,7 +1137,7 @@
   .discoveryNode {
     top: auto;
     bottom: calc(100% + 66px);
-    width: 280px;
+    width: min(300px, calc(100vw - 60px));
     max-width: none;
     height: auto;
     padding: 10px 12px;
@@ -1200,7 +1189,7 @@
   }
   .scene {
     --card-width: calc((100% - 48px) / 2);
-    margin: 358px 0 80px;
+    margin: 314px 0 80px;
   }
   .profile::before {
     inset: -10px -6px -9px;
@@ -1292,10 +1281,17 @@
 @media (max-width: 340px) {
   .scene {
     --card-width: calc((100% - 24px) / 2);
-    margin-top: 358px;
+    margin-top: 314px;
   }
   .discoveryNode {
-    width: min(280px, calc(100vw - 78px));
+    width: 260px;
+  }
+  .discoverySummary {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 54px;
+    gap: 6px;
+  }
+  .discoverySummaryOption {
+    gap: 4px;
   }
   .instructionArrow {
     left: calc(100% + 8px);
