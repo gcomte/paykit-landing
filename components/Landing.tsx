@@ -345,9 +345,9 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               <Icon kind="exchange" size={28} />
               <h3>Interoperable.</h3>
               <p>
-                You and your contact can use different wallets. Compatible apps
-                exchange payment details through Paykit, then pay using a method
-                you both support.
+                Paykit is an open protocol. Any wallet, payment provider,
+                point-of-sale system, online store, or service can integrate it
+                and coordinate payments with other compatible apps.
               </p>
               <a
                 className="text-link"
