@@ -73,12 +73,6 @@ export default function PaymentIllustration() {
         manual: "Manual steps",
         reducedMotion: "Choose a step to explore at your own pace.",
       }}
-      heading={
-        <>
-          <span>From a contact to a payment</span>
-          <span className={styles.example}>Illustrative example</span>
-        </>
-      }
       footer={
         <p className={styles.note}>
           Illustrative profiles and currencies, not a list of supported

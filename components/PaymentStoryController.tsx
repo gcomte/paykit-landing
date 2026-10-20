@@ -2,6 +2,7 @@
 
 import {
   useEffect,
+  useId,
   useRef,
   useState,
   type CSSProperties,
@@ -12,7 +13,6 @@ import styles from "./PaymentStory.module.css";
 type Step = { label: ReactNode; title: ReactNode; description: ReactNode };
 type Props = {
   children: ReactNode;
-  heading: ReactNode;
   footer: ReactNode;
   steps: Step[];
   labels: {
@@ -29,12 +29,12 @@ type Props = {
 
 export default function PaymentStoryController({
   children,
-  heading,
   footer,
   steps,
   labels,
 }: Props) {
   const root = useRef<HTMLElement>(null);
+  const titleId = useId();
   const [active, setActive] = useState(0);
   const [requestedPlay, setRequestedPlay] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -105,14 +105,22 @@ export default function PaymentStoryController({
     setRequestedPlay(false);
     elapsed.current = 0;
     setProgress(0);
-    setManualAnnouncement(steps[index].description);
+    setManualAnnouncement(
+      <>
+        {steps[index].title} {steps[index].description}
+      </>,
+    );
   }
   function replay() {
     setActive(0);
     elapsed.current = 0;
     setProgress(0);
     setRequestedPlay(!reducedMotion);
-    setManualAnnouncement(steps[0].description);
+    setManualAnnouncement(
+      <>
+        {steps[0].title} {steps[0].description}
+      </>,
+    );
   }
   function toggle() {
     setRequestedPlay(!requestedPlay);
@@ -121,6 +129,7 @@ export default function PaymentStoryController({
     <figure
       ref={root}
       className={styles.story}
+      aria-labelledby={titleId}
       data-testid="payment-story"
       data-active-step={active}
       data-playing={playing}
@@ -129,19 +138,23 @@ export default function PaymentStoryController({
       data-reduced-motion={reducedMotion}
       style={{ "--story-progress": `${progress}%` } as CSSProperties}
     >
-      <div className={styles.heading}>{heading}</div>
+      <div className={styles.heading} data-testid="payment-story-heading">
+        <h3 id={titleId}>{steps[active].title}</h3>
+        <div className={styles.progressTrack} aria-hidden="true">
+          <span className={styles.progressFill} />
+        </div>
+      </div>
       {children}
-      <div className={styles.caption} data-testid="payment-story-caption">
+      <figcaption
+        className={styles.caption}
+        data-testid="payment-story-caption"
+      >
         {steps.map((step, index) => (
-          <div key={index} hidden={index !== active}>
-            <h3>{step.title}</h3>
-            <p>{step.description}</p>
-          </div>
+          <p key={index} hidden={index !== active}>
+            {step.description}
+          </p>
         ))}
-      </div>
-      <div className={styles.progressTrack} aria-hidden="true">
-        <span className={styles.progressFill} />
-      </div>
+      </figcaption>
       <div className={styles.controls}>
         <nav className={styles.steps} aria-label={labels.navigation}>
           {steps.map((step, index) => (

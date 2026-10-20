@@ -207,19 +207,16 @@ test("the payment story separates discovery from payment and supports reduced mo
     expect(code).not.toContain("Alice wants to pay");
   }
   const route = story.getByTestId("payment-route");
-  const caption = story.getByTestId("payment-story-caption");
+  const title = story.getByTestId("payment-story-heading").getByRole("heading");
   for (const step of [0, 1, 2, 3]) {
     const button = story.locator(`button[data-step="${step}"]`);
     await button.click();
     await expect(story).toHaveAttribute("data-active-step", String(step));
     await expect(button).toHaveAttribute("aria-current", "step");
     await expect(route).toHaveCSS("opacity", step === 3 ? "1" : "0");
-    if (step === 1)
-      await expect(caption.getByRole("heading")).toContainText("Paykit");
-    if (step === 2)
-      await expect(caption.getByRole("heading")).toContainText("$10");
-    if (step === 3)
-      await expect(caption.getByRole("heading")).toContainText(/direct/i);
+    if (step === 1) await expect(title).toContainText("Paykit");
+    if (step === 2) await expect(title).toContainText("$10");
+    if (step === 3) await expect(title).toContainText(/direct/i);
   }
   await story.locator('button[data-step="1"]').focus();
   await page.keyboard.press("Enter");
