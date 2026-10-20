@@ -34,7 +34,7 @@ const features = [
   {
     title: "Requests and receipts",
     description:
-      "Keep the context with the payment. Exchange requests, payment proofs, and encrypted receipts between compatible apps.",
+      "Keep the context with the payment. Exchange requests, payment proofs, and encrypted receipts between Paykit-enabled apps.",
     icon: (
       <>
         <path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z" />
