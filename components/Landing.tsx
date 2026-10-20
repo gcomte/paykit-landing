@@ -644,16 +644,13 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                   Google Calendar <Arrow diagonal />
                 </a>
               </div>
-              <p className="calendar-help">
-                Calendar download for Apple Calendar, Outlook &amp; more.
-              </p>
               <a
                 href={links.agenda}
                 target="_blank"
                 rel="noreferrer"
                 className="workshop-link"
               >
-                Find it on the agenda <Arrow diagonal />
+                Find it on the conference agenda <Arrow diagonal />
               </a>
             </div>
           </div>
