@@ -358,7 +358,11 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               <Icon kind="globe" size={28} />
               <h3>Decentralized.</h3>
               <p>
-                Your public-key identity is discovered through{" "}
+                Paykit runs on{" "}
+                <a href="https://pubky.org/" target="_blank" rel="noreferrer">
+                  Pubky
+                </a>
+                , so you can host your own data and stay fully in control.{" "}
                 <a
                   href="https://github.com/pubky/pkarr"
                   target="_blank"
@@ -366,15 +370,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 >
                   PKARR
                 </a>{" "}
-                on Mainline DHT. Your payment data lives on a{" "}
-                <a
-                  href="https://pubky.org/homeserver/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  homeserver
-                </a>{" "}
-                you choose—or run yourself.
+                keeps you discoverable—no registration or permission required.
               </p>
               <a className="text-link" href="#foundation-title">
                 Your data, your choice <Arrow />
