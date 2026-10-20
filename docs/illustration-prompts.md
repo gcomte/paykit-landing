@@ -46,3 +46,26 @@ Lighting/mood: soft cool-white studio edge lighting, glass highlights, subtle me
 Composition/framing: balanced two-object arrangement with a readable visual connection between them, three-quarter elevated isometric camera, objects completely in frame, generous breathing room. Match a premium dark graphite, cool glass and brushed metal, orange light-path visual system. Readable at half size.
 Constraints: absolutely no text, letters, numbers, logos, brand symbols, watermark. No coins, no actual money, no crypto tokens, no central giant logo or token hub, no globe, no cloud, no people, no decorative particles, no busy circuitry, no neon city, no clutter. The person tile must have a clear human silhouette, not a payment address. All elements contained within the canvas.
 ```
+
+## Person-to-person compatibility example
+
+- Project asset: `public/illustrations/contact-payment-v2.png`
+- Dimensions: 1774 × 887 pixels (2:1), RGB PNG.
+- Tool: built-in `image_gen.imagegen`, edit mode with `public/illustrations/contact-payment-v1.png` as reference. No API or CLI fallback.
+- Original: `/home/gaib/.codex/generated_images/01a15889-4dcc-7812-b0f4-610e6d6824d9/exec-f433c473-f63e-4f4a-9cc7-67c20ccd3d16.png`.
+- Inspected with `view_image`; selected without further image edits. Both main objects are person/contact plaques. Left labels read PayPal, Bitkit / Bitcoin, Wise; right labels read Ethereum, WDK / Bitcoin, Revolut. The only orange connecting route joins the Bitkit and WDK Bitcoin rows, via a small Bitcoin marker. Other methods are neutral and unconnected. Exact capitalization is correct; no success status is present.
+- This is a conceptual compatibility example, not a claim of available PayPal, Wise, Ethereum, Revolut, or WDK integrations. The website supplies explanatory context and accessible text.
+
+Exact edit prompt:
+
+```text
+Use case: precise-object-edit.
+Asset type: conceptual compatibility illustration for the Paykit landing page, not a product screenshot or claim of integrations.
+Edit the provided contact-payment illustration to show a PERSON paying another PERSON, with their different available payment methods clearly associated with them, and Bitcoin as their only shared method.
+Preserve the original's exceptionally polished premium 3D studio product-render style, graphite background #090b10, smoked glass, brushed black metal, cool-white material highlights, restrained orange #ff6b3d glow, realistic floor, beautiful depth and soft studio shadows. Keep a wide approximately 2:1 balanced landscape frame with all objects contained and generous breathing room.
+Replace the left large wallet object with an upright smoked-glass PERSON identity plaque with a large clear simple cool-white human silhouette. Keep another matching PERSON identity plaque on the right. Both main objects must be people/contact identities, not wallet symbols.
+Beneath each person's silhouette, integrate three very legible horizontal glass/metal method rows as part of that person's group. Use a mostly front-facing composition so labels are large and readable at a website display width of 1152 pixels. Left person's exact rows top to bottom: "PayPal"; "Bitkit" with a small secondary "Bitcoin" label; "Wise". Right person's exact rows top to bottom: "Ethereum"; "WDK" with a small secondary "Bitcoin" label; "Revolut". The left middle Bitkit/Bitcoin row and right middle WDK/Bitcoin row have orange illuminated edges. All other rows remain neutral graphite with cool-white text.
+Between the two middle Bitcoin rows, show one beautiful thin orange light beam linking ONLY the Bitkit/Bitcoin row on the left to the WDK/Bitcoin row on the right. Centered on this single link is a tasteful small glass marker with an orange Bitcoin glyph "₿" and small exact label "Bitcoin". This represents the compatible method. Remove the original's two floating generic detail slips; they are replaced by the single small Bitcoin marker. No connectors, arrows, or beams touch PayPal, Wise, Ethereum, or Revolut. Bitcoin is the ONLY shared payment method. No payment-success checkmarks, paid statuses, actual coins, money, or suggestion any funds have moved.
+Typography exact text ONLY: PayPal, Bitkit, Bitcoin, Wise, Ethereum, WDK, Revolut, Bitcoin. Preserve exact lettercase; clean plain modern sans text, no invented logos or imitated brand marks. Do not render the words Paykit, protocol, user, sender, recipient, person, or any title/caption/frame wording; website HTML will supply context. No watermark. No actual people, coins, tokens, globe, cloud, giant central logo, busy circuitry, particles, or clutter.
+The visual must clearly read as two people with different available methods, with only their shared Bitcoin route highlighted. Preserve sophisticated tangible 3D materials and visual beauty, not a flat UI screenshot.
+```

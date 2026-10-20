@@ -208,8 +208,13 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
       </a>
       <header className="site-header">
         <div className="header-inner">
-          <a href="#" className="wordmark" aria-label="Paykit home">
-            Paykit
+          <a
+            href="#"
+            className="brand-lockup"
+            aria-label="Paykit — the open payment protocol"
+          >
+            <span className="wordmark">Paykit</span>
+            <span className="brand-tagline">- the open payment protocol</span>
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="#how-it-works">How it works</a>
@@ -235,9 +240,6 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
       <main id="main">
         <section className="hero section-pad" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <p className="eyebrow hero-eyebrow">
-              <span className="status-dot" /> The open payment protocol
-            </p>
             <h1 id="hero-title">
               Pay. Get paid.
               <br />
