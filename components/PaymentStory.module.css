@@ -183,12 +183,12 @@
 .instructionArrowHead {
   position: absolute;
   left: -3px;
-  top: 75px;
+  top: 61px;
   width: 6px;
   height: 6px;
   border-top: 1.5px solid var(--accent);
   border-right: 1.5px solid var(--accent);
-  transform: rotate(225deg);
+  transform: rotate(185deg);
 }
 .story[data-active-step="2"] .instructionArrow {
   opacity: 1;
@@ -1117,6 +1117,9 @@
     left: calc(100% - 2px);
     width: 64px;
   }
+  .instructionArrowHead {
+    transform: rotate(176deg);
+  }
   .desktopDiscoveryLinks {
     display: none;
   }
@@ -1276,8 +1279,11 @@
     width: min(280px, calc(100vw - 78px));
   }
   .instructionArrow {
-    left: calc(100% - 2px);
+    left: calc(100% + 8px);
     width: 28px;
+  }
+  .instructionArrowHead {
+    transform: rotate(156deg);
   }
   .intent {
     top: 80px;

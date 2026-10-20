@@ -176,7 +176,7 @@ export default function PaymentIllustration() {
                 aria-hidden="true"
               >
                 <svg viewBox="0 0 88 88" preserveAspectRatio="none" fill="none">
-                  <path d="M0 8C74 8 74 78 0 78" />
+                  <path d="M0 8C24 20 24 44 0 64" />
                 </svg>
                 <span className={styles.instructionArrowHead} />
               </div>
