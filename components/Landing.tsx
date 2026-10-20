@@ -426,8 +426,8 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               </div>
               <h3>Pay your contacts with Bitkit.</h3>
               <p>
-                Try Paykit with Bitkit, the self-custodial Bitcoin and Lightning
-                wallet. Paykit support is available from version 3.0.
+                Try Paykit with Bitkit, the self-custodial Bitcoin, Lightning and
+                Tether wallet. Paykit support is available from version 3.0.
               </p>
               <span className="card-link">
                 Get Bitkit <Arrow />
