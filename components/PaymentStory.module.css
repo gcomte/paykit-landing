@@ -588,7 +588,6 @@
 }
 .story[data-active-step="3"] .query {
   opacity: 1;
-  transition-delay: 1.125s;
 }
 .story[data-active-step="3"] .queryRequest {
   animation: queryRequest 6.5s linear 1 both;
