@@ -1114,8 +1114,8 @@
   .queryLabel,
   .optionsLabel {
     display: block;
-    left: 2px;
-    transform: none;
+    left: 50%;
+    transform: translateX(-50%);
     line-height: 16px;
     padding: 3px 6px;
   }
