@@ -922,7 +922,21 @@
   }
   .queryLabel,
   .optionsLabel {
-    display: none;
+    display: block;
+    left: -104px;
+    white-space: nowrap;
+  }
+  .queryLabel {
+    top: -52px;
+  }
+  .optionsLabel {
+    top: -29px;
+  }
+  .queryLabel::after {
+    content: " →";
+  }
+  .optionsLabel::before {
+    content: "← ";
   }
   .profile::before {
     inset: -10px -6px -9px;
