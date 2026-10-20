@@ -663,53 +663,6 @@ h3 {
   margin-left: auto;
   max-width: 180px;
 }
-.build {
-  padding-top: 24px;
-}
-.resource-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.resource-list > a {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 25px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: #10131a;
-  position: relative;
-  transition: border-color 0.2s;
-}
-.resource-list > a:hover {
-  border-color: #596171;
-}
-.resource-icon {
-  color: #bec8d9;
-  margin-top: 2px;
-}
-.resource-list h3 {
-  font-size: 18px;
-  padding-right: 22px;
-}
-.resource-list p {
-  color: var(--muted);
-  font-size: 16px;
-  margin-top: 8px;
-  max-width: 370px;
-}
-.resource-tag {
-  display: none;
-}
-.resource-list > a > svg {
-  position: absolute;
-  top: 26px;
-  right: 22px;
-  width: 17px;
-  height: 17px;
-  color: #9daabf;
-}
 .lugano {
   background:
     radial-gradient(ellipse at 0 30%, #ff6b3d12, transparent 70%), #11131a;
@@ -1343,23 +1296,6 @@ h3 {
   .marketplace-icon > svg {
     width: 31px;
     height: 31px;
-  }
-  .resource-list {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .resource-list > a {
-    padding: 24px 22px;
-    gap: 14px;
-  }
-  .resource-list h3 {
-    font-size: 18px;
-  }
-  .resource-list p {
-    font-size: 16px;
-  }
-  .build {
-    padding-top: 8px;
   }
   .lugano-inner {
     gap: 32px;

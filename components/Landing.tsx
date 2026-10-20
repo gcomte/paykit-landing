@@ -50,12 +50,6 @@ function Icon({ kind, size = 24 }: { kind: string; size?: number }) {
         <path d="M3 7h17m-5-5 5 5-5 5M21 17H4m5-5-5 5 5 5" />
       </>
     ),
-    wallet: (
-      <>
-        <path d="M20 8V5H5a2 2 0 0 0 0 4h16v11H5a2 2 0 0 1-2-2V7m14 7h4" />
-        <circle cx="17" cy="14" r=".5" />
-      </>
-    ),
     check: <path d="m5 12 4.5 4.5L19 7" />,
     code: (
       <>
@@ -108,7 +102,6 @@ function Icon({ kind, size = 24 }: { kind: string; size?: number }) {
 const links = {
   github: "https://github.com/pubky/paykit-rs",
   specs: "https://github.com/pubky/paykit-rs/tree/master/specs",
-  server: "https://github.com/pubky/paykit-server",
   agenda: "https://planb.lugano.ch/planb-forum/agenda/",
 };
 
@@ -220,7 +213,6 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="#how-it-works">How it works</a>
-            <a href="#build">Build with Paykit</a>
           </nav>
           <a href="#try-paykit" className="button button-orange header-cta">
             Try Paykit <Arrow />
@@ -233,7 +225,6 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             <nav className="mobile-nav" aria-label="Mobile navigation">
               <a href="#how-it-works">How it works</a>
               <a href="#try-paykit">Try Paykit</a>
-              <a href="#build">Build with Paykit</a>
             </nav>
           </details>
         </div>
@@ -582,73 +573,6 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 Decentralized discovery. A homeserver you choose—or run yourself.
               </p>
             </div>
-          </div>
-        </section>
-
-        <section
-          className="build section-pad"
-          id="build"
-          aria-labelledby="build-title"
-        >
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">OPEN SOURCE. OPEN POSSIBILITIES.</p>
-              <h2 id="build-title">
-                Build payments into
-                <br />
-                <span className="muted title-accent">what comes next.</span>
-              </h2>
-            </div>
-          </div>
-          <div className="resource-list">
-            <a href={links.github} target="_blank" rel="noreferrer">
-              <span className="resource-icon">
-                <Icon kind="code" />
-              </span>
-              <div>
-                <h3>Explore the protocol</h3>
-                <p>Rust implementation, library, and integration examples.</p>
-              </div>
-              <span className="resource-tag">paykit-rs</span>
-              <Arrow diagonal />
-            </a>
-            <a href={links.specs} target="_blank" rel="noreferrer">
-              <span className="resource-icon">
-                <Icon kind="exchange" />
-              </span>
-              <div>
-                <h3>Read the specifications</h3>
-                <p>The formats and messages that let apps speak Paykit.</p>
-              </div>
-              <span className="resource-tag">Protocol specs</span>
-              <Arrow diagonal />
-            </a>
-            <a href={links.server} target="_blank" rel="noreferrer">
-              <span className="resource-icon">
-                <Icon kind="wallet" />
-              </span>
-              <div>
-                <h3>Build a receiving service</h3>
-                <p>A reference server for receiving Paykit payments.</p>
-              </div>
-              <span className="resource-tag">paykit-server</span>
-              <Arrow diagonal />
-            </a>
-            <a
-              href="https://pubky.org/overview/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span className="resource-icon">
-                <Icon kind="globe" />
-              </span>
-              <div>
-                <h3>Get to know Pubky</h3>
-                <p>The identity and data foundation beneath Paykit.</p>
-              </div>
-              <span className="resource-tag">Pubky overview</span>
-              <Arrow diagonal />
-            </a>
           </div>
         </section>
 
