@@ -41,8 +41,8 @@ const steps = [
       "Alice and Bob each use their own wallets and payment services.",
   },
   {
-    label: "Enter Paykit",
-    title: "Enter Paykit",
+    label: "Paykit indexes payment options",
+    title: "Paykit indexes payment options",
     description:
       "Wallets implement the Paykit protocol to discover Alice’s and Bob’s payment options and exchange the details. This step shares information, not funds.",
   },
