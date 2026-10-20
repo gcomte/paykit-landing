@@ -175,3 +175,49 @@ CHANGE ONLY THE CENTRAL PAYKIT BOX INTERIOR AND ONE GRAY EDGE PORT:
 2. The faint gray connection from Bob's MIDDLE Revolut row must terminate on its OWN gray outer-edge port on the RIGHT edge of Paykit at a height between the Cake Wallet gray port and the orange WDK outgoing port. It must not connect to, touch, share, or merge with the orange outgoing WDK route/port. Separate them clearly by at least 30 pixels vertically. If needed, place the Revolut gray port on the upper-right edge and Cake Wallet gray port at the right part of the TOP edge, using clean independent curved paths. All four gray paths must terminate on the box's OUTER edges only, not continue inside. Keep Alice's PayPal path entering the upper-left/top edge and Alice's Wise path entering the lower-left/bottom edge.
 No other edits. All existing labels, person plaques, colors, shadows, and wallet/currency text must remain exactly as shown. The final center face is plain with ONLY the word Paykit, while every external faint connection ends at a distinct port.
 ```
+
+## Trial: shared discovery layer with direct wallet-to-wallet payment
+
+- Project asset: `public/illustrations/contact-payment-v6.png`
+- Dimensions: 1774 × 887 pixels (2:1), RGB PNG.
+- Tool: built-in `image_gen.imagegen`, edit mode, first referencing v5 then applying a targeted discovery-outline refinement. No API or CLI fallback.
+- Draft: `/home/gaib/.codex/generated_images/01a15889-4dcc-7812-b0f4-610e6d6824d9/exec-5144d1e8-2e35-4674-a493-352da822001b.png`.
+- Final original: `/home/gaib/.codex/generated_images/01a15889-4dcc-7812-b0f4-610e6d6824d9/exec-3aa67eac-cee3-4e65-ad29-d5982da2ea65.png`.
+- Both results inspected with `view_image`. The final outline surrounds wallet options only; person portraits and names sit above it. Exact lower caption: “Wallets use Paykit to find a shared payment rail.” The former central Paykit box and all faint wallet links are removed. One uninterrupted orange curve runs directly from Alice's top Bitkit row to Bob's bottom WDK row, labeled BTC, with no intermediary. Alice's row order is Bitkit, PayPal, Wise; Bob's is Cake Wallet, Revolut, WDK. All exact names, intent caption, GBP, and vertically stacked currencies were visually verified. Final copied without image processing.
+- Version 5 is unchanged and available for rollback. This version presents Paykit as a discovery protocol used by wallets rather than an intermediary. The hypothetical profiles are not integration or asset-support claims and the intent/route does not assert payment completion.
+
+Initial exact edit prompt:
+
+```text
+Use case: precise-object-edit.
+Asset type: premium Paykit protocol-discovery conceptual illustration for a technology landing page.
+Edit the attached v5 image, preserving the excellent polished 3D graphite/glass/orange visual style, dark #090b10 studio floor/background, cool-white smoked-glass edges, orange #ff6b3d light, beautiful soft reflections and shadows. Preserve the two PERSON plaques and exact names Alice and Bob, the exact upper caption "Alice wants to send $10 equivalent to Bob" and its thin upper right-facing intent arrow. Preserve large legible modern sans labels and vertical currency stacks. Approximately 1774x887 wide 2:1 composition; all content within canvas.
+
+CRITICAL SEMANTIC CHANGE: Paykit is a discovery protocol used by wallets, NOT an intermediary or payment relay. REMOVE the central Paykit box ENTIRELY. Remove ALL four faint gray wallet-connection lines and their edge ports. The space between people must contain NO central object, hub, box, node, port, icon, server, Paykit logo, or split route.
+
+Reorder Alice's wallet rows so Bitkit comes FIRST:
+Alice TOP row: "Bitkit" left; "BTC" vertically ABOVE "Tether" in right column. Orange row edge and orange BTC label; Tether neutral.
+Alice MIDDLE row: "PayPal" left; single "USD" right. Neutral graphite row.
+Alice BOTTOM row: "Wise" left; "USD" vertically ABOVE "GBP" in right column. Neutral graphite row.
+Bob's row order stays:
+TOP "Cake Wallet" left; "Ether" vertically ABOVE "XMR" right, neutral.
+MIDDLE "Revolut" left; "EUR" vertically ABOVE "CHF" right, neutral.
+BOTTOM "WDK" left; "BTC" vertically ABOVE "Ether" right. Orange row edge and orange BTC label; Ether neutral.
+
+Replace the central box/faint lines with a quiet conceptual DISCOVERY LAYER: a single subtle thin smoked-glass frame or faint cool-gray outline that spatially encloses the available wallet OPTIONS on both left and right (not the people/upper intent caption). Its purpose is to indicate that the wallets use the same protocol to discover a compatible rail. Place the exact caption "Wallets use Paykit to find a shared payment rail." as a clear legible label along the frame's lower border BELOW the wallet options. The outline should be restrained and secondary; it is not a service, container, money path, or central relay. No opaque panel background obscures the scene. Do not introduce any additional explanatory wording or title.
+
+Show ONE uninterrupted strong orange BTC payment arrow DIRECTLY from Alice's TOP Bitkit row to Bob's BOTTOM WDK row, curving smoothly down through otherwise EMPTY middle space. The route must be a continuous single elegant curve without any intermediate box, waypoint, node, center marker, or break. Give it one clear arrowhead pointing into Bob's bottom WDK row. Label the route "BTC" near the curve. It must NOT go through or touch the Paykit discovery caption or any box/hub. No connections from PayPal, Wise, Cake Wallet, or Revolut; no gray/dashed wallet links, no secondary route. The frame stays quiet behind and separate from the orange direct payment arrow.
+
+Maintain exact spelling and capitalization everywhere: Alice, Bob, Bitkit, BTC, Tether, PayPal, USD, Wise, GBP, Cake Wallet, Ether, XMR, Revolut, EUR, CHF, WDK. All two-currency lists VERTICALLY STACKED one above another in their right columns, NEVER side by side. Exact captions: "Alice wants to send $10 equivalent to Bob" and "Wallets use Paykit to find a shared payment rail.".
+No paid/success statuses, no checkmarks, no actual money or coins, no invented brand logos, no watermark. Preserve the quiet tangible beautiful 3D material style.
+```
+
+Exact discovery-outline refinement prompt:
+
+```text
+Use case: precise-object-edit.
+Make ONE narrow refinement to the attached image and preserve all other pixels/content/style as closely as possible.
+The cool-gray protocol-discovery outline currently wraps the entire Alice and Bob plaques, including their head silhouettes and names. Change ONLY this secondary outline so it encloses the SIX WALLET OPTION ROWS only, with Alice and Bob's names and portrait silhouettes ABOVE and OUTSIDE the outlined discovery layer.
+Use one beautiful faint thin cool-gray rounded rectangular outline spanning from the left of Alice's wallet rows across to the right of Bob's wallet rows. Its TOP horizontal edge lies just above the top Bitkit and Cake Wallet rows and just BELOW the names/portraits. Its BOTTOM horizontal edge lies below the Wise and WDK rows and includes the exact existing caption "Wallets use Paykit to find a shared payment rail." centered as a tasteful label interrupting the bottom border. The outline is very subtle, visually behind the wallet objects, not a central object or service and not a gray connection route. It can pass invisibly behind the glass plaques as needed. No outline around the portraits, heads or names; remove the old top outline that wraps their upper corners. All wallet options belong to this quiet shared discovery layer.
+Preserve the uninterrupted orange direct BTC arrow EXACTLY from Alice's top Bitkit row to Bob's bottom WDK row through empty middle space, its BTC label, all wallet names, all stacked currencies, Alice/Bob names, the exact top caption "Alice wants to send $10 equivalent to Bob" and upper intent arrow, beautiful premium graphite glass 3D rendering, light and reflections. No central object, logo, box, node, faint wallet links, or other changes. Exact existing typography/spellings must remain unchanged.
+```

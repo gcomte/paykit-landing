@@ -4,8 +4,8 @@ const profiles = [
   {
     person: "Alice",
     methods: [
-      { name: "PayPal", currencies: ["USD"] },
       { name: "Bitkit", currencies: ["BTC", "Tether"], shared: true },
+      { name: "PayPal", currencies: ["USD"] },
       { name: "Wise", currencies: ["USD", "GBP"] },
     ],
   },
@@ -41,13 +41,13 @@ export default function PaymentIllustration() {
       aria-labelledby="payment-frame-title"
     >
       <div className="payment-frame-heading">
-        <span id="payment-frame-title">Handled by Paykit</span>
+        <span id="payment-frame-title">Payment discovery with Paykit</span>
         <span className="payment-example">Illustrative example</span>
       </div>
       <Image
         className="payment-map-image"
-        src="/illustrations/contact-payment-v5.png"
-        alt="Alice wants to send $10 equivalent to Bob, shown by a right-pointing arrow. Alice has PayPal with USD, Bitkit with BTC and Tether, and Wise with USD and GBP. Bob has Cake Wallet with Ether and XMR at the top, Revolut with EUR and CHF in the middle, and WDK with BTC and Ether at the bottom. Each wallet's currencies are stacked vertically. Independent faint lines end at different points around a plain Paykit box. A strong orange BTC route links Alice's middle Bitkit wallet through Paykit to Bob's bottom WDK wallet."
+        src="/illustrations/contact-payment-v6.png"
+        alt="Alice wants to send $10 equivalent to Bob. Alice's wallets are Bitkit with BTC and Tether first, PayPal with USD second, and Wise with USD and GBP third. Bob has Cake Wallet with Ether and XMR, Revolut with EUR and CHF, and WDK with BTC and Ether at the bottom. Currencies are stacked vertically. A subtle discovery frame explains that wallets use Paykit to find a shared payment rail. A single uninterrupted orange BTC arrow goes directly from Alice's Bitkit to Bob's WDK, with no Paykit intermediary."
         width={1774}
         height={887}
         sizes="(max-width: 900px) 1px, 1152px"
@@ -57,63 +57,71 @@ export default function PaymentIllustration() {
           Alice wants to send $10 equivalent to Bob
           <span className="payment-intent-arrow" aria-hidden="true" />
         </p>
-        <div className="method-profiles">
-          {profiles.map((profile, index) => (
-            <div className="method-profile-group" key={profile.person}>
-              <div className="method-person">
-                <div className="method-person-heading">
-                  <span className="method-person-icon">
-                    <Person />
-                  </span>
-                  <strong>{profile.person}</strong>
-                </div>
-                {profile.methods.map((method) => (
-                  <div
-                    className={`method-option ${method.shared ? "method-shared" : ""}`}
-                    key={method.name}
-                  >
-                    <span>{method.name}</span>
-                    <span className="method-currencies">
-                      {method.currencies.map((currency) => (
-                        <span
-                          className={
-                            currency === "BTC" ? "currency-selected" : undefined
-                          }
-                          key={currency}
-                        >
-                          {currency}
-                        </span>
-                      ))}
+        <div className="payment-discovery-layer">
+          <p className="payment-discovery-label">
+            Wallets use Paykit to find a shared payment rail.
+          </p>
+          <div className="method-profiles">
+            {profiles.map((profile, index) => (
+              <div className="method-profile-group" key={profile.person}>
+                <div className="method-person">
+                  <div className="method-person-heading">
+                    <span className="method-person-icon">
+                      <Person />
                     </span>
+                    <strong>{profile.person}</strong>
                   </div>
-                ))}
-              </div>
-              {index === 0 && (
-                <div className="method-router">
-                  <svg viewBox="0 0 64 352" fill="none" aria-hidden="true">
-                    <path
-                      d="M0 128H12Q22 128 22 146V192M0 304H12Q20 304 20 284V240M64 128H56Q46 128 46 148V192M64 216Q60 216 60 205H59"
-                      className="method-discovery-lines"
-                    />
-                    <path
-                      d="M0 216H5M32 240C32 280 50 304 62 304M57 299L62 304L57 309"
-                      className="method-btc-line"
-                    />
-                  </svg>
-                  <span className="method-route-currency">BTC</span>
-                  <span className="method-paykit-node">Paykit</span>
+                  {profile.methods.map((method) => (
+                    <div
+                      className={`method-option ${method.shared ? "method-shared" : ""}`}
+                      key={method.name}
+                    >
+                      <span>{method.name}</span>
+                      <span className="method-currencies">
+                        {method.currencies.map((currency) => (
+                          <span
+                            className={
+                              currency === "BTC"
+                                ? "currency-selected"
+                                : undefined
+                            }
+                            key={currency}
+                          >
+                            {currency}
+                          </span>
+                        ))}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              )}
-            </div>
-          ))}
+                {index === 0 && (
+                  <div className="method-payment-route">
+                    <svg
+                      viewBox="0 0 64 352"
+                      preserveAspectRatio="none"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M0 128C32 128 32 304 62 304M57 299L62 304L57 309"
+                        className="method-btc-line"
+                      />
+                    </svg>
+                    <span className="method-route-currency">BTC</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
         <div className="mobile-bitcoin-route">
           <span aria-hidden="true">₿</span> BTC selected: Bitkit → WDK
         </div>
       </div>
       <figcaption>
-        Paykit lets wallets discover a shared payment method and exchange the
-        details automatically. <strong>You just review and pay.</strong>
+        Paykit helps wallets find a shared payment rail and exchange the
+        details.
+        <strong> Alice pays Bob directly.</strong>
       </figcaption>
       <p className="payment-example-note">
         Illustrative profiles and currencies. Paykit exchanges payment details;
