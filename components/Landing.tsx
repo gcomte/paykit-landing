@@ -319,10 +319,6 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 Open <span className="title-accent">by design.</span>
               </h2>
             </div>
-            <p>
-              A shared protocol that any wallet, app, or service can implement.
-              Built for people to connect across platforms.
-            </p>
           </div>
           <div className="openness-grid">
             <article>
