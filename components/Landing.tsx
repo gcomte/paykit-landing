@@ -440,11 +440,11 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               rel="noreferrer"
             >
               <div className="app-card-top">
-                <span className="app-category">THE PAYMENT PAGE</span>
+                <span className="app-category">RECEIVE PAYMENTS</span>
                 <Arrow diagonal />
               </div>
               <div className="payky-wordmark">
-                payky<span>↗</span>
+                Paykiy<span>.</span>
               </div>
               <h3>One link. Every way to pay you.</h3>
               <p>
@@ -452,7 +452,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 Pubky identity. Set it up, then share your link.
               </p>
               <span className="card-link">
-                Create your Payky page <Arrow />
+                Create your Paykiy page <Arrow />
               </span>
             </a>
             <a className="app-card future-card" href="#contact">
