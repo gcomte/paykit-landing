@@ -211,11 +211,11 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
           <a
             href="#"
             className="brand-lockup"
-            aria-label="Paykit — the open payment protocol"
+            aria-label="Paykit — the open payment coordination protocol"
           >
             <span className="wordmark">Paykit</span>
             <span className="brand-tagline title-accent">
-              the open payment protocol
+              the open payment coordination protocol
             </span>
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
@@ -363,11 +363,19 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               <h3>Decentralized.</h3>
               <p>
                 Your public-key identity is discovered through{" "}
-                <a href="https://github.com/pubky/pkarr" target="_blank" rel="noreferrer">
+                <a
+                  href="https://github.com/pubky/pkarr"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   PKARR
                 </a>{" "}
                 on Mainline DHT. Your payment data lives on a{" "}
-                <a href="https://pubky.org/homeserver/" target="_blank" rel="noreferrer">
+                <a
+                  href="https://pubky.org/homeserver/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   homeserver
                 </a>{" "}
                 you choose—or run yourself.
@@ -752,10 +760,10 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 Is Paykit a wallet?<span>+</span>
               </summary>
               <p>
-                Paykit is an open payment protocol. Wallets and services
-                integrate it to discover someone’s payment methods and exchange
-                the details needed to pay them. You keep using your wallet to
-                approve and send payments.
+                Paykit is an open payment coordination protocol. Wallets and
+                services integrate it to discover someone’s payment methods and
+                exchange the details needed to pay them. You keep using your
+                wallet to approve and send payments.
               </p>
             </details>
             <details>
@@ -834,7 +842,8 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             Built on{" "}
             <a href="https://pubky.org/" target="_blank" rel="noreferrer">
               Pubky
-            </a>.
+            </a>
+            .
           </span>
           <form action="/api/logout" method="post">
             <button type="submit" className="lock-preview">

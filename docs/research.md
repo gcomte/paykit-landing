@@ -144,7 +144,7 @@ Be explicit that the visitor is opening their email app. A sent message supplies
 
 Direction: a cohesive graphite technology site, cool-white Geist typography, restrained orange accents, consistent borders and surface spacing. Body text stays at least 16px; labels and secondary links at least 14px on desktop and mobile. The brand is plain **Paykit** with an uppercase P, no symbol, and no period. Keep the messaging calm and avoid decorative motion, dashboard clutter, or repeated competing badges.
 
-1. **Header:** plain Paykit name followed by “- the open payment protocol” in smaller type, three short section links, a primary try action, and accessible mobile navigation. No protocol pill in the hero.
+1. **Header:** plain Paykit name followed by “- the open payment coordination protocol” in smaller type, three short section links, a primary try action, and accessible mobile navigation. No protocol pill in the hero.
 2. **Hero:** “Pay. Get paid. Skip the back-and-forth.” Explain the open protocol in a short supporting paragraph, with one primary try action and a secondary teaser action.
 3. **Introductory teaser:** directly in the opening section, before the technical explanation. Use the actual video thumbnail and a clear play action. Load the YouTube player only on request.
 4. **How it works:** one purpose-made payment illustration, with readable HTML labels and three short steps: choose a contact, exchange details, review/pay.
