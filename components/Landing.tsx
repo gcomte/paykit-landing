@@ -305,11 +305,12 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
         >
           <div className="section-heading">
             <div>
-              <p className="eyebrow">LESS ASKING. MORE PAYING.</p>
+              <p className="eyebrow">ANIMATED ILLUSTRATION</p>
               <h2 id="how-title">
                 Pay a person,
-                <br />
-                <span className="muted">in three steps.</span>
+                <span className="muted">
+                  not an address, IBAN, invoice or app-specific handle.
+                </span>
               </h2>
             </div>
             <p>

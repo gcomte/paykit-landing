@@ -82,7 +82,7 @@ export default function PaymentStoryController({
   useEffect(() => {
     if (!playing) return;
     const duration =
-      active === 0 ? 4000 : active === steps.length - 1 ? 6000 : 5000;
+      active === 0 ? 8000 : active === steps.length - 1 ? 12000 : 10000;
     let lastTick = performance.now();
     const timer = window.setInterval(() => {
       const now = performance.now();

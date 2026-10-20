@@ -261,9 +261,21 @@ test("the payment story separates discovery from payment and supports reduced mo
     await expect(discoveryLinks).toHaveCSS("opacity", step === 1 ? "1" : "0");
     await expect(query).toHaveCSS("opacity", step === 2 ? "1" : "0");
     if (step === 1) {
-      await expect(story.getByTestId("payment-discovery-node")).toHaveText(
-        "Paykit",
-      );
+      const node = story.getByTestId("payment-discovery-node");
+      await expect(node.getByText("Paykit", { exact: true })).toHaveCount(1);
+      await expect(node.getByText("Alice", { exact: true })).toHaveCount(1);
+      await expect(node.getByText("Bob", { exact: true })).toHaveCount(1);
+      await expect(node.locator("img")).toHaveCount(6);
+      await expect
+        .poll(() =>
+          node.locator("img").evaluateAll((images) =>
+            images.every((image) => {
+              const logo = image as HTMLImageElement;
+              return logo.complete && logo.naturalWidth > 0;
+            }),
+          ),
+        )
+        .toBe(true);
       const connectedWallets = await discovery
         .locator("[data-discovery-wallet]")
         .evaluateAll((paths) =>
@@ -372,7 +384,7 @@ test("the payment story separates discovery from payment and supports reduced mo
 test("the payment story autoplays, loops, pauses, and replays", async ({
   page,
 }) => {
-  test.setTimeout(60_000);
+  test.setTimeout(120_000);
   expect(password).toBeTruthy();
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.setViewportSize({ width: 1440, height: 1000 });
@@ -384,8 +396,10 @@ test("the payment story autoplays, loops, pauses, and replays", async ({
   await expect(story).toHaveAttribute("data-playing", "true");
   await expect(story.getByText("Auto-playing", { exact: true })).toBeVisible();
   await expect(story).toHaveAttribute("data-active-step", "0");
+  await page.waitForTimeout(4_500);
+  await expect(story).toHaveAttribute("data-active-step", "0");
   await expect(story).toHaveAttribute("data-active-step", "1", {
-    timeout: 9_000,
+    timeout: 8_000,
   });
   await story.getByTestId("payment-story-toggle").click();
   await expect(story).toHaveAttribute("data-playing", "false");
@@ -393,7 +407,7 @@ test("the payment story autoplays, loops, pauses, and replays", async ({
   const pausedProgress = await story.evaluate((element) =>
     (element as HTMLElement).style.getPropertyValue("--story-progress"),
   );
-  await page.waitForTimeout(5_500);
+  await page.waitForTimeout(11_000);
   await expect(story).toHaveAttribute("data-active-step", pausedStep!);
   expect(
     await story.evaluate((element) =>
@@ -410,10 +424,10 @@ test("the payment story autoplays, loops, pauses, and replays", async ({
   ).toBe(true);
   await story.getByTestId("payment-story-toggle").click();
   await expect(story).toHaveAttribute("data-active-step", "2", {
-    timeout: 9_000,
+    timeout: 18_000,
   });
   await expect(story).toHaveAttribute("data-active-step", "3", {
-    timeout: 9_000,
+    timeout: 18_000,
   });
   await expect(story.getByTestId("payment-route")).toHaveCSS("opacity", "1");
   await story.getByTestId("payment-story-toggle").click();
@@ -422,13 +436,13 @@ test("the payment story autoplays, loops, pauses, and replays", async ({
   await expect(story).toHaveAttribute("data-playing", "true");
   await expect(story).toHaveAttribute("data-active-step", "3");
   await expect(story).toHaveAttribute("data-active-step", "0", {
-    timeout: 8_000,
+    timeout: 16_000,
   });
   await expect(story).toHaveAttribute("data-playing", "true");
   await story.getByTestId("payment-story-replay").click();
   await expect(story).toHaveAttribute("data-active-step", "0");
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-  await page.waitForTimeout(5_500);
+  await page.waitForTimeout(11_000);
   await expect(story).toHaveAttribute("data-active-step", "0");
   await expect(story).toHaveAttribute("data-playing", "false");
   await story.scrollIntoViewIfNeeded();

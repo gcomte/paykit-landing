@@ -21,6 +21,14 @@ const profiles = [
     ],
   },
 ];
+const walletLogos: Record<string, string> = {
+  Bitkit: "/wallets/bitkit.svg",
+  PayPal: "/wallets/paypal.svg",
+  Wise: "/wallets/wise.svg",
+  "Cake Wallet": "/wallets/cake-wallet.svg",
+  Revolut: "/wallets/revolut.svg",
+  WDK: "/wallets/wdk.svg",
+};
 const steps = [
   {
     label: "Meet Alice and Bob",
@@ -50,33 +58,33 @@ const steps = [
 const discoveryLinks = [
   {
     wallet: "Bitkit",
-    desktop: "M0 173C12 173 12 48 25 48",
-    mobile: "M0 173C14 173 8 50 12 -10",
+    desktop: "M0 173C12 173 12 116 30 116",
+    mobile: "M0 173C14 173 8 50 12 -66",
   },
   {
     wallet: "PayPal",
-    desktop: "M0 275C15 275 8 78 25 78",
-    mobile: "M0 275C24 275 16 58 29 -10",
+    desktop: "M0 275C15 275 14 116 38 116",
+    mobile: "M0 275C24 275 16 58 29 -66",
   },
   {
     wallet: "Wise",
-    desktop: "M0 377C20 377 14 114 38 114",
-    mobile: "M0 377C33 377 22 74 43 -10",
+    desktop: "M0 377C20 377 20 116 46 116",
+    mobile: "M0 377C33 377 22 74 43 -66",
   },
   {
     wallet: "Cake Wallet",
-    desktop: "M100 173C86 173 85 30 62 30",
-    mobile: "M100 173C86 173 92 50 88 -10",
+    desktop: "M100 173C86 173 86 116 70 116",
+    mobile: "M100 173C86 173 92 50 88 -66",
   },
   {
     wallet: "Revolut",
-    desktop: "M100 275C85 275 98 74 75 74",
-    mobile: "M100 275C76 275 84 58 71 -10",
+    desktop: "M100 275C85 275 86 116 62 116",
+    mobile: "M100 275C76 275 84 58 71 -66",
   },
   {
     wallet: "WDK",
-    desktop: "M100 377C82 377 98 100 75 100",
-    mobile: "M100 377C67 377 78 74 57 -10",
+    desktop: "M100 377C82 377 80 116 54 116",
+    mobile: "M100 377C67 377 78 74 57 -66",
   },
 ];
 function Person() {
@@ -196,7 +204,45 @@ export default function PaymentIllustration() {
             className={styles.discoveryNode}
             data-testid="payment-discovery-node"
           >
-            Paykit
+            <strong className={styles.discoveryNodeTitle}>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <rect x="5" y="10" width="14" height="11" rx="2" />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+              </svg>
+              <span>Paykit</span>
+            </strong>
+            <div className={styles.discoverySummary}>
+              {profiles.map((profile) => (
+                <div
+                  className={styles.discoverySummaryPerson}
+                  key={profile.person}
+                >
+                  <strong>{profile.person}</strong>
+                  <span className={styles.discoverySummaryMethods}>
+                    {profile.methods.map((method) => (
+                      <Image
+                        src={walletLogos[method.name]}
+                        width={28}
+                        height={28}
+                        alt={method.name}
+                        key={method.name}
+                      />
+                    ))}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <div
@@ -208,24 +254,24 @@ export default function PaymentIllustration() {
             <g className={styles.desktopDiscoveryLinks}>
               <path
                 className={styles.queryRequest}
-                d="M0 40C10 40 15 53 25 53"
+                d="M0 104C8 144 24 148 30 116"
                 pathLength="1"
               />
               <path
                 className={styles.queryResponse}
-                d="M25 93C15 93 10 100 0 100"
+                d="M60 116C58 160 20 170 0 124"
                 pathLength="1"
               />
             </g>
             <g className={styles.mobileDiscoveryLinks}>
               <path
                 className={styles.queryRequest}
-                d="M0 30C16 30 13 4 28 -10"
+                d="M0 30C16 30 13 4 28 -66"
                 pathLength="1"
               />
               <path
                 className={styles.queryResponse}
-                d="M60 -10C52 20 28 70 0 70"
+                d="M60 -66C52 20 28 70 0 70"
                 pathLength="1"
               />
             </g>

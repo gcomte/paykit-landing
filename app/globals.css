@@ -401,6 +401,24 @@ h3 {
 .how {
   border-top: 1px solid var(--line);
 }
+.how .section-heading {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+.how .section-heading > p {
+  max-width: 680px;
+}
+#how-title {
+  max-width: 1000px;
+}
+#how-title .muted {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.035em;
+}
 
 .steps-grid {
   display: grid;
