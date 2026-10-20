@@ -52,7 +52,7 @@ const steps = [
     label: "Find a shared rail",
     title: "Bitkit finds a shared payment rail through Paykit.",
     description:
-      "Bitkit uses Paykit to discover Bob’s payment options and finds BTC in common: Bitkit can pay WDK.",
+      "Bitkit uses Paykit to discover Bob’s payment options and finds on-chain BTC in common: Bitkit can pay WDK.",
   },
   {
     label: "Approve and pay",
