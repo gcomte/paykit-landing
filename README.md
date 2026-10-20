@@ -4,6 +4,13 @@ A password-protected Paykit landing page built with Next.js 16 App Router, React
 
 The design uses graphite surfaces, Geist typography, and orange accents. Body copy is at least 16px and labels/secondary links at least 14px. The introductory video appears in the opening section. Original generated illustration assets and their exact prompts are documented in [docs/illustration-prompts.md](docs/illustration-prompts.md). Use the plain **Paykit** name; there is no Paykit logo yet.
 
+The payment explanation is a four-state HTML/SVG animation: starting options,
+protocol discovery, finding a shared rail, and direct wallet payment. Its copy and
+profiles stay in the server component; the client controller handles playback
+only. Visitors can select steps, pause, or replay. Autoplay runs once while the
+scene is visible and is disabled for reduced-motion preferences. Previous static
+assets and [rollback instructions](docs/illustration-rollback.md) are preserved.
+
 Production URL: [paykit-landing-page.vercel.app](https://paykit-landing-page.vercel.app).
 
 This address is registered as a verified production domain on the existing Vercel project, so production deployments update it automatically.

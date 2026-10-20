@@ -23,3 +23,26 @@ Verify that deployment reaches Ready and is assigned to
 `https://paykit-landing-page.vercel.app/`. Reverting the trial restores the former
 Bitkit position too; it can be moved first separately if preferred. Future edits
 to the same files may require resolving a normal revert conflict.
+
+## Four-step animation trial
+
+The static discovery-layer version is preserved in the pushed annotated tag
+`illustration-before-animation` (commit `c740723`). Its image,
+`public/illustrations/contact-payment-v7.png`, remains available.
+
+The animation shows the starting options, protocol discovery, selection of a
+shared rail, and a direct wallet-to-wallet payment. The complete animation trial
+is tagged `illustration-animation-v1`.
+
+To return to the static version, use:
+
+```sh
+git revert --no-commit illustration-before-animation..illustration-animation-v1
+git commit -m "Restore static Paykit payment illustration"
+git push origin HEAD:refs/heads/feat/paykit-landing
+npx --yes vercel@64.7.0 --prod --yes --no-wait
+```
+
+This restores the static component, its styling, and its explanatory text while
+preserving the earlier illustration history. Confirm the deployment reaches Ready
+and the canonical domain points to it.
