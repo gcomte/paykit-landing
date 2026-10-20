@@ -214,11 +214,12 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             aria-label="Paykit — the open payment protocol"
           >
             <span className="wordmark">Paykit</span>
-            <span className="brand-tagline">- the open payment protocol</span>
+            <span className="brand-tagline title-accent">
+              the open payment protocol
+            </span>
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="#how-it-works">How it works</a>
-            <a href="#try-paykit">Try Paykit</a>
             <a href="#build">Build with Paykit</a>
           </nav>
           <a href="#try-paykit" className="button button-orange header-cta">
@@ -250,14 +251,6 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               handles the methods, addresses, and invoices. You just review and
               pay.
             </p>
-            <div className="hero-actions">
-              <a className="button button-orange" href="#try-paykit">
-                Try Paykit <Arrow />
-              </a>
-              <a className="button button-plain" href="#how-it-works">
-                See how it works <Arrow />
-              </a>
-            </div>
           </div>
           <div className="hero-video" id="watch">
             <Teaser>
