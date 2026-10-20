@@ -35,6 +35,8 @@ export default function PaymentStoryController({
   labels,
 }: Props) {
   const root = useRef<HTMLElement>(null);
+  const sceneViewport = useRef<HTMLDivElement>(null);
+  const sceneCanvas = useRef<HTMLDivElement>(null);
   const titleId = useId();
   const [active, setActive] = useState(0);
   const [requestedPlay, setRequestedPlay] = useState(true);
@@ -46,6 +48,23 @@ export default function PaymentStoryController({
   const [reducedMotion, setReducedMotion] = useState(false);
   const [manualAnnouncement, setManualAnnouncement] = useState<ReactNode>(null);
   const playing = requestedPlay && inView && pageVisible && !reducedMotion;
+
+  useEffect(() => {
+    const viewport = sceneViewport.current;
+    const canvas = sceneCanvas.current;
+    if (!viewport || !canvas) return;
+    const resize = () => {
+      if (!canvas.offsetWidth) return;
+      const scale = Math.min(1, viewport.clientWidth / canvas.offsetWidth);
+      viewport.style.setProperty("--scene-scale", String(scale));
+      viewport.style.height = `${canvas.offsetHeight * scale}px`;
+    };
+    resize();
+    const observer = new ResizeObserver(resize);
+    observer.observe(viewport);
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -139,7 +158,19 @@ export default function PaymentStoryController({
         <div className={styles.heading} data-testid="payment-story-heading">
           <h3 id={titleId}>{steps[active].title}</h3>
         </div>
-        {children}
+        <div
+          ref={sceneViewport}
+          className={styles.sceneViewport}
+          data-testid="payment-scene-viewport"
+        >
+          <div
+            ref={sceneCanvas}
+            className={styles.sceneCanvas}
+            data-testid="payment-scene-canvas"
+          >
+            {children}
+          </div>
+        </div>
       </div>
       <figcaption
         className={styles.caption}

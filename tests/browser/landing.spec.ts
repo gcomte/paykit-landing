@@ -404,6 +404,139 @@ test("the payment story separates discovery from payment and supports reduced mo
   ).toBe(true);
 });
 
+test("the mobile payment diagram preserves and uniformly scales its desktop arrangement", async ({
+  page,
+}) => {
+  expect(password).toBeTruthy();
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/access");
+  await page.getByLabel("Password", { exact: true }).fill(password!);
+  await page.getByRole("button", { name: "Enter Paykit" }).click();
+  await page.evaluate(() => document.fonts.ready);
+  const story = page.getByTestId("payment-story");
+  const viewport = story.getByTestId("payment-scene-viewport");
+  const canvas = story.getByTestId("payment-scene-canvas");
+  const alice = story.locator('[data-person="Alice"]');
+  const bob = story.locator('[data-person="Bob"]');
+  const node = story.getByTestId("payment-discovery-node");
+  const caption = story
+    .getByTestId("payment-story-caption")
+    .locator('p[aria-hidden="false"]');
+
+  for (const width of [1440, 820, 390, 320]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await expect
+      .poll(() =>
+        canvas.evaluate((element) => {
+          const canvasElement = element as HTMLElement;
+          const bounds = canvasElement.getBoundingClientRect();
+          const parent = canvasElement.parentElement!.getBoundingClientRect();
+          return Math.abs(
+            bounds.width - Math.min(canvasElement.offsetWidth, parent.width),
+          );
+        }),
+      )
+      .toBeLessThan(1);
+    const geometry = await canvas.evaluate((element) => {
+      const canvasElement = element as HTMLElement;
+      const bounds = canvasElement.getBoundingClientRect();
+      return {
+        width: canvasElement.offsetWidth,
+        scaleX: bounds.width / canvasElement.offsetWidth,
+        scaleY: bounds.height / canvasElement.offsetHeight,
+      };
+    });
+    expect(geometry.width).toBe(width <= 700 ? 1020 : 1120);
+    expect(geometry.scaleX).toBeCloseTo(geometry.scaleY, 5);
+    expect(geometry.scaleX).toBeLessThanOrEqual(1);
+    const scale = geometry.scaleX;
+    const viewBounds = (await viewport.boundingBox())!;
+
+    for (const step of [1, 3, 4]) {
+      await story.locator(`button[data-step="${step}"]`).click();
+      const left = (await alice.boundingBox())!;
+      const right = (await bob.boundingBox())!;
+      const center = (await node.boundingBox())!;
+      expect(left.x + left.width).toBeLessThan(center.x);
+      expect(center.x + center.width).toBeLessThan(right.x);
+      expect(Math.abs(left.y - right.y)).toBeLessThan(1);
+      // Paykit must stay between the people at the same vertical level,
+      // rather than moving above their cards on narrow screens.
+      expect(Math.abs(center.y - left.y) / scale).toBeLessThan(32);
+      expect(
+        Math.abs(
+          center.x + center.width / 2 - (left.x + right.x + right.width) / 2,
+        ),
+      ).toBeLessThan(1);
+      expect(left.x).toBeGreaterThanOrEqual(viewBounds.x);
+      expect(right.x + right.width).toBeLessThanOrEqual(
+        viewBounds.x + viewBounds.width + 1,
+      );
+      await expect(story.getByTestId("payment-discovery")).toHaveCSS(
+        "opacity",
+        step === 4 ? "0" : "1",
+      );
+      expect(
+        await caption.evaluate((element) =>
+          parseFloat(getComputedStyle(element).fontSize),
+        ),
+      ).toBeGreaterThanOrEqual(16);
+      expect(
+        await caption.evaluate(
+          (element) => getComputedStyle(element).transform,
+        ),
+      ).toBe("none");
+    }
+
+    await story.locator('button[data-step="1"]').click();
+    const charlie = node.locator('[data-summary-person="Charlie"]');
+    if (width <= 700) await expect(charlie).toHaveCSS("display", "none");
+    else await expect(charlie).not.toHaveCSS("display", "none");
+    expect(
+      await node.evaluate((element) => {
+        const bounds = element.getBoundingClientRect();
+        return Array.from(
+          element.querySelectorAll("strong, img, [data-summary-currency]"),
+        ).every((label) => {
+          const rect = label.getBoundingClientRect();
+          if (!rect.width || !rect.height) return true;
+          return (
+            rect.left >= bounds.left - 0.5 &&
+            rect.right <= bounds.right + 0.5 &&
+            rect.top >= bounds.top - 0.5 &&
+            rect.bottom <= bounds.bottom + 0.5
+          );
+        });
+      }),
+      `Paykit names and payment options fit at ${width}px`,
+    ).toBe(true);
+    expect(
+      await story.locator("[data-wallet]").evaluateAll((cards) =>
+        cards.every((card) => {
+          const bounds = card.getBoundingClientRect();
+          return Array.from(
+            card.querySelectorAll(":scope > img, [data-currency]"),
+          ).every((label) => {
+            const rect = label.getBoundingClientRect();
+            return (
+              rect.left >= bounds.left - 0.5 &&
+              rect.right <= bounds.right + 0.5 &&
+              rect.top >= bounds.top - 0.5 &&
+              rect.bottom <= bounds.bottom + 0.5
+            );
+          });
+        }),
+      ),
+      `wallet labels stay inside the scaled cards at ${width}px`,
+    ).toBe(true);
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true);
+  }
+});
+
 test("step descriptions stay readable during manual playback and reduced motion", async ({
   page,
 }) => {

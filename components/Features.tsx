@@ -2,7 +2,7 @@ const features = [
   {
     title: "Recurring payments",
     description:
-      "Agree on repeating payment requests with clear amounts and billing periods. Your wallet manages the schedule and payment.",
+      "Agree on repeating payment requests with clear amounts and billing periods. Your wallet manages the schedule, while you stay in control and can stop recurring payments at any time.",
     icon: (
       <>
         <path d="M20 8a8 8 0 0 0-14-2L3 9m0-6v6h6M4 16a8 8 0 0 0 14 2l3-3m0 6v-6h-6" />
@@ -59,10 +59,6 @@ export default function Features() {
             <span className="title-accent">one-off payment.</span>
           </h2>
         </div>
-        <p>
-          From paying a friend to an ongoing arrangement, Paykit gives wallets a
-          shared way to coordinate what comes next.
-        </p>
       </div>
       <div className="features-grid">
         {features.map((feature) => (

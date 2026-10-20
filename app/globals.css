@@ -431,7 +431,8 @@ h3 {
   margin-top: auto;
 }
 .openness-note {
-  max-width: 850px;
+  max-width: none;
+  text-wrap: pretty;
   margin-top: 36px;
   padding-top: 24px;
   border-top: 1px solid var(--line);
