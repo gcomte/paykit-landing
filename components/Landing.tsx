@@ -740,7 +740,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             <a href="https://pubky.org/" target="_blank" rel="noreferrer">
               Pubky <Arrow diagonal />
             </a>
-            <a href="https://t.me/pubkycore" target="_blank" rel="noreferrer">
+            <a href="https://pubky.app/" target="_blank" rel="noreferrer">
               Community <Arrow diagonal />
             </a>
             <a href="#contact">
@@ -756,11 +756,6 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             </a>
             .
           </span>
-          <form action="/api/logout" method="post">
-            <button type="submit" className="lock-preview">
-              Lock preview
-            </button>
-          </form>
           <a href="#">Back to top ↑</a>
         </div>
       </footer>

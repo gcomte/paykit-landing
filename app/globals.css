@@ -981,19 +981,6 @@ h3 {
   padding: 24px 0 32px;
   border-top: 1px solid var(--line);
 }
-.footer-bottom form {
-  margin-left: auto;
-}
-.lock-preview {
-  border: 0;
-  padding: 8px 0;
-  background: none;
-  color: #a3b1c6;
-  font-size: 14px;
-}
-.lock-preview:hover {
-  color: white;
-}
 @media (max-width: 1050px) {
   .section-pad {
     padding: 72px 32px;
