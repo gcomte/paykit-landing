@@ -1113,6 +1113,10 @@
   .scene {
     margin-top: 314px;
   }
+  .instructionArrow {
+    left: calc(100% - 2px);
+    width: 64px;
+  }
   .desktopDiscoveryLinks {
     display: none;
   }
