@@ -7,7 +7,7 @@ const profiles = [
   {
     person: "Alice",
     methods: [
-      { name: "Bitkit", currencies: ["BTC", "USDT"], shared: true },
+      { name: "Bitkit", currencies: ["BTC", "Lightning", "USDT"], shared: true },
       { name: "PayPal", currencies: ["USD"], shared: false },
       { name: "Wise", currencies: ["USD", "GBP"], shared: false },
     ],
@@ -37,16 +37,22 @@ const steps = [
       "Alice and Bob each use their own wallets and payment services.",
   },
   {
-    label: "Discover the options",
-    title: "Paykit knows their payment options.",
+    label: "Enter Paykit",
+    title: "Enter Paykit",
     description:
       "Wallets implement the Paykit protocol to discover Alice’s and Bob’s payment options and exchange the details. This step shares information, not funds.",
   },
   {
-    label: "Find a shared rail",
-    title: "Alice asks Paykit how to pay Bob $10 equivalent.",
+    label: "Choose who to pay",
+    title: "Alice asks Bitkit to send Bob the equivalent of $10.",
     description:
-      "Using the Paykit protocol, Alice’s wallet queries Bob’s payment options and finds BTC in common: Bitkit can pay WDK.",
+      "Alice opens Bitkit, chooses Bob, and enters $10. Her wallet will send the equivalent amount using a payment method they both support.",
+  },
+  {
+    label: "Find a shared rail",
+    title: "Bitkit finds a shared payment rail through Paykit.",
+    description:
+      "Bitkit uses Paykit to discover Bob’s payment options and finds BTC in common: Bitkit can pay WDK.",
   },
   {
     label: "Approve and pay",
@@ -58,42 +64,42 @@ const steps = [
 const discoveryLinks = [
   {
     wallet: "Bitkit",
-    desktop: "M0 173C12 173 12 116 30 116",
-    mobile: "M0 173C14 173 8 50 12 -66",
+    desktop: "M0 150C12 150 12 116 30 116",
+    mobile: "M0 150C14 150 8 50 12 -66",
   },
   {
     wallet: "PayPal",
-    desktop: "M0 275C15 275 14 116 38 116",
-    mobile: "M0 275C24 275 16 58 29 -66",
+    desktop: "M0 236C15 236 14 116 38 116",
+    mobile: "M0 236C24 236 16 58 29 -66",
   },
   {
     wallet: "Wise",
-    desktop: "M0 377C20 377 20 116 46 116",
-    mobile: "M0 377C33 377 22 74 43 -66",
+    desktop: "M0 322C20 322 20 116 46 116",
+    mobile: "M0 322C33 322 22 74 43 -66",
   },
   {
     wallet: "BitBox",
-    desktop: "M100 173C86 173 86 116 70 116",
-    mobile: "M100 173C86 173 92 50 88 -66",
+    desktop: "M100 150C86 150 86 116 70 116",
+    mobile: "M100 150C86 150 92 50 88 -66",
   },
   {
     wallet: "Revolut",
-    desktop: "M100 275C85 275 86 116 62 116",
-    mobile: "M100 275C76 275 84 58 71 -66",
+    desktop: "M100 236C85 236 86 116 62 116",
+    mobile: "M100 236C76 236 84 58 71 -66",
   },
   {
     wallet: "WDK",
-    desktop: "M100 377C82 377 80 116 54 116",
-    mobile: "M100 377C67 377 78 74 57 -66",
+    desktop: "M100 322C82 322 80 116 54 116",
+    mobile: "M100 322C67 322 78 74 57 -66",
   },
 ];
 function Person() {
   return (
     <Image
       src="/illustrations/glass-person-v1.png"
-      width={112}
-      height={112}
-      sizes="(max-width: 700px) 56px, 112px"
+      width={96}
+      height={96}
+      sizes="(max-width: 700px) 56px, 96px"
       alt=""
       draggable={false}
     />
@@ -106,7 +112,6 @@ export default function PaymentIllustration() {
       labels={{
         play: "Play payment walkthrough",
         pause: "Pause payment walkthrough",
-        replay: "Replay payment walkthrough",
         navigation: "Payment walkthrough steps",
         autoplay: "Auto-playing",
         paused: "Paused",
@@ -115,8 +120,8 @@ export default function PaymentIllustration() {
       }}
       footer={
         <p className={styles.note}>
-          Illustrative profiles and currencies, not a list of supported
-          integrations. Apps choose which payment methods they support. You
+          Illustrative payment options, not a list of supported integrations.
+          Apps choose which payment methods they support. You
           approve payments in your wallet.
         </p>
       }
@@ -170,7 +175,7 @@ export default function PaymentIllustration() {
           <svg
             className={styles.discoveryLinks}
             data-testid="payment-discovery-links"
-            viewBox="0 0 100 422"
+            viewBox="0 0 100 360"
             preserveAspectRatio="none"
             fill="none"
           >
@@ -238,13 +243,26 @@ export default function PaymentIllustration() {
                   <strong>{profile.person}</strong>
                   <span className={styles.discoverySummaryMethods}>
                     {profile.methods.map((method) => (
-                      <Image
-                        src={walletLogos[method.name]}
-                        width={28}
-                        height={28}
-                        alt={method.name}
+                      <span
+                        className={styles.discoverySummaryOption}
+                        data-summary-wallet={method.name}
                         key={method.name}
-                      />
+                      >
+                        <Image
+                          src={walletLogos[method.name]}
+                          width={22}
+                          height={22}
+                          alt={method.name}
+                          title={method.name}
+                        />
+                        <span className={styles.discoverySummaryCurrencies}>
+                          {method.currencies.map((currency) => (
+                            <span data-summary-currency={currency} key={currency}>
+                              {currency}
+                            </span>
+                          ))}
+                        </span>
+                      </span>
                     ))}
                   </span>
                 </div>
@@ -257,16 +275,16 @@ export default function PaymentIllustration() {
           data-testid="payment-query"
           aria-hidden="true"
         >
-          <svg viewBox="0 0 100 422" preserveAspectRatio="none" fill="none">
+          <svg viewBox="0 0 100 360" preserveAspectRatio="none" fill="none">
             <g className={styles.desktopDiscoveryLinks}>
               <path
                 className={styles.queryRequest}
-                d="M0 104C8 144 24 148 30 116"
+                d="M0 88C8 128 24 132 30 116"
                 pathLength="1"
               />
               <path
                 className={styles.queryResponse}
-                d="M60 116C58 160 20 170 0 124"
+                d="M60 116C58 144 20 154 0 108"
                 pathLength="1"
               />
             </g>
@@ -291,17 +309,17 @@ export default function PaymentIllustration() {
           data-testid="payment-route"
           aria-hidden="true"
         >
-          <svg viewBox="0 0 100 422" preserveAspectRatio="none" fill="none">
+          <svg viewBox="0 0 100 360" preserveAspectRatio="none" fill="none">
             <path
               className={styles.routeLine}
-              d="M0 173C45 173 55 377 100 377"
+              d="M0 150C45 150 55 322 100 322"
             />
             <path
               className={styles.routePulse}
-              d="M0 173C45 173 55 377 100 377"
+              d="M0 150C45 150 55 322 100 322"
               pathLength="1"
             />
-            <path className={styles.arrow} d="m94 371 5 6-5 6" />
+            <path className={styles.arrow} d="m94 316 5 6-5 6" />
           </svg>
           <span className={styles.btc}>BTC</span>
         </div>

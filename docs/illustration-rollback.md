@@ -65,3 +65,7 @@ npx --yes vercel@64.7.0 --prod --yes --no-wait
 To return all the way to the static image after this update, revert the complete
 range `illustration-before-animation..illustration-lively-animation-v1` instead.
 Future edits may require resolving a normal revert conflict.
+
+## Compact payment options and five-stage walkthrough
+
+The version immediately before this layout update is commit `91a2b58`. It preserves the refined header, four-stage animation, and the earlier compact Paykit logo summary. The next layout version narrows Alice and Bob’s panels, shows every provider’s payment options inside Paykit, and splits the payment instruction from rail discovery. Its stages are setup (0), Enter Paykit (1), instruct Bitkit (2), discover a shared rail (3), and direct payment (4). The automatic loop takes 50 seconds (8/10/10/10/12). Use normal revert commits to undo the layout update while preserving shared history; later unrelated edits may require resolving conflicts.

@@ -18,7 +18,6 @@ type Props = {
   labels: {
     play: string;
     pause: string;
-    replay: string;
     navigation: string;
     reducedMotion: string;
     autoplay: string;
@@ -111,17 +110,6 @@ export default function PaymentStoryController({
       </>,
     );
   }
-  function replay() {
-    setActive(0);
-    elapsed.current = 0;
-    setProgress(0);
-    setRequestedPlay(!reducedMotion);
-    setManualAnnouncement(
-      <>
-        {steps[0].title} {steps[0].description}
-      </>,
-    );
-  }
   function toggle() {
     setRequestedPlay(!requestedPlay);
   }
@@ -196,16 +184,6 @@ export default function PaymentStoryController({
                 <path d="m7 4 9 6-9 6Z" />
               </svg>
             )}
-          </button>
-          <button
-            type="button"
-            onClick={replay}
-            aria-label={labels.replay}
-            data-testid="payment-story-replay"
-          >
-            <svg viewBox="0 0 20 20" aria-hidden="true">
-              <path d="M4 8a6.5 6.5 0 1 1 0 5M4 3v5h5" />
-            </svg>
           </button>
         </div>
       </div>

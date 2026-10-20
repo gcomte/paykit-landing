@@ -196,7 +196,7 @@ test("the payment story separates discovery from payment and supports reduced mo
   await page.getByRole("button", { name: "Enter Paykit" }).click();
   const story = page.getByTestId("payment-story");
   await story.scrollIntoViewIfNeeded();
-  await expect(story).toHaveAttribute("data-active-step", "3");
+  await expect(story).toHaveAttribute("data-active-step", "4");
   expect(publicScriptBodies.length).toBeGreaterThan(0);
   const loadedScripts = await Promise.all(publicScriptBodies);
   expect(
@@ -263,15 +263,15 @@ test("the payment story separates discovery from payment and supports reduced mo
         return [css.borderColor, css.backgroundImage, css.boxShadow, css.opacity];
       }),
     );
-  for (const step of [0, 1, 2, 3]) {
+  for (const step of [0, 1, 2, 3, 4]) {
     const button = story.locator(`button[data-step="${step}"]`);
     await button.click();
     await expect(story).toHaveAttribute("data-active-step", String(step));
     await expect(button).toHaveAttribute("aria-current", "step");
-    await expect(route).toHaveCSS("opacity", step === 3 ? "1" : "0");
+    await expect(route).toHaveCSS("opacity", step === 4 ? "1" : "0");
     await expect(discovery).toHaveCSS("opacity", step >= 1 ? "1" : "0");
     await expect(discoveryLinks).toHaveCSS("opacity", step === 1 ? "1" : "0");
-    await expect(query).toHaveCSS("opacity", step === 2 ? "1" : "0");
+    await expect(query).toHaveCSS("opacity", step === 3 ? "1" : "0");
     if (step === 1) {
       const node = story.getByTestId("payment-discovery-node");
       await expect(node.getByText("Paykit", { exact: true })).toHaveCount(1);
@@ -317,6 +317,14 @@ test("the payment story separates discovery from payment and supports reduced mo
       await expect(title).toContainText("$10");
       expect(await cardStyles()).toEqual(neutralCards);
       const btcLabels = story.locator('[data-wallet] [data-currency="BTC"]');
+      for (const btc of await btcLabels.all()) {
+        await expect(btc).toHaveCSS("color", "rgb(196, 208, 223)");
+      }
+    }
+    if (step === 3) {
+      await expect(title).toContainText(/rail/i);
+      expect(await cardStyles()).toEqual(neutralCards);
+      const btcLabels = story.locator('[data-wallet] [data-currency="BTC"]');
       await expect(btcLabels).toHaveCount(2);
       for (const btc of await btcLabels.all()) {
         await expect(btc).toHaveCSS("color", "rgb(255, 172, 127)");
@@ -328,8 +336,8 @@ test("the payment story separates discovery from payment and supports reduced mo
         await expect(currency).toHaveCSS("color", "rgb(196, 208, 223)");
       }
     }
-    if (step === 3) await expect(title).toContainText(/direct/i);
-    if (step === 3) await expectPaymentToBypassPaykit();
+    if (step === 4) await expect(title).toContainText(/direct/i);
+    if (step === 4) await expectPaymentToBypassPaykit();
   }
   await story.locator('button[data-step="1"]').focus();
   await page.keyboard.press("Enter");
@@ -348,23 +356,26 @@ test("the payment story separates discovery from payment and supports reduced mo
     (await bitbox.boundingBox())!.y,
   );
   for (const [wallet, currencies] of [
-    ["Bitkit", ["BTC", "USDT"]],
+    ["Bitkit", ["BTC", "Lightning", "USDT"]],
     ["Wise", ["USD", "GBP"]],
     ["BitBox", ["ETH", "XMR"]],
     ["WDK", ["BTC", "ETH"]],
     ["Revolut", ["EUR", "CHF"]],
   ] as const) {
     const row = story.locator(`[data-wallet="${wallet}"]`);
-    const top = row.getByText(currencies[0], { exact: true });
-    const bottom = row.getByText(currencies[1], { exact: true });
-    const topBox = (await top.boundingBox())!;
-    const bottomBox = (await bottom.boundingBox())!;
-    expect(bottomBox.y).toBeGreaterThan(topBox.y);
-    expect(
-      await top.evaluate((element) =>
-        parseFloat(getComputedStyle(element).fontSize),
-      ),
-    ).toBeGreaterThanOrEqual(14);
+    await expect(row.locator("[data-currency]")).toHaveText([...currencies]);
+    let previousY = -Infinity;
+    for (const currency of currencies) {
+      const label = row.getByText(currency, { exact: true });
+      const bounds = (await label.boundingBox())!;
+      expect(bounds.y).toBeGreaterThan(previousY);
+      previousY = bounds.y;
+      expect(
+        await label.evaluate((element) =>
+          parseFloat(getComputedStyle(element).fontSize),
+        ),
+      ).toBeGreaterThanOrEqual(14);
+    }
     expect(
       await row.evaluate((element) => {
         const bounds = element.getBoundingClientRect();
@@ -384,7 +395,7 @@ test("the payment story separates discovery from payment and supports reduced mo
       `${wallet} labels must fit inside their wallet card`,
     ).toBe(true);
   }
-  await story.locator('button[data-step="3"]').click();
+  await story.locator('button[data-step="4"]').click();
   await expectPaymentToBypassPaykit();
   expect(
     await page.evaluate(
@@ -393,7 +404,7 @@ test("the payment story separates discovery from payment and supports reduced mo
   ).toBe(true);
 });
 
-test("the payment story autoplays, loops, pauses, and replays", async ({
+test("the payment story autoplays, loops, and pauses", async ({
   page,
 }) => {
   test.setTimeout(120_000);
@@ -441,18 +452,19 @@ test("the payment story autoplays, loops, pauses, and replays", async ({
   await expect(story).toHaveAttribute("data-active-step", "3", {
     timeout: 18_000,
   });
+  await expect(story).toHaveAttribute("data-active-step", "4", {
+    timeout: 18_000,
+  });
   await expect(story.getByTestId("payment-route")).toHaveCSS("opacity", "1");
   await story.getByTestId("payment-story-toggle").click();
   await expect(story).toHaveAttribute("data-playing", "false");
   await story.getByTestId("payment-story-toggle").click();
   await expect(story).toHaveAttribute("data-playing", "true");
-  await expect(story).toHaveAttribute("data-active-step", "3");
+  await expect(story).toHaveAttribute("data-active-step", "4");
   await expect(story).toHaveAttribute("data-active-step", "0", {
     timeout: 16_000,
   });
   await expect(story).toHaveAttribute("data-playing", "true");
-  await story.getByTestId("payment-story-replay").click();
-  await expect(story).toHaveAttribute("data-active-step", "0");
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   await page.waitForTimeout(11_000);
   await expect(story).toHaveAttribute("data-active-step", "0");
