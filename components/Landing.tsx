@@ -395,71 +395,6 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
 
         <Features />
 
-        <section className="foundation" aria-labelledby="foundation-title">
-          <div className="foundation-inner section-pad">
-            <div className="foundation-copy">
-              <p className="eyebrow">
-                <span className="status-dot" /> BUILT ON PUBKY
-              </p>
-              <h2 id="foundation-title">
-                Your data.
-                <br />
-                Your choice.
-              </h2>
-              <p>
-                Convenient payments shouldn’t need a central address book.
-                Paykit builds on Pubky, a decentralized protocol that puts
-                identity and data in your hands.
-              </p>
-              <p>
-                Your payment data lives on a Homeserver you choose—or run
-                yourself. Mainline DHT helps apps discover where to find it.
-              </p>
-              <a
-                href="https://pubky.org/overview/"
-                target="_blank"
-                rel="noreferrer"
-                className="text-link"
-              >
-                Explore Pubky <Arrow diagonal />
-              </a>
-            </div>
-            <div className="foundation-visual">
-              <div className="foundation-art">
-                <Image
-                  src="/illustrations/pubky-network-v1.png"
-                  alt="Conceptual illustration of a personal identity connected to independently operated servers."
-                  width={1536}
-                  height={1024}
-                  sizes="(max-width: 800px) 100vw, 50vw"
-                />
-              </div>
-              <div className="foundation-route">
-                <span>Pubky identity</span>
-                <Arrow />
-                <a
-                  href="https://pubky.org/mainline-dht/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Mainline DHT
-                </a>
-                <Arrow />
-                <a
-                  href="https://pubky.org/homeserver/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Your Homeserver
-                </a>
-              </div>
-              <p className="foundation-caption">
-                Decentralized discovery. Infrastructure you can choose or run.
-              </p>
-            </div>
-          </div>
-        </section>
-
         <section
           className="try section-pad"
           id="try-paykit"
@@ -584,6 +519,71 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               Explore the marketplace <Arrow diagonal />
             </span>
           </a>
+        </section>
+
+        <section className="foundation" aria-labelledby="foundation-title">
+          <div className="foundation-inner section-pad">
+            <div className="foundation-copy">
+              <p className="eyebrow">
+                <span className="status-dot" /> BUILT ON PUBKY
+              </p>
+              <h2 id="foundation-title">
+                Your data.
+                <br />
+                Your choice.
+              </h2>
+              <p>
+                Convenient payments shouldn’t need a central address book.
+                Paykit builds on Pubky, a decentralized protocol that puts
+                identity and data in your hands.
+              </p>
+              <p>
+                Your payment data lives on a Homeserver you choose—or run
+                yourself. Mainline DHT helps apps discover where to find it.
+              </p>
+              <a
+                href="https://pubky.org/overview/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-link"
+              >
+                Explore Pubky <Arrow diagonal />
+              </a>
+            </div>
+            <div className="foundation-visual">
+              <div className="foundation-art">
+                <Image
+                  src="/illustrations/pubky-network-v1.png"
+                  alt="Conceptual illustration of a personal identity connected to independently operated servers."
+                  width={1536}
+                  height={1024}
+                  sizes="(max-width: 800px) 100vw, 50vw"
+                />
+              </div>
+              <div className="foundation-route">
+                <span>Pubky identity</span>
+                <Arrow />
+                <a
+                  href="https://pubky.org/mainline-dht/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Mainline DHT
+                </a>
+                <Arrow />
+                <a
+                  href="https://pubky.org/homeserver/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Your Homeserver
+                </a>
+              </div>
+              <p className="foundation-caption">
+                Decentralized discovery. Infrastructure you can choose or run.
+              </p>
+            </div>
+          </div>
         </section>
 
         <section

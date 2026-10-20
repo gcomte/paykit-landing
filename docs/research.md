@@ -138,8 +138,8 @@ Direction: a cohesive graphite technology site, cool-white Geist typography, res
 3. **Introductory teaser:** directly in the opening section, before the technical explanation. Use the actual video thumbnail and a clear play action. Load the YouTube player only on request.
 4. **How it works:** one purpose-made payment illustration, with readable HTML labels and three short steps: choose a contact, exchange details, review/pay.
 5. **Features:** four compact features: recurring payments, allowances, private receiving details, and requests/receipts. Wallets own scheduling, approval, and execution.
-6. **Pubky foundation:** compact explanation of identity, DHT routing, and chosen/self-hosted data storage, with a matching original illustration and links to the underlying infrastructure. Images are conceptual rather than topology specifications.
-7. **Try Paykit:** original unfiltered Bitkit SVG, Payky, a future-wallet integration invitation, and Pubky Marketplace with honest staging context.
+6. **Try Paykit:** original unfiltered Bitkit SVG, Payky, a future-wallet integration invitation, and Pubky Marketplace with honest staging context.
+7. **Pubky foundation:** compact explanation of identity, DHT routing, and chosen/self-hosted data storage, with a matching original illustration and links to the underlying infrastructure. Images are conceptual rather than topology specifications.
 8. **Resources:** a consistent two-column grid of source, specifications, receiving server, and Pubky overview links.
 9. **Lugano:** title “Meet us in Lugano”, subtitle “Let’s talk Paykit”, and “Find us at the Synonym booth” as requested by the user. Group verified workshop details with direct Google Calendar and `.ics` download actions. Keep accurate UTC times and the thirty-minute download reminder.
 10. **FAQ/contact/footer:** short expandable answers, a straightforward integration-interest email composer, direct email fallback, and preview logout.
