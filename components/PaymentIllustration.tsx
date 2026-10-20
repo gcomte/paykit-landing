@@ -7,7 +7,7 @@ const profiles = [
   {
     person: "Alice",
     methods: [
-      { name: "Bitkit", currencies: ["BTC", "Tether"], shared: true },
+      { name: "Bitkit", currencies: ["BTC", "USDT"], shared: true },
       { name: "PayPal", currencies: ["USD"], shared: false },
       { name: "Wise", currencies: ["USD", "GBP"], shared: false },
     ],
@@ -15,9 +15,9 @@ const profiles = [
   {
     person: "Bob",
     methods: [
-      { name: "Cake Wallet", currencies: ["Ether", "XMR"], shared: false },
+      { name: "Cake Wallet", currencies: ["ETH", "XMR"], shared: false },
       { name: "Revolut", currencies: ["EUR", "CHF"], shared: false },
-      { name: "WDK", currencies: ["BTC", "Ether"], shared: true },
+      { name: "WDK", currencies: ["BTC", "ETH"], shared: true },
     ],
   },
 ];
@@ -114,10 +114,6 @@ export default function PaymentIllustration() {
       }
     >
       <div className={styles.scene} data-testid="payment-scene">
-        <div className={styles.discovery} aria-hidden="true">
-          <div className={styles.discoveryScan} />
-          <span>Wallets use Paykit to discover payment options.</span>
-        </div>
         {profiles.map((profile) => (
           <div
             className={styles.profile}
@@ -129,10 +125,6 @@ export default function PaymentIllustration() {
                 <Person />
               </span>
               <strong>{profile.person}</strong>
-              <span className={styles.protocol}>
-                Speaks Paykit
-                <span className={styles.activity} aria-hidden="true" />
-              </span>
             </div>
             <div className={styles.methods}>
               {profile.methods.map((method) => (

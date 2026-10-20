@@ -140,24 +140,6 @@
   height: 100%;
   object-fit: contain;
 }
-.protocol {
-  position: absolute;
-  left: 0;
-  bottom: 10px;
-  color: #b6c5d7;
-  font-size: 14px;
-  opacity: 0;
-  transition: opacity 0.45s;
-  white-space: nowrap;
-}
-.activity {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  margin-left: 7px;
-  background: #c2dff5;
-}
 .methods {
   display: grid;
   gap: 12px;
@@ -210,60 +192,6 @@
   transition:
     color 0.5s,
     text-shadow 0.5s;
-}
-.discovery {
-  position: absolute;
-  inset: 113px -23px -26px;
-  border: 1px solid #aac8e64d;
-  border-radius: 20px;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.5s;
-  box-shadow:
-    0 0 22px #8fbee308,
-    inset 0 0 20px #9fbfe707;
-}
-.discovery > span {
-  position: absolute;
-  bottom: -34px;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  font-size: 14px;
-  color: #becde0;
-}
-.discoveryScan {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  overflow: hidden;
-  pointer-events: none;
-}
-.discoveryScan::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -35%;
-  width: 30%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #c4e2ff0c,
-    #d7ecff22,
-    transparent
-  );
-  transform: skewX(-15deg);
-}
-.discoveryScan::after {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: -20%;
-  width: 15%;
-  height: 1px;
-  background: #d9efff;
-  box-shadow: 0 0 8px #c3e4ff;
 }
 .discoveryNetwork {
   position: absolute;
@@ -516,21 +444,6 @@
 .story[data-active-step="1"] .avatar {
   animation: portraitFloat 4s ease-in-out infinite;
 }
-.story[data-active-step="2"] .discovery {
-  opacity: 1;
-}
-.story[data-active-step="2"] .protocol {
-  opacity: 1;
-}
-.story[data-active-step="1"] .activity {
-  animation: discoveryLight 1.4s ease-in-out infinite;
-}
-.story[data-active-step="1"] .discoveryScan::before {
-  animation: discoverScan 2.1s 0.2s ease-in-out infinite;
-}
-.story[data-active-step="1"] .discoveryScan::after {
-  animation: edgeScan 2.6s linear infinite;
-}
 .story[data-active-step="1"] .method {
   animation: readDetails 2.5s ease-in-out infinite;
 }
@@ -540,11 +453,9 @@
 .story[data-active-step="1"] .method:nth-child(3) {
   animation-delay: 0.6s;
 }
-.story[data-active-step="2"] [data-shared="false"],
 .story[data-active-step="3"] [data-shared="false"] {
   opacity: 0.75;
 }
-.story[data-active-step="2"] [data-shared="true"],
 .story[data-active-step="3"] [data-shared="true"] {
   border-color: #ff9a6fe0;
   background:
@@ -554,9 +465,6 @@
     inset 0 1px #ffe3ccad,
     inset 0 0 0 1px #ff754a55,
     0 0 25px #ff754a20;
-}
-.story[data-active-step="2"] [data-shared="true"] {
-  animation: matchBloom 1.1s 1.7s ease-out both;
 }
 .story[data-active-step="2"] [data-currency="BTC"],
 .story[data-active-step="3"] [data-currency="BTC"] {
@@ -756,17 +664,6 @@
     transform: translateY(-4px);
   }
 }
-@keyframes discoveryLight {
-  0%,
-  100% {
-    opacity: 0.4;
-    box-shadow: 0 0 0 #c2dff500;
-  }
-  50% {
-    opacity: 1;
-    box-shadow: 0 0 9px #c2dff5a0;
-  }
-}
 @keyframes discoverOptions {
   0% {
     stroke-dashoffset: 1;
@@ -809,22 +706,6 @@
     opacity: 0.8;
   }
 }
-@keyframes discoverScan {
-  from {
-    transform: translateX(0) skewX(-15deg);
-  }
-  to {
-    transform: translateX(450%) skewX(-15deg);
-  }
-}
-@keyframes edgeScan {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(850%);
-  }
-}
 @keyframes readDetails {
   0%,
   100% {
@@ -835,25 +716,6 @@
     box-shadow:
       inset 0 1px #eff7ff,
       0 0 22px #b4d5ff10;
-  }
-}
-@keyframes matchBloom {
-  0% {
-    box-shadow:
-      inset 0 1px #ffe3ccad,
-      0 0 0 #ff754a00;
-  }
-  40% {
-    box-shadow:
-      inset 0 1px #fff1e5,
-      inset 0 0 0 1px #ff754a77,
-      0 0 32px #ff754a50;
-  }
-  100% {
-    box-shadow:
-      inset 0 1px #ffe3ccad,
-      inset 0 0 0 1px #ff754a55,
-      0 0 25px #ff754a20;
   }
 }
 @keyframes transfer {
@@ -960,12 +822,6 @@
     width: 56px;
     height: 70px;
   }
-  .protocol {
-    left: 0;
-    bottom: 13px;
-    font-size: 14px;
-    letter-spacing: -0.035em;
-  }
   .method {
     padding: 12px 9px;
     gap: 5px;
@@ -980,17 +836,6 @@
     font-size: 14px;
     gap: 5px;
     padding-left: 5px;
-  }
-  .discovery {
-    inset: 116px -11px -20px;
-    border-radius: 14px;
-  }
-  .discovery > span {
-    width: 250px;
-    white-space: normal;
-    text-align: center;
-    line-height: 1.4;
-    bottom: -49px;
   }
   .btc {
     font-size: 14px;

@@ -239,6 +239,18 @@ test("the payment story separates discovery from payment and supports reduced mo
     ).toBe(true);
   }
   const title = story.getByTestId("payment-story-heading").getByRole("heading");
+  await expect(story.getByText("Speaks Paykit", { exact: true })).toHaveCount(0);
+  await expect(
+    story.getByText("Wallets use Paykit to discover payment options.", { exact: true }),
+  ).toHaveCount(0);
+  let neutralCards: unknown;
+  const cardStyles = () =>
+    story.locator("[data-wallet]").evaluateAll((cards) =>
+      cards.map((card) => {
+        const css = getComputedStyle(card);
+        return [css.borderColor, css.backgroundImage, css.boxShadow, css.opacity];
+      }),
+    );
   for (const step of [0, 1, 2, 3]) {
     const button = story.locator(`button[data-step="${step}"]`);
     await button.click();
@@ -275,8 +287,23 @@ test("the payment story separates discovery from payment and supports reduced mo
         "Wise",
       ]);
     }
+    if (step === 0) neutralCards = await cardStyles();
     if (step === 1) await expect(title).toContainText("Paykit");
-    if (step === 2) await expect(title).toContainText("$10");
+    if (step === 2) {
+      await expect(title).toContainText("$10");
+      expect(await cardStyles()).toEqual(neutralCards);
+      const btcLabels = story.locator('[data-wallet] [data-currency="BTC"]');
+      await expect(btcLabels).toHaveCount(2);
+      for (const btc of await btcLabels.all()) {
+        await expect(btc).toHaveCSS("color", "rgb(255, 172, 127)");
+      }
+      const otherCurrencies = story.locator(
+        '[data-wallet] [data-currency]:not([data-currency="BTC"])',
+      );
+      for (const currency of await otherCurrencies.all()) {
+        await expect(currency).toHaveCSS("color", "rgb(196, 208, 223)");
+      }
+    }
     if (step === 3) await expect(title).toContainText(/direct/i);
     if (step === 3) await expectPaymentToBypassPaykit();
   }
@@ -297,10 +324,10 @@ test("the payment story separates discovery from payment and supports reduced mo
     (await cake.boundingBox())!.y,
   );
   for (const [wallet, currencies] of [
-    ["Bitkit", ["BTC", "Tether"]],
+    ["Bitkit", ["BTC", "USDT"]],
     ["Wise", ["USD", "GBP"]],
-    ["Cake Wallet", ["Ether", "XMR"]],
-    ["WDK", ["BTC", "Ether"]],
+    ["Cake Wallet", ["ETH", "XMR"]],
+    ["WDK", ["BTC", "ETH"]],
     ["Revolut", ["EUR", "CHF"]],
   ] as const) {
     const row = story.locator(`[data-wallet="${wallet}"]`);
