@@ -457,7 +457,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             </a>
             <a className="app-card future-card" href="#contact">
               <div className="app-card-top">
-                <span className="app-category">WHAT’S NEXT</span>
+                <span className="app-category">MORE INTEGRATIONS AHEAD</span>
                 <Arrow diagonal />
               </div>
               <div className="future-logo">
