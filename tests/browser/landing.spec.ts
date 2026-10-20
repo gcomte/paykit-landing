@@ -109,7 +109,6 @@ test("visitors can unlock the page and browse it at desktop and phone widths", a
     document.documentElement.style.scrollBehavior = "auto";
     window.scrollTo(0, 0);
   });
-  await page.screenshot({ path: "test-results/desktop.png", fullPage: true });
   await page.screenshot({ path: "test-results/desktop-hero.png" });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.evaluate(() => window.scrollTo(0, 0));
@@ -119,7 +118,6 @@ test("visitors can unlock the page and browse it at desktop and phone widths", a
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
-  await page.screenshot({ path: "test-results/mobile.png", fullPage: true });
   await page.screenshot({ path: "test-results/mobile-hero.png" });
   expect(errors).toEqual([]);
 });
@@ -129,6 +127,7 @@ test("video loads on demand and the inquiry composer prepares a structured email
   baseURL,
 }) => {
   expect(password).toBeTruthy();
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/access");
   await page.getByLabel("Password", { exact: true }).fill(password!);
   await page.getByRole("button", { name: "Enter Paykit" }).click();

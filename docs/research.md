@@ -131,20 +131,20 @@ Be explicit that the visitor is opening their email app. A sent message supplies
 
 ## Visual and information plan
 
-Direction: warm white canvas, dark ink text, orange accents, generous space, strong typography, and a minimal editorial layout. Use a small number of precise ideas per section. Avoid decorative dashboards, ticker strips, dense protocol diagrams, unsupported statistics, and stacks of competing badges.
+Direction: a cohesive graphite technology site, cool-white Geist typography, restrained orange accents, consistent borders and surface spacing. Body text stays at least 16px; labels and secondary links at least 14px on desktop and mobile. The brand is plain **Paykit** with an uppercase P, no symbol, and no period. Keep the messaging calm and avoid decorative motion, dashboard clutter, or repeated competing badges.
 
-1. **Header:** Paykit wordmark, short section links, and an integration/contact action. Compact navigation on mobile.
-2. **Hero:** “Pay. Get paid. Skip the back-and-forth.” Lead with the convenience people want, then explain that an open protocol lets wallets handle payment details. One primary try action and one secondary video action.
-3. **Single explanatory illustration:** contact → automatic exchange of compatible payment details → review and pay. Keep the relationship legible without animation; motion is optional enhancement and respects reduced-motion preferences.
-4. **How it works:** three short steps reinforcing the illustration. Keep addresses, identifiers, Noise handshakes, and allowance terminology out of this overview.
-   **Features:** a compact four-feature section covers recurring payments, allowances with limits, private receiving details, and requests/receipts. Recurrence is a request format; wallets own scheduling. Allowances are accepted shared terms, not access to funds. Both facts are enforced by the wallet/adapter boundary and SDK allowance accounting paths linked above. Keep advanced limits out of the main copy.
-5. **Pubky foundation:** compact explanation of identity, DHT routing, and self-hostable data storage, with a direct Pubky link.
-6. **Try Paykit:** Bitkit logo/card, Payky destination, Pubky Marketplace staging link, and a small future-wallet/integration invitation. Clear actions and honest staging context.
-7. **Teaser:** intentional click-to-load video with accessible title and fallback external link.
-8. **Resources:** source, SDK/bindings, server, and Pubky links with short descriptions.
-9. **Lugano:** concise invitation, verified workshop details, agenda action, direct Google Calendar link, and an `.ics` download with a thirty-minute reminder. Use UTC timestamps so calendar apps display local time correctly.
-10. **Contact:** integration-interest composer and direct email fallback.
-11. **FAQ/footer:** “Is Paykit a wallet?”, “Who can integrate it?”, and “Where does my data live?” plus source and legal links. Keep answers short.
+1. **Header:** plain Paykit name, three short section links, a primary try action, and accessible mobile navigation.
+2. **Hero:** “Pay. Get paid. Skip the back-and-forth.” Explain the open protocol in a short supporting paragraph, with one primary try action and a secondary teaser action.
+3. **Introductory teaser:** directly in the opening section, before the technical explanation. Use the actual video thumbnail and a clear play action. Load the YouTube player only on request.
+4. **How it works:** one purpose-made payment illustration, with readable HTML labels and three short steps: choose a contact, exchange details, review/pay.
+5. **Features:** four compact features: recurring payments, allowances, private receiving details, and requests/receipts. Wallets own scheduling, approval, and execution.
+6. **Pubky foundation:** compact explanation of identity, DHT routing, and chosen/self-hosted data storage, with a matching original illustration and links to the underlying infrastructure. Images are conceptual rather than topology specifications.
+7. **Try Paykit:** original unfiltered Bitkit SVG, Payky, a future-wallet integration invitation, and Pubky Marketplace with honest staging context.
+8. **Resources:** a consistent two-column grid of source, specifications, receiving server, and Pubky overview links.
+9. **Lugano:** title “Meet us in Lugano”, subtitle “Let’s talk Paykit”, and “Find us at the Synonym booth” as requested by the user. Group verified workshop details with direct Google Calendar and `.ics` download actions. Keep accurate UTC times and the thirty-minute download reminder.
+10. **FAQ/contact/footer:** short expandable answers, a straightforward integration-interest email composer, direct email fallback, and preview logout.
+
+Both conceptual illustrations were generated using the built-in image generation tool. The exact prompts, provenance, and project asset paths are documented in [illustration-prompts.md](illustration-prompts.md). The teaser poster is the supplied video’s [official YouTube thumbnail](https://i.ytimg.com/vi/yUkBWQ1J7bQ/maxresdefault.jpg). Bitkit's original SVG preserves its white lettering, black outline, and orange mark; do not apply a monochrome brightness filter.
 
 The FAQ is the main useful addition to the original brief: it reinforces that Paykit is an adoptable protocol and clarifies data control without lengthening the introduction.
 

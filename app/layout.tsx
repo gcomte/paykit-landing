@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 
-const sans = Manrope({
+const sans = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",

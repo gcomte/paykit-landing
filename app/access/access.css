@@ -1,76 +1,53 @@
 .access-shell {
   min-height: 100svh;
-  background: #f6f5f0;
-  color: #191919;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 38px 24px;
-  font-family: var(--font-sans), sans-serif;
+  padding: 36px 24px;
+  background:
+    radial-gradient(ellipse at 50% 0, #ff6b3d10, transparent 65%), #090b10;
 }
 .access-wordmark {
-  font-size: 34px;
-  font-weight: 850;
-  letter-spacing: -2px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: inherit;
-  text-decoration: none;
-}
-.access-wordmark span {
-  background: #ff4400;
-  color: #fff;
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  letter-spacing: 0;
-  font-size: 30px;
+  font-size: 28px;
+  font-weight: 650;
+  letter-spacing: -0.04em;
 }
 .access-card {
   width: min(100%, 440px);
   margin: auto;
-  padding: 62px 0;
+  padding: 48px 0;
 }
 .access-eyebrow {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: #777;
+  font-size: 14px;
+  color: #ff9c76;
+  font-weight: 500;
 }
 .access-card h1 {
-  font-size: 58px;
-  line-height: 1.06;
-  letter-spacing: -3.5px;
-  margin: 24px 0;
+  font-size: 52px;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  font-weight: 550;
+  margin: 20px 0;
 }
 .access-card > p {
-  font-size: 15px;
-  color: #666;
+  color: #a8b3c6;
+  font-size: 17px;
   line-height: 1.7;
   margin-bottom: 32px;
 }
 .access-card label {
-  font-size: 12px;
-  font-weight: 750;
   display: block;
+  font-size: 15px;
   margin-bottom: 10px;
 }
 .access-card input {
   width: 100%;
-  border: 1px solid #d3d1c9;
+  border: 1px solid #424b5a;
   border-radius: 10px;
-  padding: 16px;
+  padding: 15px;
+  background: #111721;
+  color: #f4f6fb;
   font: inherit;
-  background: #fff;
-  box-sizing: border-box;
-  color: #191919;
-}
-.access-card input:focus {
-  outline: 2px solid #ff4400;
-  outline-offset: 3px;
 }
 .access-card button {
   display: flex;
@@ -79,42 +56,40 @@
   width: 100%;
   border: 0;
   border-radius: 10px;
-  background: #ff4400;
-  color: #fff;
+  background: #ff6b3d;
+  color: #1d0c06;
   font: inherit;
-  font-size: 14px;
-  font-weight: 750;
-  padding: 17px 20px;
-  margin-top: 14px;
+  font-weight: 600;
+  padding: 15px 19px;
+  margin-top: 16px;
   cursor: pointer;
 }
 .access-card button:hover {
-  background: #dc3b00;
+  background: #ff8d6a;
 }
+.access-card input:focus-visible,
 .access-card button:focus-visible {
-  outline: 2px solid #191919;
-  outline-offset: 3px;
+  outline: 2px solid #ff9c76;
+  outline-offset: 4px;
 }
 .access-note {
   display: block;
-  font-size: 11px;
-  color: #888;
-  margin-top: 22px;
+  font-size: 14px;
+  color: #9ca9bd;
+  margin-top: 24px;
 }
 .access-error {
-  color: #a62700;
-  font-size: 13px;
-  line-height: 1.6;
+  color: #ffb094;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-top: 14px;
 }
 .access-bottom {
-  font-size: 11px;
-  color: #888;
+  font-size: 14px;
+  color: #9ca9bd;
 }
 @media (max-width: 480px) {
   .access-card h1 {
-    font-size: 49px;
-  }
-  .access-shell {
-    padding: 24px;
+    font-size: 46px;
   }
 }

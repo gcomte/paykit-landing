@@ -14,7 +14,7 @@ export default async function Access({
   return (
     <main className="access-shell">
       <a className="access-wordmark" href="/access" aria-label="Paykit">
-        <span aria-hidden="true">↗</span> paykit
+        Paykit
       </a>
       <section className="access-card" aria-labelledby="access-title">
         <span className="access-eyebrow">A FIRST LOOK</span>

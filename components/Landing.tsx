@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { InquiryForm, Teaser } from "./Interactions";
 import Features from "./Features";
+import PaymentIllustration from "./PaymentIllustration";
 
 function Arrow({
   diagonal = false,
@@ -25,25 +27,6 @@ function Arrow({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </svg>
-  );
-}
-
-function Mark({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="31"
-      height="31"
-      viewBox="0 0 32 32"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M4 6h12a9 9 0 0 1 0 18h-3v6H4V6Zm9 8v3h3a1.5 1.5 0 0 0 0-3h-3Z"
-        fill="currentColor"
-      />
-      <path d="m22 2 6 6-6 6V2Z" fill="currentColor" />
     </svg>
   );
 }
@@ -152,16 +135,6 @@ function Contact({ contactEmail }: { contactEmail: string }) {
         <a className="text-link" href={`mailto:${contactEmail}`}>
           <Icon kind="mail" size={20} /> {contactEmail} <Arrow diagonal />
         </a>
-        <div className="contact-note">
-          <span className="mini-mark">
-            <Mark />
-          </span>
-          <p>
-            Open protocol.
-            <br />
-            Open conversation.
-          </p>
-        </div>
       </div>
       <InquiryForm contactEmail={contactEmail}>
         <div className="form-row">
@@ -236,10 +209,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
       <header className="site-header">
         <div className="header-inner">
           <a href="#" className="wordmark" aria-label="Paykit home">
-            <Mark />
-            <span>
-              paykit<span className="wordmark-dot">.</span>
-            </span>
+            Paykit
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="#how-it-works">How it works</a>
@@ -265,20 +235,18 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
       <main id="main">
         <section className="hero section-pad" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <p className="eyebrow">
-              <span className="status-dot" /> THE OPEN PAYMENT PROTOCOL
+            <p className="eyebrow hero-eyebrow">
+              <span className="status-dot" /> The open payment protocol
             </p>
             <h1 id="hero-title">
               Pay. Get paid.
               <br />
-              Skip the
-              <br className="desktop-break" />{" "}
-              <span className="serif-word">back-and-forth.</span>
+              <span>Skip the back‑and‑forth.</span>
             </h1>
             <p className="hero-intro">
-              Paykit is an open protocol that lets wallets handle the payment
-              details. Choose a contact, review, and pay—without chasing
-              methods, addresses, or invoices.
+              Paykit is the open protocol for paying contacts. Your wallet
+              handles the methods, addresses, and invoices. You just review and
+              pay.
             </p>
             <div className="hero-actions">
               <a className="button button-orange" href="#try-paykit">
@@ -288,68 +256,43 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 <span className="play-small">▶</span> Watch the teaser
               </a>
             </div>
-            <div className="hero-footnote">
-              <span className="tiny-pubky">
-                p<span>✳</span>
-              </span>
-              <span>
-                Built on{" "}
-                <a href="https://pubky.org/" target="_blank" rel="noreferrer">
-                  Pubky
-                </a>
-                . Made for any wallet.
-              </span>
-            </div>
+            <p className="hero-footnote">
+              Built on{" "}
+              <a href="https://pubky.org/" target="_blank" rel="noreferrer">
+                Pubky
+              </a>
+              <span aria-hidden="true">·</span>Open to any wallet
+            </p>
           </div>
-          <div
-            className="hero-art"
-            role="img"
-            aria-label="Illustration: select a contact, your wallet discovers their payment methods and exchanges payment details through Paykit, then you approve the payment."
-          >
-            <div className="art-grid" />
-            <div className="pay-card">
-              <div className="pay-card-top">
-                <span className="pay-label">PAY A CONTACT</span>
-                <span className="card-dots">•••</span>
-              </div>
-              <div className="recipient">
-                <span className="avatar avatar-large">
-                  L
-                  <span className="avatar-check">
-                    <Icon kind="check" size={10} />
-                  </span>
-                </span>
-                <div>
-                  <b>Lea</b>
-                  <span>Someone you know.</span>
-                </div>
-              </div>
-              <div className="amount">
-                21,000 <span>sats</span>
-              </div>
-              <div className="automatic-row">
-                <span>
-                  <span className="live-dot" /> Payment details found
-                </span>
-                <Icon kind="check" size={15} />
-              </div>
-              <div className="illustrated-pay">
-                Pay Lea <Arrow />
-              </div>
-            </div>
-            <div className="protocol-chip">
-              <span className="protocol-mark">
-                <Mark />
+          <div className="hero-video" id="watch">
+            <Teaser>
+              <img
+                className="teaser-image"
+                src="/teaser-poster.jpg"
+                alt=""
+                width="1280"
+                height="720"
+              />
+              <span className="video-shade" />
+              <span className="video-play">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path d="m9 5 11 7-11 7V5Z" fill="currentColor" />
+                </svg>
               </span>
-              <div>
-                <b>Paykit connects the details.</b>
-                <span>Your wallet is ready. You approve.</span>
-              </div>
-              <Icon kind="check" size={20} />
-            </div>
-            <span className="art-coordinate coordinate-bottom">
-              ILLUSTRATIVE FLOW · YOU APPROVE THE PAYMENT
-            </span>
+              <span className="poster-caption">
+                <span>
+                  <strong>Meet Paykit</strong>
+                  <span>Watch the introduction</span>
+                </span>
+                <Arrow diagonal />
+              </span>
+            </Teaser>
           </div>
         </section>
 
@@ -372,6 +315,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               wallets a shared way to find and exchange the details they need.
             </p>
           </div>
+          <PaymentIllustration />
           <div className="steps-grid">
             <article className="step">
               <div className="step-top">
@@ -437,7 +381,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             </article>
           </div>
           <div className="protocol-note">
-            <Mark />
+            <Icon kind="code" />
             <p>
               <strong>A common language for payments.</strong> Paykit is an open
               protocol that any wallet, app, or service can adopt. Your money
@@ -458,11 +402,9 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 <span className="status-dot" /> BUILT ON PUBKY
               </p>
               <h2 id="foundation-title">
-                Your identity.
-                <br />
                 Your data.
                 <br />
-                <span>Your call.</span>
+                Your choice.
               </h2>
               <p>
                 Convenient payments shouldn’t need a central address book.
@@ -482,129 +424,40 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 Explore Pubky <Arrow diagonal />
               </a>
             </div>
-            <div className="foundation-diagram">
-              <div className="foundation-diagram-label">
-                <span className="mono">UNDER THE HOOD</span>
-                <span className="foundation-live">
-                  <span /> Open by design
-                </span>
+            <div className="foundation-visual">
+              <div className="foundation-art">
+                <Image
+                  src="/illustrations/pubky-network-v1.png"
+                  alt="Conceptual illustration of a personal identity connected to independently operated servers."
+                  width={1536}
+                  height={1024}
+                  sizes="(max-width: 800px) 100vw, 50vw"
+                />
               </div>
-              <div className="network-node">
-                <span className="node-icon">
-                  <Icon kind="person" />
-                </span>
-                <div>
-                  <b>Your Pubky identity</b>
-                  <span>One identity. A stable starting point.</span>
-                </div>
-                <span className="node-index">01</span>
-              </div>
-              <div className="node-connector">
-                <span>Discover</span>
+              <div className="foundation-route">
+                <span>Pubky identity</span>
                 <Arrow />
-              </div>
-              <a
-                className="network-node"
-                href="https://pubky.org/mainline-dht/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className="node-icon">
-                  <Icon kind="globe" />
-                </span>
-                <div>
-                  <b>Mainline DHT</b>
-                  <span>Signed records point to your Homeserver.</span>
-                </div>
-                <Arrow diagonal />
-              </a>
-              <div className="node-connector">
-                <span>Connect</span>
+                <a
+                  href="https://pubky.org/mainline-dht/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Mainline DHT
+                </a>
                 <Arrow />
+                <a
+                  href="https://pubky.org/homeserver/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Your Homeserver
+                </a>
               </div>
-              <a
-                className="network-node final-node"
-                href="https://pubky.org/homeserver/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className="node-icon">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    aria-hidden="true"
-                  >
-                    <rect x="4" y="3" width="16" height="7" rx="1.5" />
-                    <rect x="4" y="14" width="16" height="7" rx="1.5" />
-                    <path d="M8 6.5h.1M8 17.5h.1M13 6.5h4m-4 11h4" />
-                  </svg>
-                </span>
-                <div>
-                  <b>Your chosen Homeserver</b>
-                  <span>Your payment data lives here.</span>
-                </div>
-                <Arrow diagonal />
-              </a>
-              <div className="foundation-privacy">
-                <Icon kind="lock" size={18} />
-                <p>
-                  Publish payment methods for discovery. Exchange private
-                  details through encrypted channels.
-                </p>
-              </div>
+              <p className="foundation-caption">
+                Decentralized discovery. Infrastructure you can choose or run.
+              </p>
             </div>
           </div>
-        </section>
-
-        <section
-          className="watch section-pad"
-          id="watch"
-          aria-labelledby="watch-title"
-        >
-          <div className="watch-copy">
-            <p className="eyebrow">LESS FRICTION. MORE CONNECTION.</p>
-            <h2 id="watch-title">
-              See the idea
-              <br />
-              in motion.
-            </h2>
-            <p>
-              A little less payment admin.
-              <br />A lot more possibility.
-            </p>
-            <span className="video-duration">
-              THE PAYKIT TEASER <span>↗</span>
-            </span>
-          </div>
-          <Teaser>
-            <div className="poster-lines" />
-            <span className="poster-wordmark">
-              <Mark /> paykit.
-            </span>
-            <span className="poster-text">
-              Goodbye,
-              <br />
-              <span>payment friction.</span>
-            </span>
-            <span className="video-play">
-              <svg
-                width="22"
-                height="24"
-                viewBox="0 0 22 24"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path d="M21 12 1 23V1l20 11Z" fill="currentColor" />
-              </svg>
-            </span>
-            <span className="poster-caption">
-              PRESS PLAY <Arrow />
-            </span>
-          </Teaser>
         </section>
 
         <section
@@ -617,11 +470,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               <p className="eyebrow">
                 <span className="status-dot" /> TAKE IT FOR A SPIN
               </p>
-              <h2 id="try-title">
-                Less theory.
-                <br />
-                More trying it.
-              </h2>
+              <h2 id="try-title">See Paykit in action.</h2>
             </div>
             <p>
               Pick up a compatible wallet, create a payment page, or try a
@@ -647,11 +496,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                   height="48"
                 />
               </div>
-              <h3>
-                People-first payments.
-                <br />
-                In your pocket.
-              </h3>
+              <h3>Pay your contacts with Bitkit.</h3>
               <p>
                 Try Paykit with Bitkit, the self-custodial Bitcoin and Lightning
                 wallet. Use a Paykit-compatible build.
@@ -673,11 +518,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               <div className="payky-wordmark">
                 payky<span>↗</span>
               </div>
-              <h3>
-                One link.
-                <br />
-                Every way to pay you.
-              </h3>
+              <h3>One link. Every way to pay you.</h3>
               <p>
                 Bring your payment methods together on a page built on your
                 Pubky identity. Set it up, then share your link.
@@ -696,11 +537,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 <span>+</span>
                 <span>+</span>
               </div>
-              <h3>
-                Your wallet
-                <br />
-                could be here.
-              </h3>
+              <h3>Your wallet could be here.</h3>
               <p>
                 An open protocol has room for everyone. Bring Paykit to your
                 wallet or service and help connect the ecosystem.
@@ -758,9 +595,9 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             <div>
               <p className="eyebrow">OPEN SOURCE. OPEN POSSIBILITIES.</p>
               <h2 id="build-title">
-                Make payments
+                Build payments into
                 <br />
-                <span className="muted">part of what you build.</span>
+                <span className="muted">what comes next.</span>
               </h2>
             </div>
             <p>
@@ -836,18 +673,14 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 <Icon kind="pin" size={17} /> LUGANO, SWITZERLAND · 23–24 OCT
                 2026
               </p>
-              <h2 id="lugano-title">
-                Let’s talk Paykit.
-                <br />
-                <span className="serif-word">In person.</span>
-              </h2>
+              <h2 id="lugano-title">Meet us in Lugano</h2>
+              <p className="lugano-subtitle">Let’s talk Paykit.</p>
               <p>
-                We’re at Plan ₿ Forum in Lugano. Come say hello, bring your
-                questions, and join us for a hands-on conversation about better
-                payments.
+                Find us at the Synonym booth at Plan ₿ Forum. Come say hello,
+                bring your questions, and join our Paykit workshop.
               </p>
               <a href="#contact" className="button button-dark">
-                Meet us in Lugano <Arrow />
+                Get in touch <Arrow />
               </a>
               <a
                 className="lugano-forum-link"
@@ -863,13 +696,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 <span>YOU’RE INVITED</span>
                 <span className="workshop-badge">WORKSHOP</span>
               </div>
-              <h3>
-                Paykit: A new
-                <br />
-                Payment Protocol
-                <br />
-                Paradigm
-              </h3>
+              <h3>Paykit: A new Payment Protocol Paradigm</h3>
               <div className="workshop-details">
                 <div>
                   <span>WHEN</span>
@@ -979,10 +806,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
       <footer className="site-footer">
         <div className="footer-top">
           <a href="#" className="wordmark" aria-label="Paykit home">
-            <Mark />
-            <span>
-              paykit<span className="wordmark-dot">.</span>
-            </span>
+            Paykit
           </a>
           <p>
             Good payments start
