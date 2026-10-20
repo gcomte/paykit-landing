@@ -13,8 +13,8 @@ const profiles = [
     person: "Bob",
     methods: [
       { name: "Cake Wallet", currencies: ["Ether", "XMR"] },
-      { name: "WDK", currencies: ["BTC", "Ether"], shared: true },
       { name: "Revolut", currencies: ["EUR", "CHF"] },
+      { name: "WDK", currencies: ["BTC", "Ether"], shared: true },
     ],
   },
 ];
@@ -46,8 +46,8 @@ export default function PaymentIllustration() {
       </div>
       <Image
         className="payment-map-image"
-        src="/illustrations/contact-payment-v4.png"
-        alt="Alice wants to send $10 equivalent to Bob, shown by a right-pointing arrow. Alice has PayPal with USD, Bitkit with BTC and Tether, and Wise with USD and GBP. Bob has Cake Wallet with Ether and XMR, WDK with BTC and Ether, and Revolut with EUR and CHF. Each wallet's currencies are stacked vertically. Faint lines connect every wallet to a central Paykit box. A strong orange BTC route links Alice's Bitkit to Bob's WDK through Paykit."
+        src="/illustrations/contact-payment-v5.png"
+        alt="Alice wants to send $10 equivalent to Bob, shown by a right-pointing arrow. Alice has PayPal with USD, Bitkit with BTC and Tether, and Wise with USD and GBP. Bob has Cake Wallet with Ether and XMR at the top, Revolut with EUR and CHF in the middle, and WDK with BTC and Ether at the bottom. Each wallet's currencies are stacked vertically. Independent faint lines end at different points around a plain Paykit box. A strong orange BTC route links Alice's middle Bitkit wallet through Paykit to Bob's bottom WDK wallet."
         width={1774}
         height={887}
         sizes="(max-width: 900px) 1px, 1152px"
@@ -92,11 +92,11 @@ export default function PaymentIllustration() {
                 <div className="method-router">
                   <svg viewBox="0 0 64 352" fill="none" aria-hidden="true">
                     <path
-                      d="M0 128H12Q32 128 32 160V216M0 216H64M0 304H12Q32 304 32 272V216M64 128H52Q32 128 32 160M64 304H52Q32 304 32 272"
+                      d="M0 128H12Q22 128 22 146V192M0 304H12Q20 304 20 284V240M64 128H56Q46 128 46 148V192M64 216Q60 216 60 205H59"
                       className="method-discovery-lines"
                     />
                     <path
-                      d="M0 216H62M57 211L62 216L57 221"
+                      d="M0 216H5M32 240C32 280 50 304 62 304M57 299L62 304L57 309"
                       className="method-btc-line"
                     />
                   </svg>

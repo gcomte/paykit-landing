@@ -126,3 +126,52 @@ No pair of currencies is horizontally adjacent. No slashes or commas between cur
 4. Add a clean thin cool-white right-facing intent arrow ABOVE the two person plaques, running from the Alice side toward the Bob side. Set the exact caption "Alice wants to send $10 equivalent to Bob" above that arrow in clean modern white sans type, large and very legible (approximately 32px or larger on a 1774px-wide image). Keep generous breathing room, all arrow/caption content within the canvas, and do not overlap the existing PERSON plaques. This upper arrow represents intent only; keep it visually subdued compared with the middle strong orange BTC route. No paid/success labels.
 Preserve the central Paykit label, subtle routing-node detail, subdued neutral connections, and strong orange BTC route labels. No extra explanatory text, no logos, no coins, no money objects, no success checkmarks, no watermark. Keep exact spelling and capitalization: Alice, Bob, PayPal, USD, Bitkit, BTC, Tether, Wise, GBP, Cake Wallet, Ether, XMR, WDK, Revolut, EUR, CHF, Paykit. The caption must be EXACTLY "Alice wants to send $10 equivalent to Bob". The result must remain a premium attractive conceptual illustration, not a flat table.
 ```
+
+## Reordered recipient methods and independent discovery links
+
+- Project asset: `public/illustrations/contact-payment-v5.png`
+- Dimensions: 1774 × 887 pixels (2:1), RGB PNG.
+- Tool: built-in `image_gen.imagegen`, edit mode, first referencing v4 then applying a targeted cleanup to the generated draft. No API or CLI fallback.
+- Draft: `/home/gaib/.codex/generated_images/01a15889-4dcc-7812-b0f4-610e6d6824d9/exec-6f67c2cb-ca7c-4d9c-bb8f-a00eca7cf386.png`.
+- Final original: `/home/gaib/.codex/generated_images/01a15889-4dcc-7812-b0f4-610e6d6824d9/exec-b5f31ecd-1edf-4204-a260-d5a9ba63f4bd.png`.
+- Both results inspected with `view_image`; the cleanup removed the draft's remaining internal node marks and separated Revolut's gray port from WDK's orange port. The final Paykit box has a plain interior containing only the word Paykit. All four gray discovery paths terminate independently at distinct outer-edge ports. Bob's rows are Cake Wallet, Revolut, WDK; the orange path now descends to the bottom WDK row. Alice/Bob names, intent caption, GBP, and all vertical currency stacks remain correct. Selected final copied without image processing.
+- This remains a hypothetical compatibility illustration, not an integration or asset-support claim. The intent arrow and BTC route do not assert payment completion or Paykit custody.
+
+Initial exact edit prompt:
+
+```text
+Use case: precise-object-edit.
+Asset type: premium conceptual Paykit compatibility illustration.
+Edit the attached v4 illustration. Preserve its exact premium dark graphite #090b10, smoked glass, brushed metal, cool-white edges, restrained orange #ff6b3d, beautiful 3D studio-render material style and layout. Preserve all exact text and vertically stacked currency formatting described below. Preserve Alice and Bob silhouettes and labels, and the exact top caption "Alice wants to send $10 equivalent to Bob" with its upper right-facing intent arrow. Wide 2:1 image with all objects in frame.
+
+MAKE TWO CHANGES:
+A. REORDER BOB'S WALLET ROWS, moving WDK to BOTTOM and Revolut to MIDDLE.
+Bob exact top row: "Cake Wallet" at left, "Ether" vertically ABOVE "XMR" at right, neutral.
+Bob exact middle row: "Revolut" at left, "EUR" vertically ABOVE "CHF" at right, neutral.
+Bob exact bottom row: "WDK" at left, "BTC" vertically ABOVE "Ether" at right; highlight this bottom WDK row's edges and its BTC label in orange.
+Alice remains unchanged: top "PayPal" / "USD"; middle "Bitkit" / "BTC" vertically ABOVE "Tether"; bottom "Wise" / "USD" vertically ABOVE "GBP". Only Alice's Bitkit row is orange-highlighted, only BTC text orange, Tether neutral.
+
+B. MAKE DISCOVERY CONNECTIONS CLEARLY INDEPENDENT AND UNPAIRED:
+The four faint gray discovery paths must each end independently at a different staggered edge port around the central Paykit box. They must not resemble continuous aligned left-to-right routes through the box. Avoid mirror symmetry in those port positions.
+- Alice PayPal faint path curves gently upward and terminates at a port on the TOP-LEFT section of the Paykit box's TOP edge.
+- Alice Wise faint path curves downward and terminates at a distinct port near the LEFT side of the Paykit box's BOTTOM edge.
+- Bob Cake Wallet faint path curves down to terminate independently at an UPPER RIGHT edge port of the Paykit box.
+- Bob Revolut faint path curves to a separate LOWER RIGHT edge port of the Paykit box.
+Ensure all four subdued neutral paths are separate, have visible endpoints, and do not cross the highlighted orange path. Each path belongs to one wallet only. No gray connector continues inside Paykit to an opposite-side wallet and no paired routing lines inside Paykit. Keep only a restrained abstract tiny node detail within Paykit, rather than internal through-wires. Preserve large exact central label "Paykit".
+
+The ONE strong orange BTC route runs from Alice's MIDDLE Bitkit row into Paykit, then bends smoothly down from Paykit to Bob's BOTTOM WDK row. Label this orange route "BTC" and place one clear right-facing arrowhead immediately before it reaches the bottom WDK row. Highlight only Bitkit→Paykit→WDK. The orange route must visibly end at WDK on bottom, never Revolut or Cake Wallet. The orange incoming and outgoing ports on Paykit may occupy different heights to accommodate elegant routing. Maintain beautiful restrained curves and generous breathing room; composition can adjust the central box position slightly if needed to avoid crossings. Show no other strong route.
+
+TYPOGRAPHY: exact caption "Alice wants to send $10 equivalent to Bob". Exact names Alice, Bob, PayPal, USD, Bitkit, BTC, Tether, Wise, GBP, Cake Wallet, Ether, XMR, Revolut, EUR, CHF, WDK, Paykit. Wallet names are in left columns, currencies in right columns. All two-currency pairs must stay VERTICALLY STACKED, one above the other, never side by side. Keep clean legible modern sans typography and premium tangible glass/metal geometry.
+No extra words, no paid/success status or checkmarks, no real money, no coins, no watermark, no invented brand logos. The route expresses compatible payment coordination, not a completed payment.
+```
+
+Exact refinement prompt:
+
+```text
+Use case: precise-object-edit.
+Make an extremely narrow precise edit to the attached illustration. Preserve EVERYTHING else exactly: composition, all words and currency spellings, Alice and Bob, upper caption and arrow, wallet row order, vertically stacked currencies, beautiful premium graphite glass material style, borders and floor, and highlighted Bitkit→Paykit→WDK orange BTC route and arrow.
+CHANGE ONLY THE CENTRAL PAYKIT BOX INTERIOR AND ONE GRAY EDGE PORT:
+1. Remove ALL internal lines, internal nodes, dots, circuit etching, branching marks, glyphs, and decorative routing graphics from inside the central Paykit box. Its front face must be clean plain dark smoked glass with ONLY the single white word "Paykit". No internal line segments or node circles remain anywhere above, below, or beside this word. Keep the beautiful beveled glass border, subtle reflections, and external edge ports.
+2. The faint gray connection from Bob's MIDDLE Revolut row must terminate on its OWN gray outer-edge port on the RIGHT edge of Paykit at a height between the Cake Wallet gray port and the orange WDK outgoing port. It must not connect to, touch, share, or merge with the orange outgoing WDK route/port. Separate them clearly by at least 30 pixels vertically. If needed, place the Revolut gray port on the upper-right edge and Cake Wallet gray port at the right part of the TOP edge, using clean independent curved paths. All four gray paths must terminate on the box's OUTER edges only, not continue inside. Keep Alice's PayPal path entering the upper-left/top edge and Alice's Wise path entering the lower-left/bottom edge.
+No other edits. All existing labels, person plaques, colors, shadows, and wallet/currency text must remain exactly as shown. The final center face is plain with ONLY the word Paykit, while every external faint connection ends at a distinct port.
+```
