@@ -2,19 +2,19 @@ import Image from "next/image";
 
 const profiles = [
   {
-    person: "You",
+    person: "Payer",
     methods: [
-      { name: "PayPal" },
-      { name: "Bitkit", shared: true },
-      { name: "Wise" },
+      { name: "PayPal", currencies: ["USD"] },
+      { name: "Bitkit", currencies: ["BTC", "Tether"], shared: true },
+      { name: "Wise", currencies: ["USD", "Pounds"] },
     ],
   },
   {
-    person: "Your contact",
+    person: "Recipient",
     methods: [
-      { name: "Ethereum" },
-      { name: "WDK wallet", shared: true },
-      { name: "Revolut" },
+      { name: "Cake Wallet", currencies: ["Ether", "XMR"] },
+      { name: "WDK", currencies: ["BTC", "Ether"], shared: true },
+      { name: "Revolut", currencies: ["EUR", "CHF"] },
     ],
   },
 ];
@@ -46,8 +46,8 @@ export default function PaymentIllustration() {
       </div>
       <Image
         className="payment-map-image"
-        src="/illustrations/contact-payment-v2.png"
-        alt="Two people have different payment options. You use PayPal, Bitkit with Bitcoin, and Wise. Your contact uses Ethereum, a WDK wallet with Bitcoin, and Revolut. The only highlighted connection is Bitcoin, linking Bitkit to the WDK wallet."
+        src="/illustrations/contact-payment-v3.png"
+        alt="Payer has PayPal with USD, Bitkit with BTC and Tether, and Wise with USD and Pounds. Recipient has Cake Wallet with Ether and XMR, WDK with BTC and Ether, and Revolut with EUR and CHF. Faint lines connect every wallet to a central Paykit box. A strong orange BTC route links the Payer's Bitkit to the Recipient's WDK through Paykit."
         width={1774}
         height={887}
         sizes="(max-width: 900px) 1px, 1152px"
@@ -56,11 +56,6 @@ export default function PaymentIllustration() {
         <div className="method-profiles">
           {profiles.map((profile, index) => (
             <div className="method-profile-group" key={profile.person}>
-              {index === 1 && (
-                <div className="method-connector" aria-hidden="true">
-                  <span>→</span>
-                </div>
-              )}
               <div className="method-person">
                 <div className="method-person-heading">
                   <span className="method-person-icon">
@@ -74,19 +69,42 @@ export default function PaymentIllustration() {
                     key={method.name}
                   >
                     <span>{method.name}</span>
-                    {method.shared && (
-                      <strong>
-                        <span aria-hidden="true">₿</span> Bitcoin
-                      </strong>
-                    )}
+                    <span className="method-currencies">
+                      {method.currencies.map((currency) => (
+                        <span
+                          className={
+                            currency === "BTC" ? "currency-selected" : undefined
+                          }
+                          key={currency}
+                        >
+                          {currency}
+                        </span>
+                      ))}
+                    </span>
                   </div>
                 ))}
               </div>
+              {index === 0 && (
+                <div className="method-router">
+                  <svg viewBox="0 0 64 352" fill="none" aria-hidden="true">
+                    <path
+                      d="M0 128H12Q32 128 32 160V216M0 216H64M0 304H12Q32 304 32 272V216M64 128H52Q32 128 32 160M64 304H52Q32 304 32 272"
+                      className="method-discovery-lines"
+                    />
+                    <path
+                      d="M0 216H62M57 211L62 216L57 221"
+                      className="method-btc-line"
+                    />
+                  </svg>
+                  <span className="method-route-currency">BTC</span>
+                  <span className="method-paykit-node">Paykit</span>
+                </div>
+              )}
             </div>
           ))}
         </div>
         <div className="mobile-bitcoin-route">
-          <span aria-hidden="true">₿</span> Bitcoin in common
+          <span aria-hidden="true">₿</span> BTC selected: Bitkit → WDK
         </div>
       </div>
       <figcaption>
@@ -94,8 +112,9 @@ export default function PaymentIllustration() {
         details automatically. <strong>You just review and pay.</strong>
       </figcaption>
       <p className="payment-example-note">
-        Illustrative payment profiles. Paykit integration and supported methods
-        vary by app.
+        Illustrative profiles and currencies. Paykit exchanges payment details;
+        funds move between wallets. Integrations and supported currencies vary
+        by app.
       </p>
     </figure>
   );

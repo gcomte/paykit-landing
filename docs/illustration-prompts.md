@@ -69,3 +69,29 @@ Between the two middle Bitcoin rows, show one beautiful thin orange light beam l
 Typography exact text ONLY: PayPal, Bitkit, Bitcoin, Wise, Ethereum, WDK, Revolut, Bitcoin. Preserve exact lettercase; clean plain modern sans text, no invented logos or imitated brand marks. Do not render the words Paykit, protocol, user, sender, recipient, person, or any title/caption/frame wording; website HTML will supply context. No watermark. No actual people, coins, tokens, globe, cloud, giant central logo, busy circuitry, particles, or clutter.
 The visual must clearly read as two people with different available methods, with only their shared Bitcoin route highlighted. Preserve sophisticated tangible 3D materials and visual beauty, not a flat UI screenshot.
 ```
+
+## Payer and recipient: wallet and currency matching
+
+- Project asset: `public/illustrations/contact-payment-v3.png`
+- Dimensions: 1774 × 887 pixels (2:1), RGB PNG.
+- Tool: built-in `image_gen.imagegen`, edit mode with `public/illustrations/contact-payment-v2.png` as reference. No API or CLI fallback.
+- Original: `/home/gaib/.codex/generated_images/01a15889-4dcc-7812-b0f4-610e6d6824d9/exec-35a14af3-d3c6-4487-9714-6168188d4eca.png`.
+- Inspected with `view_image`; selected without further image edits. Both identity plaques are labeled correctly: Payer and Recipient. Payer rows read PayPal / USD; Bitkit / BTC / Tether; Wise / USD / Pounds. Recipient rows read Cake Wallet / Ether / XMR; WDK / BTC / Ether; Revolut / EUR / CHF. A central Paykit box connects faintly to all six rows. The only strong orange route is Bitkit → Paykit → WDK, labeled BTC, with a right-facing arrow. BTC alone is highlighted within the wallet rows; all other currency labels are neutral. Exact capitalization is correct; no paid or success status is present.
+- The profiles are hypothetical examples of compatible methods and currencies, not claims of supported wallet integrations or assets. Paykit's box represents coordination, not custody; the website supplies explanatory context and accessible text.
+
+Exact edit prompt:
+
+```text
+Use case: precise-object-edit.
+Asset type: conceptual payment-method compatibility illustration for a premium Paykit website.
+Edit the provided v2 illustration. Preserve its excellent premium 3D product-render style, two upright smoked-glass PERSON plaques, cool-white glass/metal edges, graphite #090b10 floor and background, precise orange #ff6b3d accent lighting, polished materials, restrained soft shadows, wide approximately 2:1 landscape composition. Both main objects remain PERSON/contact plaques with simple large human silhouettes. Keep every object entirely in frame and generous breathing room.
+Make these precise changes:
+1. Label the left PERSON plaque "Payer" in large clean white modern sans type near the silhouette. Label the right PERSON plaque "Recipient". Keep these exact labels legible.
+2. Left plaque has exactly three method rows. Top row primary label "PayPal", secondary currency label "USD". Middle row primary "Bitkit", secondary currencies "BTC" and "Tether". Bottom row primary "Wise", secondary currencies "USD" and "Pounds". All text exact and clean.
+3. Right plaque has exactly three method rows. Top row primary label "Cake Wallet", secondary currencies "Ether" and "XMR". Middle row primary "WDK", secondary currencies "BTC" and "Ether". Bottom row primary "Revolut", secondary currencies "EUR" and "CHF". All text exact and clean.
+4. Replace the center Bitcoin marker with a modern intelligent-looking but restrained smoked-glass / graphite Paykit matching box, clearly labeled "Paykit" in large clean modern white sans type. Use subtle etched abstract routing lines or a tiny elegant connected-node detail inside it, without a face, AI robot, brain, chip, or giant decorative symbol. It is conceptual protocol coordination, not a money-custody device.
+5. Show thin faint cool-gray connections from ALL SIX wallet rows to the central Paykit box, organized neatly without visual clutter. These faint links communicate discovering available methods. Keep those neutral lines very subdued.
+6. Show ONE strong orange path joining the left Bitkit row to the central Paykit box, then out to the right WDK row. Specifically highlight the "BTC" currency on both Bitkit and WDK rows in orange. Label this strong orange route "BTC", and place one clear orange arrowhead pointing right toward Recipient. Other currencies on these same rows remain neutral white or gray. No strong orange path touches PayPal, Wise, Cake Wallet, Revolut, Tether, Ether, XMR, USD, Pounds, EUR, or CHF. BTC is the ONLY currency shared between Payer and Recipient. Ether appears only on Recipient's side. No exchange or conversion routes.
+Typography: exact labels "Payer", "Recipient", "PayPal", "USD", "Bitkit", "BTC", "Tether", "Wise", "USD", "Pounds", "Cake Wallet", "Ether", "XMR", "WDK", "BTC", "Ether", "Revolut", "EUR", "CHF", "Paykit", "BTC". Large readable plain text, no invented brand logos; preserve exact capitalization. Methods clearly primary, currency labels clearly secondary, without tiny illegible type. Clean nearly frontal plaque faces retain 3D depth and slight perspective.
+Do not add a frame, title, subtitle, legend, explanatory prose, supported badge, paid status, success checkmark, any amounts, actual money, coins, crypto token objects, watermark, globe, cloud, or real people. This is a hypothetical compatibility example, not a product screenshot or integration claim. Preserve the original's beautiful quiet premium material quality and balanced presentation.
+```
