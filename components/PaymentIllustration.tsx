@@ -152,8 +152,7 @@ export default function PaymentIllustration() {
       footer={
         <p className={styles.note}>
           Illustrative payment options, not a list of supported integrations.
-          Apps choose which payment methods they support. You approve payments
-          in your wallet.
+          Apps choose which payment methods they support.
         </p>
       }
     >
