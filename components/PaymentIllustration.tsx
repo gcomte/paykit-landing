@@ -68,32 +68,32 @@ const steps = [
 const discoveryLinks = [
   {
     wallet: "Bitkit",
-    desktop: "M0 150C35 150 65 140 100 140",
+    desktop: "M0 150C35 150 65 75 100 75",
     mobile: "M0 150C14 150 8 50 12 -66",
   },
   {
     wallet: "PayPal",
-    desktop: "M0 236C35 236 65 224 100 224",
+    desktop: "M0 236C35 236 65 150 100 150",
     mobile: "M0 236C24 236 16 58 29 -66",
   },
   {
     wallet: "Wise",
-    desktop: "M0 322C35 322 65 308 100 308",
+    desktop: "M0 322C35 322 65 220 100 220",
     mobile: "M0 322C33 322 22 74 43 -66",
   },
   {
     wallet: "BitBox",
-    desktop: "M100 150C65 150 35 160 0 160",
+    desktop: "M100 150C65 150 35 95 0 95",
     mobile: "M100 150C86 150 92 50 88 -66",
   },
   {
     wallet: "Revolut",
-    desktop: "M100 236C65 236 35 246 0 246",
+    desktop: "M100 236C65 236 35 170 0 170",
     mobile: "M100 236C76 236 84 58 71 -66",
   },
   {
     wallet: "WDK",
-    desktop: "M100 322C65 322 35 332 0 332",
+    desktop: "M100 322C65 322 35 235 0 235",
     mobile: "M100 322C67 322 78 74 57 -66",
   },
 ];
