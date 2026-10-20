@@ -221,3 +221,21 @@ The cool-gray protocol-discovery outline currently wraps the entire Alice and Bo
 Use one beautiful faint thin cool-gray rounded rectangular outline spanning from the left of Alice's wallet rows across to the right of Bob's wallet rows. Its TOP horizontal edge lies just above the top Bitkit and Cake Wallet rows and just BELOW the names/portraits. Its BOTTOM horizontal edge lies below the Wise and WDK rows and includes the exact existing caption "Wallets use Paykit to find a shared payment rail." centered as a tasteful label interrupting the bottom border. The outline is very subtle, visually behind the wallet objects, not a central object or service and not a gray connection route. It can pass invisibly behind the glass plaques as needed. No outline around the portraits, heads or names; remove the old top outline that wraps their upper corners. All wallet options belong to this quiet shared discovery layer.
 Preserve the uninterrupted orange direct BTC arrow EXACTLY from Alice's top Bitkit row to Bob's bottom WDK row through empty middle space, its BTC label, all wallet names, all stacked currencies, Alice/Bob names, the exact top caption "Alice wants to send $10 equivalent to Bob" and upper intent arrow, beautiful premium graphite glass 3D rendering, light and reflections. No central object, logo, box, node, faint wallet links, or other changes. Exact existing typography/spellings must remain unchanged.
 ```
+
+## Shorter intent heading
+
+- Project asset: `public/illustrations/contact-payment-v7.png`
+- Dimensions: 1774 × 887 pixels (2:1), RGB PNG.
+- Tool: built-in `image_gen.imagegen`, edit mode referencing v6. No API or CLI fallback.
+- Original: `/home/gaib/.codex/generated_images/01a15889-4dcc-7812-b0f4-610e6d6824d9/exec-1aa12522-7a7d-42f3-b70a-0e8c089b4e9c.png`.
+- Inspected with `view_image`; exact upper heading now reads “I want to pay”. Upper arrow, Alice/Bob, Bitkit-first order, all stacked currencies, direct uninterrupted BTC curve, and the discovery outline and exact lower caption remain present and correct. Final copied without image processing. Versions 5 and 6 remain unchanged.
+
+Exact edit prompt:
+
+```text
+Use case: text-localization.
+Make exactly ONE narrow text edit to the attached image: replace the upper heading "Alice wants to send $10 equivalent to Bob" with the exact heading "I want to pay".
+Center "I want to pay" above the existing upper arrow using the same clean large cool-white modern sans typography and the same heading baseline, leaving calm empty space on either side.
+Preserve EVERYTHING ELSE as closely as possible, unchanged: exact 1774x887 wide composition; upper right-facing intent arrow; Alice and Bob names/portraits; Alice row order Bitkit / PayPal / Wise; Bob row order Cake Wallet / Revolut / WDK; vertically stacked currencies BTC above Tether, USD alone, USD above GBP, Ether above XMR, EUR above CHF, BTC above Ether; beautiful premium graphite smoked-glass 3D rendering; all orange highlights; the single uninterrupted direct orange BTC curve from Alice's top Bitkit row to Bob's bottom WDK row with its BTC label and arrow; subtle discovery frame surrounding wallet options only; exact lower caption "Wallets use Paykit to find a shared payment rail."; shadows, reflections, lighting and all object positions.
+No other changes, additions or removals. No central box/hub, no faint wallet links. The ONLY changed content is the heading, now EXACTLY "I want to pay".
+```

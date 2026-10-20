@@ -46,15 +46,15 @@ export default function PaymentIllustration() {
       </div>
       <Image
         className="payment-map-image"
-        src="/illustrations/contact-payment-v6.png"
-        alt="Alice wants to send $10 equivalent to Bob. Alice's wallets are Bitkit with BTC and Tether first, PayPal with USD second, and Wise with USD and GBP third. Bob has Cake Wallet with Ether and XMR, Revolut with EUR and CHF, and WDK with BTC and Ether at the bottom. Currencies are stacked vertically. A subtle discovery frame explains that wallets use Paykit to find a shared payment rail. A single uninterrupted orange BTC arrow goes directly from Alice's Bitkit to Bob's WDK, with no Paykit intermediary."
+        src="/illustrations/contact-payment-v7.png"
+        alt="I want to pay. Alice's wallets are Bitkit with BTC and Tether first, PayPal with USD second, and Wise with USD and GBP third. Bob has Cake Wallet with Ether and XMR, Revolut with EUR and CHF, and WDK with BTC and Ether at the bottom. Currencies are stacked vertically. A subtle discovery frame explains that wallets use Paykit to find a shared payment rail. A single uninterrupted orange BTC arrow goes directly from Alice's Bitkit to Bob's WDK, with no Paykit intermediary."
         width={1774}
         height={887}
         sizes="(max-width: 900px) 1px, 1152px"
       />
       <div className="mobile-payment-map">
         <p className="payment-intent">
-          Alice wants to send $10 equivalent to Bob
+          I want to pay
           <span className="payment-intent-arrow" aria-hidden="true" />
         </p>
         <div className="payment-discovery-layer">
