@@ -444,7 +444,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 <Arrow diagonal />
               </div>
               <div className="payky-wordmark">
-                Paykiy<span>.</span>
+                Payky<span>.</span>
               </div>
               <h3>One link. Every way to pay you.</h3>
               <p>
@@ -452,7 +452,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 Pubky identity. Set it up, then share your link.
               </p>
               <span className="card-link">
-                Create your Paykiy page <Arrow />
+                Create your Payky page <Arrow />
               </span>
             </a>
             <a className="app-card future-card" href="#contact">
