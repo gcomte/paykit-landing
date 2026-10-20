@@ -486,6 +486,23 @@
   height: 100%;
   overflow: visible;
 }
+.query::before,
+.query::after {
+  content: "";
+  position: absolute;
+  left: -3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d5e7f4;
+  box-shadow: 0 0 7px #c8e7ff45;
+}
+.query::before {
+  top: 137px;
+}
+.query::after {
+  top: 157px;
+}
 .desktopQuery {
   right: auto;
   width: var(--node-inset);
@@ -1065,7 +1082,7 @@
   .queryLabel,
   .optionsLabel {
     display: block;
-    left: -112px;
+    left: 2px;
     white-space: nowrap;
   }
   .queryLabel {

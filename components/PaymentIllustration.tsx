@@ -349,8 +349,8 @@ export default function PaymentIllustration() {
           </svg>
           <span className={styles.mobileQueryRequestHead} />
           <span className={styles.mobileQueryResponseHead} />
-          <span className={styles.queryLabel}>Query</span>
-          <span className={styles.optionsLabel}>Options</span>
+          <span className={styles.queryLabel}>Bitkit query</span>
+          <span className={styles.optionsLabel}>Options to Bitkit</span>
         </div>
         <div
           className={styles.route}
