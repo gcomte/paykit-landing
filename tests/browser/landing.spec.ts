@@ -77,7 +77,7 @@ test("visitors can unlock the page and browse it at desktop and phone widths", a
     page.getByRole("link", { name: /Bitkit/i }).first(),
   ).toHaveAttribute("href", /https:\/\/bitkit\.to\/?$/);
   await expect(
-    page.getByRole("link", { name: /Marketplace/i }).first(),
+    page.getByRole("link", { name: /Pubky Market/i }).first(),
   ).toHaveAttribute("href", "https://staging.pubky.app/shop");
   await expect(
     page.getByText("16:15–17:00", { exact: false }).first(),

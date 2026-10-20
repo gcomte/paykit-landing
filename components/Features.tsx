@@ -56,7 +56,7 @@ export default function Features() {
           <p className="eyebrow">WHAT PAYKIT MAKES POSSIBLE</p>
           <h2 id="features-title">
             Beyond a<br />
-            one-off payment.
+            <span className="title-accent">one-off payment.</span>
           </h2>
         </div>
         <p>

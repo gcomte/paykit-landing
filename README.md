@@ -67,6 +67,6 @@ While the gate is enabled, metadata, `robots.txt`, and response headers discoura
 
 The teaser loads a `youtube-nocookie.com` embed only after the visitor chooses to watch. The contact form creates an email draft to `info@synonym.to` in the visitor's mail app; the visitor sends it themselves. It does not submit or store leads on this server. Review [Synonym's terms](https://synonym.to/terms-of-service) for the linked contact/privacy information.
 
-The Pubky Marketplace link uses the supplied staging address. It may require separate access; the landing-page password does not unlock that service. Update the URL when a public Marketplace destination is available.
+The Pubky Market link uses the supplied staging address. It may require separate access; the landing-page password does not unlock that service. Update the URL when a public Market destination is available.
 
 The Lugano workshop includes a Google Calendar link and a protected `.ics` download for Apple Calendar, Outlook, and other calendar apps. The download includes a thirty-minute reminder. Both use 24 October 2026, 14:15–15:00 UTC (16:15–17:00 CEST in Lugano).

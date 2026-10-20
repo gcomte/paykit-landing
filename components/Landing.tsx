@@ -126,7 +126,7 @@ function Contact({ contactEmail }: { contactEmail: string }) {
         <h2 id="contact-title">
           Your next payment
           <br />
-          idea starts here.
+          <span className="title-accent">idea starts here.</span>
         </h2>
         <p>
           Building a wallet? Adding payments to a service? Or just curious? We’d
@@ -243,7 +243,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             <h1 id="hero-title">
               Pay. Get paid.
               <br />
-              <span>Skip the back‑and‑forth.</span>
+              <span className="title-accent">Skip the back‑and‑forth.</span>
             </h1>
             <p className="hero-intro">
               Paykit is the open protocol for paying contacts. Your wallet
@@ -254,17 +254,10 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               <a className="button button-orange" href="#try-paykit">
                 Try Paykit <Arrow />
               </a>
-              <a className="button button-plain" href="#watch">
-                <span className="play-small">▶</span> Watch the teaser
+              <a className="button button-plain" href="#how-it-works">
+                See how it works <Arrow />
               </a>
             </div>
-            <p className="hero-footnote">
-              Built on{" "}
-              <a href="https://pubky.org/" target="_blank" rel="noreferrer">
-                Pubky
-              </a>
-              <span aria-hidden="true">·</span>Open to any wallet
-            </p>
           </div>
           <div className="hero-video" id="watch">
             <Teaser>
@@ -308,7 +301,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               <p className="eyebrow">ANIMATED ILLUSTRATION</p>
               <h2 id="how-title">
                 Pay a person,
-                <span className="muted">
+                <span className="muted title-accent">
                   not an address, IBAN, invoice or app-specific handle.
                 </span>
               </h2>
@@ -319,81 +312,83 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             </p>
           </div>
           <PaymentIllustration />
-          <div className="steps-grid">
-            <article className="step">
-              <div className="step-top">
-                <span className="step-number">01</span>
-                <Icon kind="discover" size={30} />
-              </div>
-              <div className="step-visual step-contact">
-                <span className="avatar avatar-small">A</span>
-                <b>Alice</b>
-                <span className="small-pill">Your contact</span>
-              </div>
-              <h3>Find the person.</h3>
-              <p>
-                Start with a contact’s Pubky identity. Your wallet discovers the
-                payment methods they make available.
-              </p>
-              <span className="step-resolves">No “What do you accept?”</span>
-            </article>
-            <article className="step">
-              <div className="step-top">
-                <span className="step-number">02</span>
-                <Icon kind="exchange" size={30} />
-              </div>
-              <div className="step-visual step-exchange">
-                <span>
-                  <Icon kind="wallet" size={23} />
-                </span>
-                <div className="exchange-line">
-                  <i />
-                  <i />
-                  <i />
-                </div>
-                <span>
-                  <Icon kind="person" size={23} />
-                </span>
-              </div>
-              <h3>Get the details.</h3>
-              <p>
-                Compatible apps coordinate the payment details, including
-                addresses or invoices, behind the scenes.
-              </p>
-              <span className="step-resolves">
-                No copying. No back-and-forth.
-              </span>
-            </article>
-            <article className="step">
-              <div className="step-top">
-                <span className="step-number">03</span>
-                <Icon kind="wallet" size={30} />
-              </div>
-              <div className="step-visual step-approved">
-                <span>
-                  <Icon kind="check" size={20} />
-                </span>
-                <b>Ready to pay</b>
-              </div>
-              <h3>Make the payment.</h3>
-              <p>
-                Review and approve in your wallet. Your wallet sends the payment
-                using a method you both support.
-              </p>
-              <span className="step-resolves">Your wallet. Your approval.</span>
-            </article>
-          </div>
-          <div className="protocol-note">
-            <Icon kind="code" />
+        </section>
+
+        <section
+          className="openness section-pad"
+          id="open-protocol"
+          aria-labelledby="openness-title"
+        >
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">OPEN IN EVERY WAY</p>
+              <h2 id="openness-title">
+                Open <span className="title-accent">by design.</span>
+              </h2>
+            </div>
             <p>
-              <strong>A common language for payments.</strong> Paykit is an open
-              protocol that any wallet, app, or service can adopt. Your money
-              stays with your wallet.
+              A shared protocol that any wallet, app, or service can implement.
+              Built for people to connect across platforms.
             </p>
-            <a className="text-link" href="#build">
-              Build with it <Arrow />
-            </a>
           </div>
+          <div className="openness-grid">
+            <article>
+              <Icon kind="code" size={28} />
+              <h3>Open source.</h3>
+              <p>
+                Read the code, build on it, or create your own implementation.
+                Paykit’s Rust libraries are MIT-licensed.
+              </p>
+              <a
+                className="text-link"
+                href={links.github}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Explore the code <Arrow diagonal />
+              </a>
+            </article>
+            <article>
+              <Icon kind="exchange" size={28} />
+              <h3>Interoperable.</h3>
+              <p>
+                You and your contact can use different wallets. Compatible apps
+                exchange payment details through Paykit, then pay using a method
+                you both support.
+              </p>
+              <a
+                className="text-link"
+                href={links.specs}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Read the protocol <Arrow diagonal />
+              </a>
+            </article>
+            <article>
+              <Icon kind="globe" size={28} />
+              <h3>Decentralized.</h3>
+              <p>
+                Your public-key identity is discovered through{" "}
+                <a href="https://github.com/pubky/pkarr" target="_blank" rel="noreferrer">
+                  PKARR
+                </a>{" "}
+                on Mainline DHT. Your payment data lives on a{" "}
+                <a href="https://pubky.org/homeserver/" target="_blank" rel="noreferrer">
+                  homeserver
+                </a>{" "}
+                you choose—or run yourself.
+              </p>
+              <a className="text-link" href="#foundation-title">
+                Your data, your choice <Arrow />
+              </a>
+            </article>
+          </div>
+          <p className="openness-note">
+            Self-sovereign by design. Decentralized discovery and independently
+            operated homeservers reduce reliance on a single gatekeeper, helping
+            Paykit resist censorship.
+          </p>
         </section>
 
         <Features />
@@ -408,7 +403,9 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               <p className="eyebrow">
                 <span className="status-dot" /> TAKE IT FOR A SPIN
               </p>
-              <h2 id="try-title">See Paykit in action.</h2>
+              <h2 id="try-title">
+                See Paykit <span className="title-accent">in action.</span>
+              </h2>
             </div>
             <p>
               Pick up a compatible wallet, create a payment page, or try a
@@ -509,7 +506,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             </div>
             <div>
               <span className="app-category">PUT IT TO WORK</span>
-              <h3>Meet the Pubky Marketplace.</h3>
+              <h3>Meet the Pubky Market.</h3>
               <p>
                 Explore stores run by independent sellers and try a purchase
                 with Bitkit.
@@ -519,7 +516,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               </span>
             </div>
             <span className="marketplace-action">
-              Explore the marketplace <Arrow diagonal />
+              Explore Pubky Market <Arrow diagonal />
             </span>
           </a>
         </section>
@@ -528,12 +525,12 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
           <div className="foundation-inner section-pad">
             <div className="foundation-copy">
               <p className="eyebrow">
-                <span className="status-dot" /> BUILT ON PUBKY
+                <span className="status-dot" /> DATA YOU CONTROL
               </p>
               <h2 id="foundation-title">
                 Your data.
                 <br />
-                Your choice.
+                <span className="title-accent">Your choice.</span>
               </h2>
               <p>
                 Convenient payments shouldn’t need a central address book.
@@ -541,8 +538,14 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 identity and data in your hands.
               </p>
               <p>
-                Your payment data lives on a Homeserver you choose—or run
-                yourself. Mainline DHT helps apps discover where to find it.
+                Keep payment data on a homeserver you choose—or run yourself.
+                Your public-key identity stays yours, independently of a wallet
+                provider.
+              </p>
+              <p>
+                Publish the payment options you want people to find, or share
+                private details through encrypted channels. Paykit also encrypts
+                receipts before storing them on a homeserver.
               </p>
               <a
                 href="https://pubky.org/overview/"
@@ -600,7 +603,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               <h2 id="build-title">
                 Build payments into
                 <br />
-                <span className="muted">what comes next.</span>
+                <span className="muted title-accent">what comes next.</span>
               </h2>
             </div>
             <p>
@@ -677,7 +680,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 2026
               </p>
               <h2 id="lugano-title">Meet us in Lugano</h2>
-              <p className="lugano-subtitle">Let’s talk Paykit.</p>
+              <p className="lugano-subtitle title-accent">Let’s talk Paykit.</p>
               <p>
                 Find us at the Synonym booth at Plan ₿ Forum. Come say hello,
                 bring your questions, and join our Paykit workshop.
@@ -746,7 +749,9 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
         <section className="faq section-pad" aria-labelledby="faq-title">
           <div>
             <p className="eyebrow">A FEW GOOD QUESTIONS</p>
-            <h2 id="faq-title">Clear things up.</h2>
+            <h2 id="faq-title">
+              Clear <span className="title-accent">things up.</span>
+            </h2>
           </div>
           <div className="faq-list">
             <details>
@@ -832,7 +837,12 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>An open payment protocol, built on Pubky.</span>
+          <span>
+            Built on{" "}
+            <a href="https://pubky.org/" target="_blank" rel="noreferrer">
+              Pubky
+            </a>.
+          </span>
           <form action="/api/logout" method="post">
             <button type="submit" className="lock-preview">
               Lock preview

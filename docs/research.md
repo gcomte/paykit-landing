@@ -96,15 +96,26 @@ Paykit Server implements receiver-side Bitcoin on-chain observation and optional
 - [Bitcoin invoice address derivation](https://github.com/pubky/paykit-server/blob/aa98a56d87ee0dff0d749029a10c10fd300f39db/paykit-server/src/application/create_invoice.rs#L317).
 - [Receiving details and USDT constants](https://github.com/pubky/paykit-server/blob/aa98a56d87ee0dff0d749029a10c10fd300f39db/paykit-server/src/domain/receiving.rs).
 - [Bitcoin observation boundary](https://github.com/pubky/paykit-server/blob/aa98a56d87ee0dff0d749029a10c10fd300f39db/paykit-server/src/bitcoin.rs).
-- [Marketplace payment request preparation](https://github.com/pubky/paykit-server/blob/aa98a56d87ee0dff0d749029a10c10fd300f39db/paykit-server/src/application/marketplace_preparation.rs).
+- [Market payment request preparation](https://github.com/pubky/paykit-server/blob/aa98a56d87ee0dff0d749029a10c10fd300f39db/paykit-server/src/application/marketplace_preparation.rs).
 
-The server prepares/activates Marketplace requests, observes payments, and exposes lifecycle/status endpoints. Source capability does not establish the exact configuration of a live deployment. Keep live-demo copy rail-neutral unless the deployed capability has also been verified.
+The server prepares/activates Market requests, observes payments, and exposes lifecycle/status endpoints. Source capability does not establish the exact configuration of a live deployment. Keep live-demo copy rail-neutral unless the deployed capability has also been verified.
+
+## Openness section verification — 20 October 2026
+
+The openness section follows the animated walkthrough directly. It replaces the redundant static three-step summary. The hero's secondary action links to that walkthrough, while the Pubky credit lives in the footer. The deeper data-control and privacy explanation remains after the practical demos. Pubky Market is the current product name supplied by the project owner; its staging URL is unchanged.
+
+These claims were rechecked against current Paykit commit `84239143fa17a5a0b2ba0b13694ff6a6e68763df` and Pubky commit `4c713faafd57e3d74fa96a5102c3116e22d6925f`:
+
+- **Open source:** [MIT license declaration](https://github.com/pubky/paykit-rs/blob/84239143fa17a5a0b2ba0b13694ff6a6e68763df/paykit-lib/Cargo.toml#L6).
+- **Interoperable:** [Endpoint identifiers and UTF-8 payment payloads](https://github.com/pubky/paykit-rs/blob/84239143fa17a5a0b2ba0b13694ff6a6e68763df/paykit-lib/src/payment_endpoint.rs#L7). Wallets still need compatible implementations and a mutually supported method.
+- **Decentralized and self-sovereign:** [PKARR homeserver resolution](https://github.com/pubky/pubky-core/blob/4c713faafd57e3d74fa96a5102c3116e22d6925f/pubky-sdk/src/actors/pkdns.rs#L143), [key-signed publication](https://github.com/pubky/pubky-core/blob/4c713faafd57e3d74fa96a5102c3116e22d6925f/pubky-sdk/src/actors/pkdns.rs#L442), and [independently runnable homeserver](https://github.com/pubky/pubky-core/blob/4c713faafd57e3d74fa96a5102c3116e22d6925f/pubky-homeserver/README.md). Mainline DHT carries discovery records; actual payment files live on homeservers. Reducing reliance on one gatekeeper supports censorship resistance as an architectural inference, not an immunity guarantee.
+- **Privacy:** [Public endpoint access](https://github.com/pubky/paykit-rs/blob/84239143fa17a5a0b2ba0b13694ff6a6e68763df/paykit-lib/src/payment_endpoint.rs#L254) is deliberately readable. [Private messages](https://github.com/pubky/paykit-rs/blob/84239143fa17a5a0b2ba0b13694ff6a6e68763df/paykit-lib/src/encrypted_link/private_application_message.rs#L390) use encrypted links; [receipt cryptography](https://github.com/pubky/paykit-rs/blob/84239143fa17a5a0b2ba0b13694ff6a6e68763df/paykit-lib/src/receipt/crypto.rs#L23) uses XChaCha20-Poly1305. The [receipt preparation and validated upload path](https://github.com/pubky/paykit-rs/blob/84239143fa17a5a0b2ba0b13694ff6a6e68763df/paykit-lib/src/receipt/access.rs#L96) encrypts before storage and rejects inconsistent prepared ciphertext. Avoid claiming all payment data is private, hiding metadata, or anonymous settlement.
 
 ## Public links and practical destinations
 
 - [Bitkit](https://bitkit.to/): present as a supporting wallet, use the official logo, and invite visitors to try contact payments. Do not imply all published Bitkit builds have identical protocol or asset support.
 - [Payky](https://payky.app/): include as a practical destination without inventing product capabilities.
-- [Pubky Marketplace](https://staging.pubky.app/shop): use this exact product name. Individual shops are third-party stores within the Marketplace. The supplied staging destination returned an access restriction during research; describe it as staging and do not imply the landing password grants access. Replace the link when the public destination is available.
+- [Pubky Market](https://staging.pubky.app/shop): use this exact product name. Individual shops are third-party stores within the Market. The supplied staging destination returned an access restriction during research; describe it as staging and do not imply the landing password grants access. Replace the link when the public destination is available.
 - [Teaser](https://youtu.be/yUkBWQ1J7bQ): click to load an embedded player using `youtube-nocookie.com`; no video iframe before interaction.
 - [Pubky](https://pubky.org/), [Paykit repository](https://github.com/pubky/paykit-rs), [SDK](https://github.com/pubky/paykit-rs/tree/master/paykit-sdk), [Swift/Kotlin bindings](https://github.com/pubky/paykit-rs/tree/master/paykit-ffi), and [Paykit Server](https://github.com/pubky/paykit-server): deeper resources.
 
@@ -138,7 +149,7 @@ Direction: a cohesive graphite technology site, cool-white Geist typography, res
 3. **Introductory teaser:** directly in the opening section, before the technical explanation. Use the actual video thumbnail and a clear play action. Load the YouTube player only on request.
 4. **How it works:** one purpose-made payment illustration, with readable HTML labels and three short steps: choose a contact, exchange details, review/pay.
 5. **Features:** four compact features: recurring payments, allowances, private receiving details, and requests/receipts. Wallets own scheduling, approval, and execution.
-6. **Try Paykit:** original unfiltered Bitkit SVG, Payky, a future-wallet integration invitation, and Pubky Marketplace with honest staging context.
+6. **Try Paykit:** original unfiltered Bitkit SVG, Payky, a future-wallet integration invitation, and Pubky Market with honest staging context.
 7. **Pubky foundation:** compact explanation of identity, DHT routing, and chosen/self-hosted data storage, with a matching original illustration and links to the underlying infrastructure. Images are conceptual rather than topology specifications.
 8. **Resources:** a consistent two-column grid of source, specifications, receiving server, and Pubky overview links.
 9. **Lugano:** title “Meet us in Lugano”, subtitle “Let’s talk Paykit”, and “Find us at the Synonym booth” as requested by the user. Group verified workshop details with direct Google Calendar and `.ics` download actions. Keep accurate UTC times and the thirty-minute download reminder.
@@ -172,5 +183,5 @@ Verified production URL: [paykit-landing-page.vercel.app](https://paykit-landing
 - Three browser tests passed locally and against the production URL: server access gate, desktop/mobile layout, actual calendar download, Google Calendar timestamps, click-to-load video, structured email draft, and logout.
 - Unauthenticated HTML and RSC checks exposed no protected copy. Production sends no-store and noindex headers; session cookies are HTTP-only, Secure, and SameSite=Lax.
 - Security reviews found no actionable or unresolved issues. Public client bundles were checked for protected copy and authentication identifiers. Production dependency audit reported zero vulnerabilities.
-- All public resource links returned success. The supplied Marketplace staging URL returned HTTP 401; no test purchase was claimed.
+- All public resource links returned success. The supplied Market staging URL returned HTTP 401; no test purchase was claimed.
 - Contact inquiries open a visitor-controlled email draft; the website does not deliver email or maintain a lead database.
