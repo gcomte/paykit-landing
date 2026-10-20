@@ -301,7 +301,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             </div>
             <p>
               “How can I pay you?” shouldn’t be a conversation. Paykit lets your
-              wallet handle the payment details automatically.
+              wallet figure out these details for you.
             </p>
           </div>
           <PaymentIllustration />

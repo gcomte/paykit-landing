@@ -10,6 +10,8 @@ import {
 } from "react";
 import styles from "./PaymentStory.module.css";
 
+const PLAYBACK_RATE = 0.8;
+
 type Step = { label: ReactNode; title: ReactNode; description: ReactNode };
 type Props = {
   children: ReactNode;
@@ -37,6 +39,7 @@ export default function PaymentStoryController({
   const [active, setActive] = useState(0);
   const [requestedPlay, setRequestedPlay] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [manualStep, setManualStep] = useState(false);
   const elapsed = useRef(0);
   const [inView, setInView] = useState(false);
   const [pageVisible, setPageVisible] = useState(true);
@@ -49,6 +52,7 @@ export default function PaymentStoryController({
     const updatePreference = () => {
       setReducedMotion(preference.matches);
       setRequestedPlay(!preference.matches);
+      setManualStep(false);
       if (preference.matches) {
         setActive(steps.length - 1);
         elapsed.current = 0;
@@ -81,7 +85,8 @@ export default function PaymentStoryController({
   useEffect(() => {
     if (!playing) return;
     const duration =
-      active === 0 ? 8000 : active === steps.length - 1 ? 12000 : 10000;
+      (active === 0 ? 8000 : active === steps.length - 1 ? 12000 : 10000) /
+      PLAYBACK_RATE;
     let lastTick = performance.now();
     const timer = window.setInterval(() => {
       const now = performance.now();
@@ -101,6 +106,7 @@ export default function PaymentStoryController({
 
   function select(index: number) {
     setActive(index);
+    setManualStep(true);
     setRequestedPlay(false);
     elapsed.current = 0;
     setProgress(0);
@@ -111,6 +117,7 @@ export default function PaymentStoryController({
     );
   }
   function toggle() {
+    if (!requestedPlay) setManualStep(false);
     setRequestedPlay(!requestedPlay);
   }
   return (
@@ -120,19 +127,23 @@ export default function PaymentStoryController({
       aria-labelledby={titleId}
       data-testid="payment-story"
       data-active-step={active}
+      data-step-halfway={manualStep || progress >= 50}
+      data-manual-step={manualStep}
       data-playing={playing}
       data-in-view={inView}
       data-page-visible={pageVisible}
       data-reduced-motion={reducedMotion}
       style={{ "--story-progress": `${progress}%` } as CSSProperties}
     >
-      <div className={styles.heading} data-testid="payment-story-heading">
-        <h3 id={titleId}>{steps[active].title}</h3>
-        <div className={styles.progressTrack} aria-hidden="true">
-          <span className={styles.progressFill} />
+      <div className={styles.illustration} data-testid="payment-illustration">
+        <div className={styles.heading} data-testid="payment-story-heading">
+          <h3 id={titleId}>{steps[active].title}</h3>
+          <div className={styles.progressTrack} aria-hidden="true">
+            <span className={styles.progressFill} />
+          </div>
         </div>
+        {children}
       </div>
-      {children}
       <figcaption
         className={styles.caption}
         data-testid="payment-story-caption"

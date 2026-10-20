@@ -7,7 +7,11 @@ const profiles = [
   {
     person: "Alice",
     methods: [
-      { name: "Bitkit", currencies: ["BTC", "Lightning", "USDT"], shared: true },
+      {
+        name: "Bitkit",
+        currencies: ["BTC", "Lightning", "USDT"],
+        shared: true,
+      },
       { name: "PayPal", currencies: ["USD"], shared: false },
       { name: "Wise", currencies: ["USD", "GBP"], shared: false },
     ],
@@ -25,7 +29,7 @@ const walletLogos: Record<string, string> = {
   Bitkit: "/wallets/bitkit.svg",
   PayPal: "/wallets/paypal.svg",
   Wise: "/wallets/wise.svg",
-  "BitBox": "/wallets/bitbox.png",
+  BitBox: "/wallets/bitbox.png",
   Revolut: "/wallets/revolut.svg",
   WDK: "/wallets/wdk.svg",
 };
@@ -58,41 +62,68 @@ const steps = [
     label: "Approve and pay",
     title: "Alice confirms. Her wallet pays Bob directly.",
     description:
-      "Bitkit sends BTC directly to WDK. Paykit coordinates the details; the payment never passes through Paykit.",
+      "Bitkit sends BTC directly to WDK. The payment never passes through Paykit.",
   },
 ];
 const discoveryLinks = [
   {
     wallet: "Bitkit",
-    desktop: "M0 150C12 150 12 116 30 116",
+    desktop: "M0 150C35 150 65 140 100 140",
     mobile: "M0 150C14 150 8 50 12 -66",
   },
   {
     wallet: "PayPal",
-    desktop: "M0 236C15 236 14 116 38 116",
+    desktop: "M0 236C35 236 65 224 100 224",
     mobile: "M0 236C24 236 16 58 29 -66",
   },
   {
     wallet: "Wise",
-    desktop: "M0 322C20 322 20 116 46 116",
+    desktop: "M0 322C35 322 65 308 100 308",
     mobile: "M0 322C33 322 22 74 43 -66",
   },
   {
     wallet: "BitBox",
-    desktop: "M100 150C86 150 86 116 70 116",
+    desktop: "M100 150C65 150 35 160 0 160",
     mobile: "M100 150C86 150 92 50 88 -66",
   },
   {
     wallet: "Revolut",
-    desktop: "M100 236C85 236 86 116 62 116",
+    desktop: "M100 236C65 236 35 246 0 246",
     mobile: "M100 236C76 236 84 58 71 -66",
   },
   {
     wallet: "WDK",
-    desktop: "M100 322C82 322 80 116 54 116",
+    desktop: "M100 322C65 322 35 332 0 332",
     mobile: "M100 322C67 322 78 74 57 -66",
   },
 ];
+function DiscoveryPaths({
+  links,
+  mobile = false,
+}: {
+  links: typeof discoveryLinks;
+  mobile?: boolean;
+}) {
+  return links.map((link) => (
+    <g key={link.wallet}>
+      <path
+        className={styles.discoveryLink}
+        d={mobile ? link.mobile : link.desktop}
+        data-discovery-wallet={link.wallet}
+      />
+      <path
+        className={styles.discoveryData}
+        d={mobile ? link.mobile : link.desktop}
+        pathLength="1"
+        style={{
+          animationDelay: ["0.25s", "0.875s", "1.75s", "0.5s", "1.5s", "2.25s"][
+            discoveryLinks.indexOf(link)
+          ],
+        }}
+      />
+    </g>
+  ));
+}
 function Person() {
   return (
     <Image
@@ -121,8 +152,8 @@ export default function PaymentIllustration() {
       footer={
         <p className={styles.note}>
           Illustrative payment options, not a list of supported integrations.
-          Apps choose which payment methods they support. You
-          approve payments in your wallet.
+          Apps choose which payment methods they support. You approve payments
+          in your wallet.
         </p>
       }
     >
@@ -139,6 +170,26 @@ export default function PaymentIllustration() {
               </span>
               <strong>{profile.person}</strong>
             </div>
+            {profile.person === "Alice" && (
+              <div
+                className={styles.intent}
+                data-testid="payment-intent"
+                aria-hidden="true"
+              >
+                <span
+                  className={styles.intentRecipient}
+                  data-testid="payment-intent-recipient"
+                >
+                  To Bob
+                </span>
+                <span
+                  className={styles.intentAmount}
+                  data-testid="payment-intent-amount"
+                >
+                  $10
+                </span>
+              </div>
+            )}
             <div className={styles.methods}>
               {profile.methods.map((method) => (
                 <div
@@ -172,46 +223,37 @@ export default function PaymentIllustration() {
           data-testid="payment-discovery"
           aria-hidden="true"
         >
-          <svg
+          <div
             className={styles.discoveryLinks}
             data-testid="payment-discovery-links"
-            viewBox="0 0 100 360"
-            preserveAspectRatio="none"
-            fill="none"
           >
-            <g className={styles.desktopDiscoveryLinks}>
-              {discoveryLinks.map((link) => (
-                <g key={link.wallet}>
-                  <path
-                    className={styles.discoveryLink}
-                    d={link.desktop}
-                    data-discovery-wallet={link.wallet}
-                  />
-                  <path
-                    className={styles.discoveryData}
-                    d={link.desktop}
-                    pathLength="1"
-                  />
-                </g>
-              ))}
-            </g>
-            <g className={styles.mobileDiscoveryLinks}>
-              {discoveryLinks.map((link) => (
-                <g key={link.wallet}>
-                  <path
-                    className={styles.discoveryLink}
-                    d={link.mobile}
-                    data-discovery-wallet={link.wallet}
-                  />
-                  <path
-                    className={styles.discoveryData}
-                    d={link.mobile}
-                    pathLength="1"
-                  />
-                </g>
-              ))}
-            </g>
-          </svg>
+            <div className={styles.desktopDiscoveryLinks}>
+              <svg
+                className={styles.discoveryLeft}
+                viewBox="0 0 100 360"
+                preserveAspectRatio="none"
+                fill="none"
+              >
+                <DiscoveryPaths links={discoveryLinks.slice(0, 3)} />
+              </svg>
+              <svg
+                className={styles.discoveryRight}
+                viewBox="0 0 100 360"
+                preserveAspectRatio="none"
+                fill="none"
+              >
+                <DiscoveryPaths links={discoveryLinks.slice(3)} />
+              </svg>
+            </div>
+            <svg
+              className={styles.mobileDiscoveryLinks}
+              viewBox="0 0 100 360"
+              preserveAspectRatio="none"
+              fill="none"
+            >
+              <DiscoveryPaths links={discoveryLinks} mobile />
+            </svg>
+          </div>
           <div
             className={styles.discoveryNode}
             data-testid="payment-discovery-node"
@@ -257,7 +299,10 @@ export default function PaymentIllustration() {
                         />
                         <span className={styles.discoverySummaryCurrencies}>
                           {method.currencies.map((currency) => (
-                            <span data-summary-currency={currency} key={currency}>
+                            <span
+                              data-summary-currency={currency}
+                              key={currency}
+                            >
                               {currency}
                             </span>
                           ))}
@@ -275,32 +320,35 @@ export default function PaymentIllustration() {
           data-testid="payment-query"
           aria-hidden="true"
         >
-          <svg viewBox="0 0 100 360" preserveAspectRatio="none" fill="none">
-            <g className={styles.desktopDiscoveryLinks}>
-              <path
-                className={styles.queryRequest}
-                d="M0 88C8 128 24 132 30 116"
-                pathLength="1"
-              />
-              <path
-                className={styles.queryResponse}
-                d="M60 116C58 144 20 154 0 108"
-                pathLength="1"
-              />
-            </g>
-            <g className={styles.mobileDiscoveryLinks}>
-              <path
-                className={styles.queryRequest}
-                d="M0 30C16 30 13 4 28 -66"
-                pathLength="1"
-              />
-              <path
-                className={styles.queryResponse}
-                d="M60 -66C52 20 28 70 0 70"
-                pathLength="1"
-              />
-            </g>
+          <div
+            className={`${styles.desktopDiscoveryLinks} ${styles.desktopQuery}`}
+          >
+            <span className={styles.queryRequestLine}>
+              <span className={styles.queryRequestTravel} />
+            </span>
+            <span className={styles.queryResponseLine}>
+              <span className={styles.queryResponseTravel} />
+            </span>
+          </div>
+          <svg
+            className={styles.mobileDiscoveryLinks}
+            viewBox="0 0 100 360"
+            preserveAspectRatio="none"
+            fill="none"
+          >
+            <path
+              className={styles.queryRequest}
+              d="M0 140C24 140 28 40 28 -66"
+              pathLength="1"
+            />
+            <path
+              className={styles.queryResponse}
+              d="M60 -66C60 30 26 160 0 160"
+              pathLength="1"
+            />
           </svg>
+          <span className={styles.mobileQueryRequestHead} />
+          <span className={styles.mobileQueryResponseHead} />
           <span className={styles.queryLabel}>Query</span>
           <span className={styles.optionsLabel}>Options</span>
         </div>
