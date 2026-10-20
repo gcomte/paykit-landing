@@ -534,6 +534,7 @@
 .story[data-active-step="4"] [data-shared="false"] {
   opacity: 0.75;
 }
+.story[data-active-step="2"] [data-person="Alice"] [data-wallet="Bitkit"],
 .story[data-active-step="4"] [data-shared="true"] {
   border-color: #ff9a6fe0;
   background:

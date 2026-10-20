@@ -255,7 +255,7 @@ test("the payment story separates discovery from payment and supports reduced mo
   await expect(
     story.getByText("Wallets use Paykit to discover payment options.", { exact: true }),
   ).toHaveCount(0);
-  let neutralCards: unknown;
+  let neutralCards: string[][] = [];
   const cardStyles = () =>
     story.locator("[data-wallet]").evaluateAll((cards) =>
       cards.map((card) => {
@@ -315,7 +315,9 @@ test("the payment story separates discovery from payment and supports reduced mo
     if (step === 1) await expect(title).toContainText("Paykit");
     if (step === 2) {
       await expect(title).toContainText("$10");
-      expect(await cardStyles()).toEqual(neutralCards);
+      const instructionCards = await cardStyles();
+      expect(instructionCards[0]).not.toEqual(neutralCards[0]);
+      expect(instructionCards.slice(1)).toEqual(neutralCards.slice(1));
       const btcLabels = story.locator('[data-wallet] [data-currency="BTC"]');
       for (const btc of await btcLabels.all()) {
         await expect(btc).toHaveCSS("color", "rgb(196, 208, 223)");
