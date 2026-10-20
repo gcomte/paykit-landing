@@ -552,8 +552,8 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             <div className="foundation-visual">
               <div className="foundation-art">
                 <Image
-                  src="/illustrations/pubky-network-v1.png"
-                  alt="Conceptual illustration of a personal identity connected to independently operated servers."
+                  src="/illustrations/pubky-homeserver-network-v2.png"
+                  alt="A decentralized peer network connected to a homeserver inside a home."
                   width={1536}
                   height={1024}
                   sizes="(max-width: 800px) 100vw, 50vw"
@@ -579,7 +579,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 </a>
               </div>
               <p className="foundation-caption">
-                Decentralized discovery. Infrastructure you can choose or run.
+                Decentralized discovery. A homeserver you choose—or run yourself.
               </p>
             </div>
           </div>
@@ -599,10 +599,6 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 <span className="muted title-accent">what comes next.</span>
               </h2>
             </div>
-            <p>
-              Give your app a common way to discover and coordinate payments.
-              Start with the code, explore the protocol, and make it your own.
-            </p>
           </div>
           <div className="resource-list">
             <a href={links.github} target="_blank" rel="noreferrer">
