@@ -2,15 +2,15 @@ import Image from "next/image";
 
 const profiles = [
   {
-    person: "Payer",
+    person: "Alice",
     methods: [
       { name: "PayPal", currencies: ["USD"] },
       { name: "Bitkit", currencies: ["BTC", "Tether"], shared: true },
-      { name: "Wise", currencies: ["USD", "Pounds"] },
+      { name: "Wise", currencies: ["USD", "GBP"] },
     ],
   },
   {
-    person: "Recipient",
+    person: "Bob",
     methods: [
       { name: "Cake Wallet", currencies: ["Ether", "XMR"] },
       { name: "WDK", currencies: ["BTC", "Ether"], shared: true },
@@ -46,13 +46,17 @@ export default function PaymentIllustration() {
       </div>
       <Image
         className="payment-map-image"
-        src="/illustrations/contact-payment-v3.png"
-        alt="Payer has PayPal with USD, Bitkit with BTC and Tether, and Wise with USD and Pounds. Recipient has Cake Wallet with Ether and XMR, WDK with BTC and Ether, and Revolut with EUR and CHF. Faint lines connect every wallet to a central Paykit box. A strong orange BTC route links the Payer's Bitkit to the Recipient's WDK through Paykit."
+        src="/illustrations/contact-payment-v4.png"
+        alt="Alice wants to send $10 equivalent to Bob, shown by a right-pointing arrow. Alice has PayPal with USD, Bitkit with BTC and Tether, and Wise with USD and GBP. Bob has Cake Wallet with Ether and XMR, WDK with BTC and Ether, and Revolut with EUR and CHF. Each wallet's currencies are stacked vertically. Faint lines connect every wallet to a central Paykit box. A strong orange BTC route links Alice's Bitkit to Bob's WDK through Paykit."
         width={1774}
         height={887}
         sizes="(max-width: 900px) 1px, 1152px"
       />
       <div className="mobile-payment-map">
+        <p className="payment-intent">
+          Alice wants to send $10 equivalent to Bob
+          <span className="payment-intent-arrow" aria-hidden="true" />
+        </p>
         <div className="method-profiles">
           {profiles.map((profile, index) => (
             <div className="method-profile-group" key={profile.person}>

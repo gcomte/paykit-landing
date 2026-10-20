@@ -325,8 +325,8 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
                 <Icon kind="discover" size={30} />
               </div>
               <div className="step-visual step-contact">
-                <span className="avatar avatar-small">L</span>
-                <b>Lea</b>
+                <span className="avatar avatar-small">A</span>
+                <b>Alice</b>
                 <span className="small-pill">Your contact</span>
               </div>
               <h3>Find the person.</h3>

@@ -95,3 +95,34 @@ Make these precise changes:
 Typography: exact labels "Payer", "Recipient", "PayPal", "USD", "Bitkit", "BTC", "Tether", "Wise", "USD", "Pounds", "Cake Wallet", "Ether", "XMR", "WDK", "BTC", "Ether", "Revolut", "EUR", "CHF", "Paykit", "BTC". Large readable plain text, no invented brand logos; preserve exact capitalization. Methods clearly primary, currency labels clearly secondary, without tiny illegible type. Clean nearly frontal plaque faces retain 3D depth and slight perspective.
 Do not add a frame, title, subtitle, legend, explanatory prose, supported badge, paid status, success checkmark, any amounts, actual money, coins, crypto token objects, watermark, globe, cloud, or real people. This is a hypothetical compatibility example, not a product screenshot or integration claim. Preserve the original's beautiful quiet premium material quality and balanced presentation.
 ```
+
+## Alice and Bob: vertically stacked currencies and payment intent
+
+- Project asset: `public/illustrations/contact-payment-v4.png`
+- Dimensions: 1774 × 887 pixels (2:1), RGB PNG.
+- Tool: built-in `image_gen.imagegen`, edit mode with `public/illustrations/contact-payment-v3.png` as reference. No API or CLI fallback.
+- Original: `/home/gaib/.codex/generated_images/01a15889-4dcc-7812-b0f4-610e6d6824d9/exec-e62501e5-69a6-4b27-bdf2-9aeaeefbc767.png`.
+- Inspected with `view_image`; selected without further image edits. Both identity plaques are labeled correctly: Alice and Bob. Each wallet name occupies the left column and each currency list the right column. Every two-currency pair is vertically stacked: BTC above Tether, USD above GBP, Ether above XMR, BTC above Ether, EUR above CHF. PayPal has USD alone. Above the plaques, a right-facing intent arrow accompanies the exact caption “Alice wants to send $10 equivalent to Bob”. The central Paykit box, six discovery connections, and sole orange BTC route with right-facing arrow remain intact. All text and currency codes verified visually.
+- The profiles are hypothetical examples of compatible methods and currencies, not claims of supported wallet integrations or assets. The upper arrow expresses the payer's intent; the illustration does not assert a completed payment. Paykit's box represents coordination, not custody.
+
+Exact edit prompt:
+
+```text
+Use case: precise-object-edit.
+Asset type: premium conceptual Paykit compatibility illustration.
+Edit the attached v3 illustration with only the specific refinements below. Preserve its beautiful high-end 3D studio render, exact dark graphite #090b10 / smoked glass / brushed metal / cool-white highlights / orange #ff6b3d material system, composition, PERSON plaques, center Paykit box, all six faint discovery connections, and sole strong orange Bitkit → Paykit → WDK BTC route with right-facing arrow. Preserve sharp clean type and realistic quiet floor/shadows. Approximately 2:1 landscape, preferably same 1774x887 proportions; a little more height allowed to comfortably fit the changes.
+1. Rename the left person's large label "Payer" to "Alice", and the right person's label "Recipient" to "Bob".
+2. In the Wise row, change "Pounds" to exact code "GBP".
+3. MOST IMPORTANT TYPOGRAPHY REFINEMENT: every wallet row must have the wallet name in a left column and its currencies in a separate right column. If a wallet has two currencies, they must be vertically stacked, one directly ABOVE the other, never side by side. They must share one consistent right-column horizontal alignment. Increase row heights slightly if needed and align the wallet names vertically centered against the currency stack. Use comfortably legible large type.
+Left Alice plaque rows:
+- PayPal at left; USD in right currency column.
+- Bitkit at left; BTC on top and Tether directly BELOW BTC in right currency column. Highlight only BTC in orange, Tether neutral white/gray.
+- Wise at left; USD on top and GBP directly BELOW USD in right currency column.
+Right Bob plaque rows:
+- Cake Wallet at left; Ether on top and XMR directly BELOW Ether in right currency column.
+- WDK at left; BTC on top and Ether directly BELOW BTC in right currency column. Highlight only BTC in orange, Ether neutral white/gray.
+- Revolut at left; EUR on top and CHF directly BELOW EUR in right currency column.
+No pair of currencies is horizontally adjacent. No slashes or commas between currency lines. Do not place any currency below the wallet name; currencies all belong to the distinct right-hand column of their row.
+4. Add a clean thin cool-white right-facing intent arrow ABOVE the two person plaques, running from the Alice side toward the Bob side. Set the exact caption "Alice wants to send $10 equivalent to Bob" above that arrow in clean modern white sans type, large and very legible (approximately 32px or larger on a 1774px-wide image). Keep generous breathing room, all arrow/caption content within the canvas, and do not overlap the existing PERSON plaques. This upper arrow represents intent only; keep it visually subdued compared with the middle strong orange BTC route. No paid/success labels.
+Preserve the central Paykit label, subtle routing-node detail, subdued neutral connections, and strong orange BTC route labels. No extra explanatory text, no logos, no coins, no money objects, no success checkmarks, no watermark. Keep exact spelling and capitalization: Alice, Bob, PayPal, USD, Bitkit, BTC, Tether, Wise, GBP, Cake Wallet, Ether, XMR, WDK, Revolut, EUR, CHF, Paykit. The caption must be EXACTLY "Alice wants to send $10 equivalent to Bob". The result must remain a premium attractive conceptual illustration, not a flat table.
+```

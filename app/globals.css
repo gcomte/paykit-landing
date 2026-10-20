@@ -1687,6 +1687,32 @@ h3 {
     display: block;
     padding: 28px;
   }
+  .payment-intent {
+    max-width: 640px;
+    margin: 0 auto 24px;
+    color: #edf2fa;
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: center;
+  }
+  .payment-intent-arrow {
+    display: block;
+    position: relative;
+    height: 1px;
+    margin: 14px 14% 0;
+    background: #aab6c9;
+  }
+  .payment-intent-arrow::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -4px;
+    width: 8px;
+    height: 8px;
+    border-top: 1px solid #aab6c9;
+    border-right: 1px solid #aab6c9;
+    transform: rotate(45deg);
+  }
   .method-profiles {
     display: flex;
     align-items: stretch;
@@ -1747,9 +1773,9 @@ h3 {
   }
   .method-currencies {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
-    gap: 0 8px;
+    align-items: center;
     color: #aebdd1;
     font-size: 14px;
   }
