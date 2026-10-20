@@ -399,11 +399,11 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               <h2 id="try-title">
                 See Paykit <span className="title-accent">in action.</span>
               </h2>
+              <p className="try-intro">
+                Pick up a compatible wallet, create a payment page, or try a
+                purchase. Meet the apps bringing Paykit to life.
+              </p>
             </div>
-            <p>
-              Pick up a compatible wallet, create a payment page, or try a
-              purchase. Meet the apps bringing Paykit to life.
-            </p>
           </div>
           <div className="app-grid">
             <a

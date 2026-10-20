@@ -184,7 +184,8 @@ test("the payment story separates discovery from payment and supports reduced mo
   page.on("response", (response) => {
     if (
       new URL(response.url()).pathname.startsWith("/_next/static/") &&
-      response.request().resourceType() === "script"
+      response.request().resourceType() === "script" &&
+      response.ok()
     ) {
       publicScriptBodies.push(response.text());
     }
@@ -446,7 +447,7 @@ test("the mobile payment diagram preserves and uniformly scales its desktop arra
         scaleY: bounds.height / canvasElement.offsetHeight,
       };
     });
-    expect(geometry.width).toBe(width <= 700 ? 1020 : 1120);
+    expect(geometry.width).toBe(width <= 700 ? 820 : 1120);
     expect(geometry.scaleX).toBeCloseTo(geometry.scaleY, 5);
     expect(geometry.scaleX).toBeLessThanOrEqual(1);
     const scale = geometry.scaleX;
@@ -459,6 +460,17 @@ test("the mobile payment diagram preserves and uniformly scales its desktop arra
       const center = (await node.boundingBox())!;
       expect(left.x + left.width).toBeLessThan(center.x);
       expect(center.x + center.width).toBeLessThan(right.x);
+      if (width <= 700) {
+        const bitkit = (await story
+          .locator('[data-wallet="Bitkit"]')
+          .boundingBox())!;
+        // Compact the empty corridors so the actual wallet contents grow.
+        // Before this refinement each card used only 200/1020 of the viewport.
+        expect(bitkit.width / viewBounds.width).toBeGreaterThanOrEqual(0.24);
+        expect(
+          (center.x - left.x - left.width) / bitkit.width,
+        ).toBeLessThanOrEqual(0.45);
+      }
       expect(Math.abs(left.y - right.y)).toBeLessThan(1);
       // Paykit must stay between the people at the same vertical level,
       // rather than moving above their cards on narrow screens.
@@ -476,6 +488,22 @@ test("the mobile payment diagram preserves and uniformly scales its desktop arra
         "opacity",
         step === 4 ? "0" : "1",
       );
+      if (step === 3) {
+        await expect(story.getByTestId("payment-query")).toHaveCSS(
+          "opacity",
+          "1",
+        );
+        for (const label of width <= 700
+          ? ["Bob’s payment options?", "options"]
+          : []) {
+          const bounds = (await story
+            .getByTestId("payment-query")
+            .getByText(label, { exact: true })
+            .boundingBox())!;
+          expect(bounds.x).toBeGreaterThanOrEqual(left.x + left.width - 0.5);
+          expect(bounds.x + bounds.width).toBeLessThanOrEqual(center.x + 0.5);
+        }
+      }
       expect(
         await caption.evaluate((element) =>
           parseFloat(getComputedStyle(element).fontSize),
@@ -492,6 +520,9 @@ test("the mobile payment diagram preserves and uniformly scales its desktop arra
     const charlie = node.locator('[data-summary-person="Charlie"]');
     if (width <= 700) await expect(charlie).toHaveCSS("display", "none");
     else await expect(charlie).not.toHaveCSS("display", "none");
+    const portrait = alice.locator('img[alt=""]');
+    if (width <= 700) await expect(portrait).toBeHidden();
+    else await expect(portrait).toBeVisible();
     expect(
       await node.evaluate((element) => {
         const bounds = element.getBoundingClientRect();

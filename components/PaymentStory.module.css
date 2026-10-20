@@ -1164,21 +1164,85 @@
 }
 @media (max-width: 700px) {
   .story {
-    padding: 20px 16px;
+    padding: 16px 10px;
     border-radius: 17px;
+  }
+  .illustration {
+    padding-top: 4px;
   }
   .heading h3 {
     min-height: 3.9em;
     font-size: 21px;
   }
   .sceneViewport {
-    aspect-ratio: 1020 / 477;
+    aspect-ratio: 820 / 381;
   }
   .sceneCanvas {
-    width: 1020px;
+    width: 820px;
   }
   .scene {
     --discovery-width: 220px;
+    --card-width: 200px;
+    margin: 24px 18px 45px;
+    height: 312px;
+  }
+  .person {
+    height: 64px;
+    padding: 0 2px 12px;
+  }
+  .person > strong {
+    font-size: 32px;
+  }
+  .avatar {
+    display: none;
+  }
+  .method {
+    padding: 7px 12px;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 10px;
+  }
+  .walletLogo {
+    width: 48px;
+    height: 48px;
+  }
+  .currencies {
+    font-size: 16px;
+    line-height: 1.15;
+    padding-left: 10px;
+  }
+  .instructionArrow {
+    top: 12px;
+    height: 44px;
+  }
+  .instructionArrowHead {
+    top: 30px;
+  }
+  .intent {
+    top: 68px;
+  }
+  .discoveryLeft,
+  .discoveryRight,
+  .route {
+    top: -48px;
+  }
+  .queryRequestLine {
+    top: 92px;
+  }
+  .queryResponseLine {
+    top: 112px;
+  }
+  .queryLabel {
+    top: auto;
+    bottom: calc(100% - 86px);
+    width: calc(var(--node-inset) - 8px);
+    padding: 3px 4px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.15;
+  }
+  .optionsLabel {
+    top: 118px;
+    padding: 3px 4px;
   }
   .discoverySummary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1187,8 +1251,8 @@
     display: none;
   }
   .caption {
-    min-height: 154px;
-    padding-top: 21px;
+    min-height: 0;
+    padding: 16px 0 18px;
   }
   .controls {
     align-items: flex-start;

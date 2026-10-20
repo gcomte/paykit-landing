@@ -503,6 +503,12 @@ h3 {
 .try {
   padding-bottom: 70px;
 }
+.try-intro {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
 .app-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
