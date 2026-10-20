@@ -1082,14 +1082,16 @@
   .queryLabel,
   .optionsLabel {
     display: block;
-    left: 2px;
+    left: auto;
+    right: calc(100% + 4px);
     white-space: nowrap;
+    line-height: 16px;
   }
   .queryLabel {
-    top: -52px;
+    top: 77px;
   }
   .optionsLabel {
-    top: -29px;
+    top: 94px;
   }
   .queryLabel::after {
     content: " →";
