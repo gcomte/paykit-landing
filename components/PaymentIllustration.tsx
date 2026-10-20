@@ -212,6 +212,7 @@ export default function PaymentIllustration() {
             data-testid="payment-discovery-node"
           >
             <strong className={styles.discoveryNodeTitle}>
+              <span>Paykit</span>
               <svg
                 width="16"
                 height="16"
@@ -227,7 +228,6 @@ export default function PaymentIllustration() {
                 <rect x="5" y="10" width="14" height="11" rx="2" />
                 <path d="M8 10V7a4 4 0 0 1 8 0v3" />
               </svg>
-              <span>Paykit</span>
             </strong>
             <div className={styles.discoverySummary}>
               {profiles.map((profile) => (

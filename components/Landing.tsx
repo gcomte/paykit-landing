@@ -300,9 +300,9 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             <div>
               <p className="eyebrow">ANIMATED ILLUSTRATION</p>
               <h2 id="how-title">
-                Pay a person,
+                Pay a person.
                 <span className="muted title-accent">
-                  not an address, IBAN, invoice or app-specific handle.
+                  Let your wallet handle the payment logistics.
                 </span>
               </h2>
             </div>
