@@ -1175,19 +1175,20 @@
     font-size: 21px;
   }
   .sceneViewport {
-    aspect-ratio: 820 / 381;
+    aspect-ratio: 696 / 381;
   }
   .sceneCanvas {
-    width: 820px;
+    width: 696px;
   }
   .scene {
-    --discovery-width: 220px;
-    --card-width: 200px;
+    --discovery-width: 184px;
+    --card-width: 156px;
     margin: 24px 18px 45px;
     height: 312px;
   }
   .person {
     height: 64px;
+    justify-content: center;
     padding: 0 2px 12px;
   }
   .person > strong {
@@ -1197,9 +1198,9 @@
     display: none;
   }
   .method {
-    padding: 7px 12px;
+    padding: 7px 8px;
     grid-template-columns: 48px minmax(0, 1fr);
-    gap: 10px;
+    gap: 8px;
   }
   .walletLogo {
     width: 48px;
@@ -1208,7 +1209,7 @@
   .currencies {
     font-size: 16px;
     line-height: 1.15;
-    padding-left: 10px;
+    padding-left: 8px;
   }
   .instructionArrow {
     top: 12px;
@@ -1245,7 +1246,10 @@
     padding: 3px 4px;
   }
   .discoverySummary {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, max-content);
+  }
+  .discoverySummaryMethods {
+    width: max-content;
   }
   .discoverySummaryPerson[data-summary-person="Charlie"] {
     display: none;

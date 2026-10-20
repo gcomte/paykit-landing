@@ -447,7 +447,7 @@ test("the mobile payment diagram preserves and uniformly scales its desktop arra
         scaleY: bounds.height / canvasElement.offsetHeight,
       };
     });
-    expect(geometry.width).toBe(width <= 700 ? 820 : 1120);
+    expect(geometry.width).toBe(width <= 700 ? 696 : 1120);
     expect(geometry.scaleX).toBeCloseTo(geometry.scaleY, 5);
     expect(geometry.scaleX).toBeLessThanOrEqual(1);
     const scale = geometry.scaleX;
@@ -464,12 +464,36 @@ test("the mobile payment diagram preserves and uniformly scales its desktop arra
         const bitkit = (await story
           .locator('[data-wallet="Bitkit"]')
           .boundingBox())!;
-        // Compact the empty corridors so the actual wallet contents grow.
-        // Before this refinement each card used only 200/1020 of the viewport.
-        expect(bitkit.width / viewBounds.width).toBeGreaterThanOrEqual(0.24);
+        const logo = (await story
+          .locator('[data-wallet="Bitkit"] > img')
+          .boundingBox())!;
+        // Compact excess card padding while preserving room for the labels.
+        expect(bitkit.width / scale).toBeCloseTo(156, 1);
+        expect(center.width / scale).toBeCloseTo(184, 1);
+        expect(logo.width / viewBounds.width).toBeGreaterThanOrEqual(0.068);
         expect(
           (center.x - left.x - left.width) / bitkit.width,
-        ).toBeLessThanOrEqual(0.45);
+        ).toBeLessThanOrEqual(0.55);
+        for (const profile of [alice, bob]) {
+          const profileBounds = (await profile.boundingBox())!;
+          const nameBounds = (await profile
+            .locator(":scope > div > strong")
+            .boundingBox())!;
+          expect(
+            Math.abs(
+              nameBounds.x +
+                nameBounds.width / 2 -
+                profileBounds.x -
+                profileBounds.width / 2,
+            ),
+          ).toBeLessThan(0.5);
+        }
+        const lightning = (await story
+          .locator('[data-wallet="Bitkit"] [data-currency="Lightning"]')
+          .boundingBox())!;
+        expect(
+          (bitkit.x + bitkit.width - lightning.x - lightning.width) / scale,
+        ).toBeLessThanOrEqual(18);
       }
       expect(Math.abs(left.y - right.y)).toBeLessThan(1);
       // Paykit must stay between the people at the same vertical level,
