@@ -1100,6 +1100,19 @@
     content: "← ";
   }
 }
+@media (min-width: 701px) and (max-width: 1000px) {
+  .queryLabel,
+  .optionsLabel {
+    left: 2px;
+    right: auto;
+  }
+  .queryLabel {
+    top: 117px;
+  }
+  .optionsLabel {
+    top: 168px;
+  }
+}
 @media (max-width: 700px) {
   .story {
     padding: 20px 16px;
