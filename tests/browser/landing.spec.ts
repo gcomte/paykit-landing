@@ -180,6 +180,15 @@ test("the payment story separates discovery from payment and supports reduced mo
   page,
 }) => {
   expect(password).toBeTruthy();
+  const publicScriptBodies: Promise<string>[] = [];
+  page.on("response", (response) => {
+    if (
+      new URL(response.url()).pathname.startsWith("/_next/static/") &&
+      response.request().resourceType() === "script"
+    ) {
+      publicScriptBodies.push(response.text());
+    }
+  });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/access");
@@ -188,15 +197,12 @@ test("the payment story separates discovery from payment and supports reduced mo
   const story = page.getByTestId("payment-story");
   await story.scrollIntoViewIfNeeded();
   await expect(story).toHaveAttribute("data-active-step", "3");
-  const scripts = await page
-    .locator("script[src]")
-    .evaluateAll((elements) =>
-      elements.map((element) => (element as HTMLScriptElement).src),
-    );
-  for (const src of new Set(scripts)) {
-    const response = await page.request.get(src);
-    expect(response.ok()).toBe(true);
-    const code = await response.text();
+  expect(publicScriptBodies.length).toBeGreaterThan(0);
+  const loadedScripts = await Promise.all(publicScriptBodies);
+  expect(
+    loadedScripts.some((code) => code.includes("payment-story-toggle")),
+  ).toBe(true);
+  for (const code of loadedScripts) {
     expect(code).not.toContain("Cake Wallet");
     expect(code).not.toContain("Alice wants to pay");
   }
