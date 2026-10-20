@@ -78,3 +78,5 @@ The active step title now sits centered inside the illustration, immediately abo
 The central Paykit summary uses two person columns: Alice and Bob sit side by side, with each person's payment providers stacked vertically beneath their name. The column names are stronger headings. Step 1 is titled “Paykit indexes payment options”.
 
 During the 12.5-second instruction step, “Bob” appears at about one third (4.17 seconds), followed by “$10” at about two thirds (8.33 seconds).
+
+Step progress runs along the illustration section's upper border via a CSS pseudo-element; there is no separate progress-bar element below the title.

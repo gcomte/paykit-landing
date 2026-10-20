@@ -138,9 +138,6 @@ export default function PaymentStoryController({
       <div className={styles.illustration} data-testid="payment-illustration">
         <div className={styles.heading} data-testid="payment-story-heading">
           <h3 id={titleId}>{steps[active].title}</h3>
-          <div className={styles.progressTrack} aria-hidden="true">
-            <span className={styles.progressFill} />
-          </div>
         </div>
         {children}
       </div>

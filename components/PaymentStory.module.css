@@ -1,5 +1,6 @@
 .story {
   --accent: #ff754a;
+  position: relative;
   margin: 40px 0 0;
   padding: 28px;
   border: 1px solid #ffffff1b;
@@ -736,19 +737,16 @@
   max-width: none;
   text-wrap: pretty;
 }
-.progressTrack {
-  height: 1px;
-  margin: 8px 0 0;
-  background: #ffffff0a;
-  border-radius: 2px;
-  overflow: hidden;
-}
-.progressFill {
-  display: block;
+.story::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
   width: var(--story-progress, 0%);
-  height: 100%;
-  background: #b0becb66;
-  border-radius: inherit;
+  height: 1px;
+  background: #ffad79aa;
+  pointer-events: none;
   transition: width 0.1s linear;
 }
 .controls {
