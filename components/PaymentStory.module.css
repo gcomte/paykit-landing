@@ -591,16 +591,16 @@
   animation: queryResponse 6.5s linear 1 both;
 }
 .story[data-active-step="3"] .queryRequestTravel {
-  animation: queryAcross 6.5s linear 1 both;
+  animation: queryAcross 6.5s linear infinite both;
 }
 .story[data-active-step="3"] .queryResponseTravel {
-  animation: optionsAcross 6.5s linear 1 both;
+  animation: optionsAcross 6.5s linear infinite both;
 }
 .story[data-active-step="3"] .queryRequestPulse {
-  animation: queryOutbound 6.5s linear 1 both;
+  animation: queryOutbound 6.5s linear infinite both;
 }
 .story[data-active-step="3"] .queryResponsePulse {
-  animation: queryInbound 6.5s linear 1 both;
+  animation: queryInbound 6.5s linear infinite both;
 }
 .route {
   position: absolute;
