@@ -1110,7 +1110,7 @@ h3 {
     padding-inline: 32px;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .desktop-nav {
     display: none;
   }
@@ -1157,6 +1157,9 @@ h3 {
     padding: 12px;
     font-size: 16px;
   }
+}
+
+@media (max-width: 800px) {
   .section-heading {
     gap: 30px;
   }
