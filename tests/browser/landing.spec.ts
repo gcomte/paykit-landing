@@ -207,6 +207,37 @@ test("the payment story separates discovery from payment and supports reduced mo
     expect(code).not.toContain("Alice wants to pay");
   }
   const route = story.getByTestId("payment-route");
+  const discovery = story.getByTestId("payment-discovery");
+  const discoveryLinks = story.getByTestId("payment-discovery-links");
+  const query = story.getByTestId("payment-query");
+  async function expectPaymentToBypassPaykit() {
+    const node = await story
+      .getByTestId("payment-discovery-node")
+      .boundingBox();
+    expect(node).not.toBeNull();
+    expect(
+      await route
+        .locator("svg path")
+        .first()
+        .evaluate((element, bounds) => {
+          const path = element as SVGPathElement;
+          const matrix = path.getScreenCTM();
+          if (!matrix) return false;
+          const length = path.getTotalLength();
+          return Array.from({ length: 101 }, (_, index) => {
+            const point = path
+              .getPointAtLength((length * index) / 100)
+              .matrixTransform(matrix);
+            return (
+              point.x < bounds!.x ||
+              point.x > bounds!.x + bounds!.width ||
+              point.y < bounds!.y ||
+              point.y > bounds!.y + bounds!.height
+            );
+          }).every(Boolean);
+        }, node),
+    ).toBe(true);
+  }
   const title = story.getByTestId("payment-story-heading").getByRole("heading");
   for (const step of [0, 1, 2, 3]) {
     const button = story.locator(`button[data-step="${step}"]`);
@@ -214,9 +245,40 @@ test("the payment story separates discovery from payment and supports reduced mo
     await expect(story).toHaveAttribute("data-active-step", String(step));
     await expect(button).toHaveAttribute("aria-current", "step");
     await expect(route).toHaveCSS("opacity", step === 3 ? "1" : "0");
+    await expect(discovery).toHaveCSS("opacity", step >= 1 ? "1" : "0");
+    await expect(discoveryLinks).toHaveCSS("opacity", step === 1 ? "1" : "0");
+    await expect(query).toHaveCSS("opacity", step === 2 ? "1" : "0");
+    if (step === 1) {
+      await expect(story.getByTestId("payment-discovery-node")).toHaveText(
+        "Paykit",
+      );
+      const connectedWallets = await discovery
+        .locator("[data-discovery-wallet]")
+        .evaluateAll((paths) =>
+          [
+            ...new Set(
+              paths
+                .filter((path) => {
+                  const rect = path.getBoundingClientRect();
+                  return rect.width > 0 && rect.height > 0;
+                })
+                .map((path) => path.getAttribute("data-discovery-wallet")),
+            ),
+          ].sort(),
+        );
+      expect(connectedWallets).toEqual([
+        "Bitkit",
+        "Cake Wallet",
+        "PayPal",
+        "Revolut",
+        "WDK",
+        "Wise",
+      ]);
+    }
     if (step === 1) await expect(title).toContainText("Paykit");
     if (step === 2) await expect(title).toContainText("$10");
     if (step === 3) await expect(title).toContainText(/direct/i);
+    if (step === 3) await expectPaymentToBypassPaykit();
   }
   await story.locator('button[data-step="1"]').focus();
   await page.keyboard.press("Enter");
@@ -271,6 +333,8 @@ test("the payment story separates discovery from payment and supports reduced mo
       `${wallet} labels must fit inside their wallet card`,
     ).toBe(true);
   }
+  await story.locator('button[data-step="3"]').click();
+  await expectPaymentToBypassPaykit();
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
