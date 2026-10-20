@@ -41,7 +41,7 @@ const steps = [
       "Alice and Bob each use their own wallets and payment services.",
   },
   {
-    label: "Paykit indexes payment options",
+    label: "Enter Paykit",
     title: "Paykit indexes payment options",
     description:
       "Wallets implement the Paykit protocol to discover Alice’s and Bob’s payment options and exchange the details. This step shares information, not funds.",
@@ -170,6 +170,18 @@ export default function PaymentIllustration() {
               </span>
               <strong>{profile.person}</strong>
             </div>
+            {profile.person === "Alice" && (
+              <div
+                className={styles.instructionArrow}
+                data-testid="payment-instruction-arrow"
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 88 88" preserveAspectRatio="none" fill="none">
+                  <path d="M0 8C74 8 74 78 0 78" />
+                </svg>
+                <span className={styles.instructionArrowHead} />
+              </div>
+            )}
             {profile.person === "Alice" && (
               <div
                 className={styles.intent}
