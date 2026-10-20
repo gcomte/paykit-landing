@@ -449,9 +449,10 @@ test("the payment story autoplays, loops, and pauses", async ({ page }) => {
   const amountCue = story.getByTestId("payment-intent-amount");
   await expect(recipientCue).toHaveCSS("opacity", "0");
   await expect(amountCue).toHaveCSS("opacity", "0");
-  await expect(recipientCue).toHaveCSS("opacity", "1", { timeout: 2_500 });
+  await expect(recipientCue).toHaveText("Bob");
+  await expect(recipientCue).toHaveCSS("opacity", "1", { timeout: 6_000 });
   await expect(amountCue).toHaveCSS("opacity", "0");
-  await expect(amountCue).toHaveCSS("opacity", "1", { timeout: 3_000 });
+  await expect(amountCue).toHaveCSS("opacity", "1", { timeout: 5_000 });
   await expect(story).toHaveAttribute("data-active-step", "3", {
     timeout: 18_000,
   });

@@ -74,3 +74,7 @@ The next refinement starts from `fa53369`: the Paykit panel aligns with the side
 
 Playback was subsequently reduced to 80% speed: the same five stages now take 10/12.5/12.5/12.5/15 seconds (62.5 seconds per loop). Visual animation delays and durations scale with the playback rate; the shared-BTC reveal remains at the halfway point of discovery.
 The active step title now sits centered inside the illustration, immediately above the people and Paykit scene, with its subtle progress line underneath. Captions and playback controls remain below the visual.
+
+The central Paykit summary uses two person columns: Alice and Bob sit side by side, with each person's payment providers stacked vertically beneath their name. The column names are stronger headings. Step 1 is titled “Paykit indexes payment options”.
+
+During the 12.5-second instruction step, “Bob” appears at about one third (4.17 seconds), followed by “$10” at about two thirds (8.33 seconds).

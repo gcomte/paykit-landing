@@ -180,7 +180,7 @@ export default function PaymentIllustration() {
                   className={styles.intentRecipient}
                   data-testid="payment-intent-recipient"
                 >
-                  To Bob
+                  Bob
                 </span>
                 <span
                   className={styles.intentAmount}

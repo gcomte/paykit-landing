@@ -157,37 +157,41 @@
 }
 .intent {
   position: absolute;
-  top: 84px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  gap: 6px;
+  top: 116px;
+  left: calc(100% + 16px);
+  display: grid;
+  justify-items: start;
+  gap: 10px;
   z-index: 4;
   opacity: 0;
   pointer-events: none;
 }
 .intent > span {
-  padding: 3px 6px;
+  padding: 4px 7px;
   border: 1px solid #ffad7959;
   border-radius: 6px;
   background: #ff754a17;
   color: #ffd0b6;
-  font-size: 14px;
-  line-height: 1.2;
+  font-size: 26px;
+  font-weight: 650;
+  line-height: 1.1;
+  box-shadow: 0 4px 18px #ff754a14;
   white-space: nowrap;
+}
+.intentRecipient {
+  rotate: -9deg;
+}
+.intentAmount {
+  rotate: 7deg;
 }
 .story[data-active-step="2"] .intent {
   opacity: 1;
 }
 .story[data-active-step="2"] .intentRecipient {
-  animation: intentCue 0.5625s 1.25s ease-out both;
+  animation: intentCue 0.5625s 4.1667s ease-out both;
 }
 .story[data-active-step="2"] .intentAmount {
-  animation: intentCue 0.5625s 3.75s ease-out both;
-}
-.story[data-active-step="2"] [data-person="Alice"] .avatar {
-  transform: translateY(-12px);
+  animation: intentCue 0.5625s 8.3333s ease-out both;
 }
 .story[data-active-step="2"][data-manual-step="true"] .intent > span {
   animation: none;
@@ -351,36 +355,45 @@
 }
 .discoverySummary {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 100px));
   justify-content: center;
-  gap: 12px;
+  align-items: start;
+  gap: 16px;
 }
 .discoverySummaryPerson {
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   font-size: 14px;
   line-height: 1.2;
   letter-spacing: 0;
 }
 .discoverySummaryPerson > strong {
-  font-weight: 500;
-  color: #b6c8db;
+  width: 100%;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #d8eaff26;
+  font-size: 16px;
+  font-weight: 650;
+  color: #eef5ff;
+  text-align: center;
+  letter-spacing: -0.02em;
 }
 .discoverySummaryMethods {
-  width: 100px;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: 56px 38px 38px;
   align-items: start;
-  gap: 6px;
+  gap: 8px;
 }
 .discoverySummaryOption {
   display: grid;
   grid-template-columns: 22px max-content;
   justify-items: start;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 .discoverySummaryCurrencies {
   display: flex;
@@ -1009,15 +1022,15 @@
     margin-left: auto;
   }
 }
-@media (min-width: 701px) and (max-width: 900px) {
+@media (min-width: 801px) and (max-width: 900px) {
   .queryLabel,
   .optionsLabel {
     display: none;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .scene {
-    margin-top: 290px;
+    margin-top: 330px;
   }
   .desktopDiscoveryLinks {
     display: none;
@@ -1026,35 +1039,13 @@
     display: block;
   }
   .discoveryNode {
-    top: -278px;
+    top: -318px;
     width: 280px;
     max-width: none;
-    height: 212px;
+    height: 252px;
     padding: 10px 12px;
     gap: 8px;
     border-radius: 12px;
-  }
-  .discoverySummary {
-    gap: 8px;
-  }
-  .discoverySummaryPerson {
-    grid-template-columns: 38px 1fr;
-    justify-items: stretch;
-    gap: 10px;
-  }
-  .discoverySummaryMethods {
-    width: auto;
-    grid-template-columns: repeat(3, minmax(58px, 1fr));
-    gap: 8px;
-  }
-  .discoverySummaryOption {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    align-items: start;
-    gap: 6px;
-  }
-  .discoverySummaryCurrencies {
-    align-items: center;
   }
   .mobileQueryRequestHead,
   .mobileQueryResponseHead {
@@ -1105,7 +1096,7 @@
   }
   .scene {
     --card-width: calc((100% - 48px) / 2);
-    margin: 290px 0 80px;
+    margin: 330px 0 80px;
   }
   .profile::before {
     inset: -10px -6px -9px;
@@ -1129,8 +1120,14 @@
     width: 56px;
     height: 70px;
   }
-  .story[data-active-step="2"] [data-person="Alice"] .avatar {
-    transform: none;
+  .intent {
+    left: calc(100% + 2px);
+    top: 114px;
+    gap: 8px;
+  }
+  .intent > span {
+    padding: 3px 2px;
+    font-size: 22px;
   }
   .method {
     grid-template-columns: 32px minmax(0, 1fr);
@@ -1187,17 +1184,12 @@
 @media (max-width: 340px) {
   .scene {
     --card-width: calc((100% - 24px) / 2);
-    margin-top: 338px;
+    margin-top: 330px;
   }
   .discoveryNode {
     width: min(280px, calc(100vw - 78px));
-    height: 260px;
-    top: -326px;
-  }
-  .discoverySummaryPerson {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 6px;
+    height: 252px;
+    top: -318px;
   }
   .method {
     grid-template-columns: 26px minmax(0, 1fr);
@@ -1229,4 +1221,11 @@
 }
 .story[data-reduced-motion="true"] .routePulse {
   display: none;
+}
+
+@media (max-width: 800px) {
+  .story[data-active-step="0"] .scene,
+  .story[data-active-step="4"] .scene {
+    margin-top: 32px;
+  }
 }
