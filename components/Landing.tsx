@@ -691,9 +691,11 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               </summary>
               <p>
                 That depends on the wallet or service you use and the methods
-                the recipient accepts. Bitkit supports Bitcoin and Lightning.
-                Paykit’s endpoint format can describe other payment methods, so
-                apps can add support for their own use cases.
+                the recipient accepts. Bitkit’s Paykit integration supports
+                on-chain Bitcoin, Lightning and USDT on Arbitrum One. Available
+                options depend on wallet setup and the recipient. Paykit’s
+                endpoint format can describe other payment methods, so apps can
+                add support for their own use cases.
               </p>
             </details>
             <details>
