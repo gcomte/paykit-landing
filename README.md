@@ -2,7 +2,7 @@
 
 A password-protected Paykit landing page built with Next.js 16 App Router, React, and TypeScript for Vercel. Research, source checks, and the visual/content plan are in [docs/research.md](docs/research.md).
 
-Deployment URL: **TBD**.
+Production URL: [paykit-landing-ten.vercel.app](https://paykit-landing-ten.vercel.app).
 
 ## Run locally
 
@@ -45,6 +45,8 @@ Install a Playwright browser with `npx playwright install chromium` if needed. B
 ## Deploy on Vercel
 
 Import this repository into Vercel using the Next.js framework preset, or deploy from the repository with the Vercel CLI. Configure `LANDING_PASSWORD` and `SESSION_SECRET` as server-side environment variables for every deployed environment that should work, including Preview and Production. Redeploy after changing environment variables.
+
+The current site was deployed with `npx vercel --prod`. Automatic Git deployments are not connected: Vercel's GitHub integration could not link this repository with its current permissions. Use the CLI for subsequent deployments, or enable the repository connection in the Vercel dashboard.
 
 The page checks access on the server before rendering its content. A successful login sets a signed, HTTP-only, same-site cookie for seven days; production cookies are secure. Changing the password or session secret invalidates existing sessions. Keep the preview password out of build commands, source files, screenshots, and committed deployment configuration.
 

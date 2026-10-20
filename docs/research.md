@@ -160,4 +160,15 @@ The Vercel project has a published persistent WAF rule limiting `/api/access` to
 
 Validation includes session integrity/expiry/configuration tests, TypeScript checking, a production build, and browser checks for password access, desktop/mobile layout, contact-draft behavior, and click-to-load video. Review the implemented authentication and data handling before deployment. Check deployed headers, unauthenticated redirects, failed/successful login, and protected responses on the final Vercel URL.
 
-Deployment URL: **TBD** until deployment is complete and verified.
+Verified production URL: [paykit-landing-ten.vercel.app](https://paykit-landing-ten.vercel.app).
+
+
+## Delivery verification — 20 October 2026
+
+- Production build and TypeScript checking passed.
+- Four session/calendar unit tests passed.
+- Three browser tests passed locally and against the production URL: server access gate, desktop/mobile layout, actual calendar download, Google Calendar timestamps, click-to-load video, structured email draft, and logout.
+- Unauthenticated HTML and RSC checks exposed no protected copy. Production sends no-store and noindex headers; session cookies are HTTP-only, Secure, and SameSite=Lax.
+- Security reviews found no actionable or unresolved issues. Public client bundles were checked for protected copy and authentication identifiers. Production dependency audit reported zero vulnerabilities.
+- All public resource links returned success. The supplied Marketplace staging URL returned HTTP 401; no test purchase was claimed.
+- Contact inquiries open a visitor-controlled email draft; the website does not deliver email or maintain a lead database.
