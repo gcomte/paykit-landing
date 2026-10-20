@@ -146,7 +146,7 @@ export default function PaymentStoryController({
         data-testid="payment-story-caption"
       >
         {steps.map((step, index) => (
-          <p key={index} hidden={index !== active}>
+          <p key={index} aria-hidden={index !== active}>
             {step.description}
           </p>
         ))}

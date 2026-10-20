@@ -790,17 +790,47 @@
   animation: none;
 }
 .caption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   min-height: 94px;
   padding: 20px 0 22px;
   border-top: 1px solid #ffffff12;
 }
 .caption p {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  opacity: 0;
   margin: 0;
   color: #b3bfd0;
   font-size: 16px;
   line-height: 1.65;
   max-width: none;
   text-wrap: pretty;
+}
+.caption p[aria-hidden="false"] {
+  visibility: visible;
+  opacity: 1;
+  animation: captionReveal 0.72s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.story[data-page-visible="true"] .caption p[aria-hidden="false"] {
+  animation-play-state: running !important;
+}
+@keyframes captionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+    color: #ffd0b6;
+  }
+  45% {
+    opacity: 1;
+    transform: translateY(0);
+    color: #ffd0b6;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    color: #b3bfd0;
+  }
 }
 .story::before {
   content: "";

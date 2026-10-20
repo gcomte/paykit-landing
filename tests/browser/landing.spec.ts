@@ -404,6 +404,51 @@ test("the payment story separates discovery from payment and supports reduced mo
   ).toBe(true);
 });
 
+test("step descriptions stay readable during manual playback and reduced motion", async ({
+  page,
+}) => {
+  expect(password).toBeTruthy();
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto("/access");
+  await page.getByLabel("Password", { exact: true }).fill(password!);
+  await page.getByRole("button", { name: "Enter Paykit" }).click();
+  await page.evaluate(() => document.fonts.ready);
+  const story = page.getByTestId("payment-story");
+  const caption = story.getByTestId("payment-story-caption");
+  await story.locator('button[data-step="1"]').click();
+  await expect(story).toHaveAttribute("data-playing", "false");
+  const active = caption.locator('p[aria-hidden="false"]');
+  await expect(active).toHaveCount(1);
+  expect(
+    await active.evaluate((element) =>
+      element
+        .getAnimations()
+        .some((animation) => animation.playState === "running"),
+    ),
+  ).toBe(true);
+  await expect(active).toHaveCSS("opacity", "1");
+  await expect(active).toHaveCSS("transform", "none");
+  await expect(active).toHaveCSS("color", "rgb(179, 191, 208)");
+  const height = (await caption.boundingBox())!.height;
+  for (const step of [2, 3, 4, 0, 1]) {
+    await story.locator(`button[data-step="${step}"]`).click();
+    await expect(active).toHaveCount(1);
+    expect((await caption.boundingBox())!.height).toBeCloseTo(height, 1);
+    for (const inactive of await caption
+      .locator('p[aria-hidden="true"]')
+      .all()) {
+      await expect(inactive).toHaveCSS("visibility", "hidden");
+    }
+  }
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(story).toHaveAttribute("data-reduced-motion", "true");
+  await story.locator('button[data-step="1"]').click();
+  await expect(active).toHaveCSS("opacity", "1");
+  await expect(active).toHaveCSS("transform", "none");
+  await expect(active).toHaveCSS("animation-name", "none");
+});
+
 test("the payment story autoplays, loops, and pauses", async ({ page }) => {
   test.setTimeout(150_000);
   expect(password).toBeTruthy();
