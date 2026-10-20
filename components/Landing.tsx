@@ -413,7 +413,7 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               rel="noreferrer"
             >
               <div className="app-card-top">
-                <span className="app-category">THE WALLET</span>
+                <span className="app-category">THE REFERENCE WALLET</span>
                 <Arrow diagonal />
               </div>
               <div className="app-logo">
