@@ -421,6 +421,25 @@
   text-align: center;
   letter-spacing: -0.02em;
 }
+.discoverySummaryMore {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  padding-top: 8px;
+  border-top: 1px solid #d8eaff26;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: #c4d0df;
+}
+.discoverySummaryMore > strong {
+  font-size: 16px;
+  font-weight: 650;
+  color: #eef5ff;
+  letter-spacing: -0.02em;
+}
 .discoverySummaryMethods {
   width: 100%;
   display: grid;
@@ -1111,7 +1130,7 @@
 }
 @media (max-width: 1200px) {
   .scene {
-    margin-top: 314px;
+    margin-top: 358px;
   }
   .instructionArrow {
     left: calc(100% - 2px);
@@ -1181,7 +1200,7 @@
   }
   .scene {
     --card-width: calc((100% - 48px) / 2);
-    margin: 314px 0 80px;
+    margin: 358px 0 80px;
   }
   .profile::before {
     inset: -10px -6px -9px;
@@ -1273,7 +1292,7 @@
 @media (max-width: 340px) {
   .scene {
     --card-width: calc((100% - 24px) / 2);
-    margin-top: 314px;
+    margin-top: 358px;
   }
   .discoveryNode {
     width: min(280px, calc(100vw - 78px));
