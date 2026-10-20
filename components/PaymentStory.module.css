@@ -486,24 +486,6 @@
   height: 100%;
   overflow: visible;
 }
-.query::before,
-.query::after {
-  content: "";
-  position: absolute;
-  left: -3px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 1px solid #ffe1c2;
-  box-shadow: 0 0 8px #ff754a80;
-}
-.query::before {
-  top: 137px;
-}
-.query::after {
-  top: 157px;
-}
 .desktopQuery {
   right: auto;
   width: var(--node-inset);
@@ -575,16 +557,29 @@
 .queryLabel,
 .optionsLabel {
   position: absolute;
-  left: 2px;
+  left: calc(var(--node-inset) / 2);
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.queryLabel,
+.optionsLabel,
+.btc {
   font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   line-height: 1.3;
-  color: #bed1e3;
+  color: #ff986d;
+  background: #111722;
+  border: 1px solid #ff754a35;
+  box-shadow: 0 4px 12px #0005;
+  padding: 5px 8px;
+  border-radius: 7px;
 }
 .queryLabel {
-  top: 117px;
+  top: 106px;
 }
 .optionsLabel {
-  top: 168px;
+  top: 166px;
 }
 .story[data-active-step="3"] .query {
   opacity: 1;
@@ -669,15 +664,6 @@
   top: 61%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: #ff986d;
-  background: #111722;
-  border: 1px solid #ff754a35;
-  box-shadow: 0 4px 12px #0005;
-  padding: 5px 8px;
-  border-radius: 7px;
 }
 .story[data-active-step="0"] .method {
   animation: walletReveal 2.125s cubic-bezier(0.2, 0.7, 0.2, 1) both;
@@ -1128,35 +1114,14 @@
   .queryLabel,
   .optionsLabel {
     display: block;
-    left: auto;
-    right: calc(100% + 4px);
-    white-space: nowrap;
-    line-height: 16px;
-  }
-  .queryLabel {
-    top: 77px;
-  }
-  .optionsLabel {
-    top: 94px;
-  }
-  .queryLabel::after {
-    content: " →";
-  }
-  .optionsLabel::before {
-    content: "← ";
-  }
-}
-@media (min-width: 701px) and (max-width: 1000px) {
-  .queryLabel,
-  .optionsLabel {
     left: 2px;
-    right: auto;
+    transform: none;
   }
   .queryLabel {
-    top: 117px;
+    top: -64px;
   }
   .optionsLabel {
-    top: 168px;
+    top: -30px;
   }
 }
 @media (max-width: 700px) {
