@@ -142,7 +142,14 @@ export default function PaymentIllustration() {
                   data-shared={method.shared}
                   key={method.name}
                 >
-                  <strong>{method.name}</strong>
+                  <Image
+                    className={styles.walletLogo}
+                    src={walletLogos[method.name]}
+                    width={40}
+                    height={40}
+                    alt={method.name}
+                    title={method.name}
+                  />
                   <span className={styles.currencies}>
                     {method.currencies.map((currency) => (
                       <span key={currency} data-currency={currency}>

@@ -239,6 +239,18 @@ test("the payment story separates discovery from payment and supports reduced mo
     ).toBe(true);
   }
   const title = story.getByTestId("payment-story-heading").getByRole("heading");
+  const walletLogos = story.locator("[data-wallet] > img");
+  await expect(walletLogos).toHaveCount(6);
+  await expect
+    .poll(() =>
+      walletLogos.evaluateAll((images) =>
+        images.every((image) => {
+          const logo = image as HTMLImageElement;
+          return logo.complete && logo.naturalWidth > 0 && logo.alt.length > 0;
+        }),
+      ),
+    )
+    .toBe(true);
   await expect(story.getByText("Speaks Paykit", { exact: true })).toHaveCount(0);
   await expect(
     story.getByText("Wallets use Paykit to discover payment options.", { exact: true }),
@@ -357,7 +369,7 @@ test("the payment story separates discovery from payment and supports reduced mo
       await row.evaluate((element) => {
         const bounds = element.getBoundingClientRect();
         const labels = element.querySelectorAll(
-          ":scope > strong, [data-currency]",
+          ":scope > img, [data-currency]",
         );
         return Array.from(labels).every((label) => {
           const rect = label.getBoundingClientRect();

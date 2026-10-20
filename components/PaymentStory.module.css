@@ -168,13 +168,17 @@
     background 0.55s,
     box-shadow 0.55s;
 }
-.method > strong {
-  font-size: 18px;
-  font-weight: 550;
-  letter-spacing: -0.025em;
-  overflow-wrap: normal;
-  color: #edf3fb;
-  text-shadow: 0 1px 4px #0009;
+.walletLogo {
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.walletLogo[alt="Wise"] {
+  background: #9fe870;
+  padding: 5px;
+  border-radius: 7px;
 }
 .currencies {
   display: flex;
@@ -879,10 +883,9 @@
     gap: 5px;
     border-radius: 9px;
   }
-  .method > strong {
-    font-size: 16px;
-    line-height: 1.25;
-    max-width: 75px;
+  .walletLogo {
+    width: 34px;
+    height: 34px;
   }
   .currencies {
     font-size: 14px;
