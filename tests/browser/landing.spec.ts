@@ -399,7 +399,18 @@ test("the payment story separates discovery from payment and supports reduced mo
       ).toHaveCount(1);
       await expect(
         query.getByText("BTC: bc1q5ayp...", { exact: true }),
-      ).toHaveCount(1);
+      ).toHaveCSS("opacity", "1");
+      await expect(story).toHaveAttribute("data-step-one-third", "true");
+      await expect(story).toHaveAttribute("data-step-two-thirds", "true");
+      for (const responseId of [
+        "payment-query-response",
+        "payment-query-response-mobile",
+      ]) {
+        await expect(story.getByTestId(responseId)).toHaveCSS(
+          "visibility",
+          "visible",
+        );
+      }
       const discoveryCards = await cardStyles();
       expect(discoveryCards[0]).not.toEqual(neutralCards[0]);
       expect(discoveryCards.slice(1)).toEqual(neutralCards.slice(1));
@@ -766,7 +777,14 @@ test("the payment story autoplays, loops, and pauses", async ({ page }) => {
   await expect(story).toHaveAttribute("data-active-step", "3", {
     timeout: 18_000,
   });
-  await expect(story).toHaveAttribute("data-step-halfway", "false");
+  await expect(story).toHaveAttribute("data-step-one-third", "false");
+  await expect(story).toHaveAttribute("data-step-two-thirds", "false");
+  const reply = story.getByTestId("payment-query").getByText("BTC: bc1q5ayp...", {
+    exact: true,
+  });
+  const responseArrow = story.getByTestId("payment-query-response");
+  await expect(reply).toHaveCSS("opacity", "0");
+  await expect(responseArrow).toHaveCSS("visibility", "hidden");
   const btcLabels = story.locator('[data-summary-rail="bitcoin-onchain"]');
   await expect(btcLabels).toHaveCount(2);
   const outerBtcLabels = story.locator('[data-wallet] [data-currency="BTC"]');
@@ -775,21 +793,40 @@ test("the payment story autoplays, loops, and pauses", async ({ page }) => {
   }
   await page.waitForTimeout(1_500);
   await story.getByTestId("payment-story-toggle").click();
+  const pausedDiscoveryProgress = await story.evaluate((element) =>
+    (element as HTMLElement).style.getPropertyValue("--story-progress"),
+  );
   await page.waitForTimeout(2_000);
-  await expect(story).toHaveAttribute("data-step-halfway", "false");
+  await expect(story).toHaveAttribute("data-step-one-third", "false");
+  await expect(story).toHaveAttribute("data-step-two-thirds", "false");
+  expect(
+    await story.evaluate((element) =>
+      (element as HTMLElement).style.getPropertyValue("--story-progress"),
+    ),
+  ).toBe(pausedDiscoveryProgress);
+  await expect(reply).toHaveCSS("opacity", "0");
+  await expect(responseArrow).toHaveCSS("visibility", "hidden");
   for (const btc of await btcLabels.all()) {
     await expect(btc).toHaveCSS("color", "rgb(196, 208, 223)");
   }
   await story.getByTestId("payment-story-toggle").click();
-  await expect(story).toHaveAttribute("data-step-halfway", "true", {
+  await expect(story).toHaveAttribute("data-step-one-third", "true", {
     timeout: 6_000,
   });
+  await expect(story).toHaveAttribute("data-step-two-thirds", "false");
   for (const btc of await btcLabels.all()) {
     await expect(btc).toHaveCSS("color", "rgb(255, 172, 127)");
   }
   for (const btc of await outerBtcLabels.all()) {
     await expect(btc).toHaveCSS("color", "rgb(196, 208, 223)");
   }
+  await expect(reply).toHaveCSS("opacity", "0");
+  await expect(responseArrow).toHaveCSS("visibility", "hidden");
+  await expect(story).toHaveAttribute("data-step-two-thirds", "true", {
+    timeout: 6_000,
+  });
+  await expect(reply).toHaveCSS("opacity", "1");
+  await expect(responseArrow).toHaveCSS("visibility", "visible");
   await expect(story).toHaveAttribute("data-active-step", "4", {
     timeout: 18_000,
   });

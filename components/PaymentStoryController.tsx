@@ -146,7 +146,8 @@ export default function PaymentStoryController({
       aria-labelledby={titleId}
       data-testid="payment-story"
       data-active-step={active}
-      data-step-halfway={manualStep || progress >= 50}
+      data-step-one-third={manualStep || progress >= 100 / 3}
+      data-step-two-thirds={manualStep || progress >= 200 / 3}
       data-manual-step={manualStep}
       data-playing={playing}
       data-in-view={inView}

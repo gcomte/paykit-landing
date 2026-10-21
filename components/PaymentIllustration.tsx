@@ -342,7 +342,10 @@ export default function PaymentIllustration() {
             <span className={styles.queryRequestLine}>
               <span className={styles.queryRequestTravel} />
             </span>
-            <span className={styles.queryResponseLine}>
+            <span
+              className={styles.queryResponseLine}
+              data-testid="payment-query-response"
+            >
               <span className={styles.queryResponseTravel} />
             </span>
           </div>
@@ -359,6 +362,7 @@ export default function PaymentIllustration() {
             />
             <path
               className={styles.queryResponse}
+              data-testid="payment-query-response-mobile"
               d="M60 -66C60 30 26 160 0 160"
               pathLength="1"
             />

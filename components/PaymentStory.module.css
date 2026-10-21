@@ -617,6 +617,25 @@
 }
 .optionsLabel {
   top: 166px;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.optionsLabel,
+.queryResponseLine,
+.queryResponse,
+.queryResponsePulse,
+.mobileQueryResponseHead {
+  visibility: hidden;
+}
+.story[data-active-step="3"][data-step-two-thirds="true"] .optionsLabel,
+.story[data-active-step="3"][data-step-two-thirds="true"] .queryResponseLine,
+.story[data-active-step="3"][data-step-two-thirds="true"] .queryResponse,
+.story[data-active-step="3"][data-step-two-thirds="true"] .queryResponsePulse,
+.story[data-active-step="3"][data-step-two-thirds="true"] .mobileQueryResponseHead {
+  visibility: visible;
+}
+.story[data-active-step="3"][data-step-two-thirds="true"] .optionsLabel {
+  opacity: 1;
 }
 .story[data-active-step="3"] .query {
   opacity: 1;
@@ -624,20 +643,28 @@
 .story[data-active-step="3"] .queryRequest {
   animation: queryRequest 6.5s linear 1 both;
 }
-.story[data-active-step="3"] .queryResponse {
-  animation: queryResponse 6.5s linear 1 both;
+.story[data-active-step="3"][data-step-two-thirds="true"] .queryResponse {
+  animation: queryResponse 1.5s linear 1 both;
 }
 .story[data-active-step="3"] .queryRequestTravel {
   animation: queryAcross 6.5s linear infinite both;
 }
-.story[data-active-step="3"] .queryResponseTravel {
-  animation: optionsAcross 6.5s linear infinite both;
+.story[data-active-step="3"][data-step-two-thirds="true"] .queryResponseTravel {
+  animation: optionsAcross 3s linear infinite both;
 }
 .story[data-active-step="3"] .queryRequestPulse {
   animation: queryOutbound 6.5s linear infinite both;
 }
-.story[data-active-step="3"] .queryResponsePulse {
-  animation: queryInbound 6.5s linear infinite both;
+.story[data-active-step="3"][data-step-two-thirds="true"] .queryResponsePulse {
+  animation: queryInbound 3s linear infinite both;
+}
+.story[data-active-step="3"][data-manual-step="true"] .queryResponse {
+  animation: none;
+}
+.story[data-active-step="3"][data-manual-step="true"] .queryResponseTravel,
+.story[data-active-step="3"][data-manual-step="true"] .queryResponsePulse {
+  animation: none;
+  opacity: 0;
 }
 .route {
   position: absolute;
@@ -752,7 +779,7 @@
     inset 0 0 0 1px #ff754a55,
     0 0 25px #ff754a20;
 }
-.story[data-active-step="3"][data-step-halfway="true"] [data-summary-rail="bitcoin-onchain"],
+.story[data-active-step="3"][data-step-one-third="true"] [data-summary-rail="bitcoin-onchain"],
 .story[data-active-step="4"] [data-currency="BTC"] {
   color: #ffac7f;
   text-shadow: 0 0 15px #ff754a70;
@@ -1017,13 +1044,9 @@
   }
 }
 @keyframes queryResponse {
-  0%,
-  40% {
+  0% {
     stroke-dashoffset: 0.6;
     opacity: 0.3;
-  }
-  55% {
-    opacity: 1;
   }
   100% {
     stroke-dashoffset: 0;
@@ -1064,12 +1087,12 @@
   }
 }
 @keyframes queryInbound {
-  0%,
-  45% {
+  0% {
     stroke-dashoffset: 1;
     opacity: 0;
   }
-  55% {
+  10%,
+  90% {
     opacity: 1;
   }
   100% {
@@ -1078,17 +1101,17 @@
   }
 }
 @keyframes optionsAcross {
-  0%,
-  45% {
+  0% {
     left: calc(100% - 12px);
     opacity: 0;
   }
-  55% {
+  10%,
+  90% {
     opacity: 1;
   }
   100% {
     left: 0;
-    opacity: 0.8;
+    opacity: 0;
   }
 }
 @keyframes readDetails {
