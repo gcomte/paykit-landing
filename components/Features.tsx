@@ -59,8 +59,8 @@ export default function Features() {
             <span className="title-accent">Across payment rails.</span>
           </h2>
           <p className="features-intro">
-            Recurring payments, allowances and spending limits — independent of
-            the underlying payment rail.
+            Have the functionality you need - independent of the underlying
+            payment rail.
           </p>
         </div>
       </div>

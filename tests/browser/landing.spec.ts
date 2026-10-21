@@ -312,7 +312,7 @@ test("the payment story separates discovery from payment and supports reduced mo
     );
     await expect(story.getByTestId("payment-discovery-node")).toHaveCSS(
       "opacity",
-      step === 2 ? "0.5" : "1",
+      step === 2 ? "0.2" : "1",
     );
     await expect(discoveryLinks).toHaveCSS("opacity", step === 1 ? "1" : "0");
     await expect(query).toHaveCSS("opacity", step === 3 ? "1" : "0");
@@ -338,7 +338,7 @@ test("the payment story separates discovery from payment and supports reduced mo
         [
           "Bob",
           [
-            "Ethereum",
+            "L1 Ethereum",
             "EUR/CHF transfer",
             "Bitcoin on-chain",
           ],

@@ -466,7 +466,7 @@
   opacity: 1;
 }
 .story[data-active-step="2"] .discoveryNode {
-  opacity: 0.5;
+  opacity: 0.2;
 }
 .story[data-active-step="1"] .discoveryData {
   animation: discoverOptions 6s 0.25s linear infinite;
