@@ -33,6 +33,28 @@ const walletLogos: Record<string, string> = {
   Revolut: "/wallets/revolut.svg",
   WDK: "/wallets/wdk.svg",
 };
+const paymentOptions = [
+  {
+    person: "Alice",
+    rails: [
+      { id: "bitcoin-onchain", label: "Bitcoin on-chain" },
+      { id: "lightning", label: "Lightning" },
+      { id: "usdt-arbitrum", label: "USDT · Arbitrum" },
+      { id: "paypal-usd", label: "PayPal · USD" },
+      { id: "bank-usd-gbp", label: "USD / GBP transfer" },
+    ],
+  },
+  {
+    person: "Bob",
+    rails: [
+      { id: "bitcoin-onchain", label: "Bitcoin on-chain" },
+      { id: "ethereum", label: "Ethereum" },
+      { id: "monero", label: "Monero" },
+      { id: "bank-eur", label: "EUR transfer" },
+      { id: "bank-chf", label: "CHF transfer" },
+    ],
+  },
+];
 const steps = [
   {
     label: "Meet Alice and Bob",
@@ -56,7 +78,7 @@ const steps = [
     label: "Find a shared rail",
     title: "Bitkit finds a shared payment rail through Paykit.",
     description:
-      "Bitkit uses Paykit to discover Bob’s payment options and finds on-chain BTC in common: Bitkit can pay WDK.",
+      "Bitkit uses Paykit to discover Bob’s payment options and finds on-chain BTC in common.",
   },
   {
     label: "Approve and pay",
@@ -288,36 +310,21 @@ export default function PaymentIllustration() {
               </svg>
             </strong>
             <div className={styles.discoverySummary}>
-              {profiles.map((profile) => (
+              {paymentOptions.map((profile) => (
                 <div
                   className={styles.discoverySummaryPerson}
+                  data-summary-person={profile.person}
                   key={profile.person}
                 >
                   <strong>{profile.person}</strong>
                   <span className={styles.discoverySummaryMethods}>
-                    {profile.methods.map((method) => (
+                    {profile.rails.map((rail) => (
                       <span
                         className={styles.discoverySummaryOption}
-                        data-summary-wallet={method.name}
-                        key={method.name}
+                        data-summary-rail={rail.id}
+                        key={rail.id}
                       >
-                        <Image
-                          src={walletLogos[method.name]}
-                          width={22}
-                          height={22}
-                          alt={method.name}
-                          title={method.name}
-                        />
-                        <span className={styles.discoverySummaryCurrencies}>
-                          {method.currencies.map((currency) => (
-                            <span
-                              data-summary-currency={currency}
-                              key={currency}
-                            >
-                              {currency}
-                            </span>
-                          ))}
-                        </span>
+                        {rail.label}
                       </span>
                     ))}
                   </span>
@@ -370,8 +377,8 @@ export default function PaymentIllustration() {
           </svg>
           <span className={styles.mobileQueryRequestHead} />
           <span className={styles.mobileQueryResponseHead} />
-          <span className={styles.queryLabel}>Pay Bob how?</span>
-          <span className={styles.optionsLabel}>BTC</span>
+          <span className={styles.queryLabel}>How can I pay Bob?</span>
+          <span className={styles.optionsLabel}>BTC: bc1q5ayp...</span>
         </div>
         <div
           className={styles.route}

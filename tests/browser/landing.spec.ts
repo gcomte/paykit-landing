@@ -316,17 +316,36 @@ test("the payment story separates discovery from payment and supports reduced mo
       await expect(node.getByText("Paykit", { exact: true })).toHaveCount(1);
       await expect(node.getByText("Alice", { exact: true })).toHaveCount(1);
       await expect(node.getByText("Bob", { exact: true })).toHaveCount(1);
-      await expect(node.locator("img")).toHaveCount(6);
-      await expect
-        .poll(() =>
-          node.locator("img").evaluateAll((images) =>
-            images.every((image) => {
-              const logo = image as HTMLImageElement;
-              return logo.complete && logo.naturalWidth > 0;
-            }),
-          ),
-        )
-        .toBe(true);
+      await expect(
+        node.locator("img, [data-summary-wallet], [data-summary-currency]"),
+      ).toHaveCount(0);
+      for (const [person, rails] of [
+        [
+          "Alice",
+          [
+            "Bitcoin on-chain",
+            "Lightning",
+            "USDT · Arbitrum",
+            "PayPal · USD",
+            "USD / GBP transfer",
+          ],
+        ],
+        [
+          "Bob",
+          [
+            "Bitcoin on-chain",
+            "Ethereum",
+            "Monero",
+            "EUR transfer",
+            "CHF transfer",
+          ],
+        ],
+      ] as const) {
+        const summary = node.locator(`[data-summary-person="${person}"]`);
+        await expect(summary.locator("[data-summary-rail]")).toHaveText([
+          ...rails,
+        ]);
+      }
       const connectedWallets = await discovery
         .locator("[data-discovery-wallet]")
         .evaluateAll((paths) =>
@@ -372,20 +391,24 @@ test("the payment story separates discovery from payment and supports reduced mo
     }
     if (step === 3) {
       await expect(title).toContainText(/rail/i);
-      await expect(query.getByText("Pay Bob how?", { exact: true })).toHaveCount(
-        1,
-      );
-      await expect(query.getByText("BTC", { exact: true })).toHaveCount(1);
+      await expect(
+        query.getByText("How can I pay Bob?", { exact: true }),
+      ).toHaveCount(1);
+      await expect(
+        query.getByText("BTC: bc1q5ayp...", { exact: true }),
+      ).toHaveCount(1);
       const discoveryCards = await cardStyles();
       expect(discoveryCards[0]).not.toEqual(neutralCards[0]);
       expect(discoveryCards.slice(1)).toEqual(neutralCards.slice(1));
-      const btcLabels = discovery.locator('[data-summary-currency="BTC"]');
+      const btcLabels = discovery.locator(
+        '[data-summary-rail="bitcoin-onchain"]',
+      );
       await expect(btcLabels).toHaveCount(2);
       for (const btc of await btcLabels.all()) {
         await expect(btc).toHaveCSS("color", "rgb(255, 172, 127)");
       }
       const otherCurrencies = story.locator(
-        '[data-wallet] [data-currency], [data-summary-currency]:not([data-summary-currency="BTC"])',
+        '[data-wallet] [data-currency], [data-summary-rail]:not([data-summary-rail="bitcoin-onchain"])',
       );
       for (const currency of await otherCurrencies.all()) {
         await expect(currency).toHaveCSS("color", "rgb(196, 208, 223)");
@@ -575,7 +598,7 @@ test("the mobile payment diagram preserves and uniformly scales its desktop arra
           "1",
         );
         for (const label of width <= 700
-          ? ["Pay Bob how?", "BTC"]
+          ? ["How can I pay Bob?", "BTC: bc1q5ayp..."]
           : []) {
           const bounds = (await story
             .getByTestId("payment-query")
@@ -606,7 +629,7 @@ test("the mobile payment diagram preserves and uniformly scales its desktop arra
       await node.evaluate((element) => {
         const bounds = element.getBoundingClientRect();
         return Array.from(
-          element.querySelectorAll("strong, img, [data-summary-currency]"),
+          element.querySelectorAll("strong, [data-summary-rail]"),
         ).every((label) => {
           const rect = label.getBoundingClientRect();
           if (!rect.width || !rect.height) return true;
@@ -741,7 +764,7 @@ test("the payment story autoplays, loops, and pauses", async ({ page }) => {
     timeout: 18_000,
   });
   await expect(story).toHaveAttribute("data-step-halfway", "false");
-  const btcLabels = story.locator('[data-summary-currency="BTC"]');
+  const btcLabels = story.locator('[data-summary-rail="bitcoin-onchain"]');
   await expect(btcLabels).toHaveCount(2);
   const outerBtcLabels = story.locator('[data-wallet] [data-currency="BTC"]');
   for (const btc of await btcLabels.all()) {

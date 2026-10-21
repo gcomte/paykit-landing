@@ -438,46 +438,23 @@
   letter-spacing: -0.02em;
 }
 .discoverySummaryMethods {
-  width: max-content;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 56px 38px 38px;
-  align-items: start;
-  gap: 8px;
-}
-.discoverySummaryOption {
-  display: grid;
-  grid-template-columns: 22px max-content;
-  justify-items: start;
+  grid-auto-rows: minmax(22px, auto);
   align-items: center;
   gap: 6px;
 }
-.discoverySummaryCurrencies {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
+.discoverySummaryOption {
+  display: block;
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;
   color: #c4d0df;
-}
-.discoverySummaryCurrencies > span {
-  display: block;
+  text-align: center;
   transition:
     color 0.5s,
     text-shadow 0.5s;
-}
-.discoverySummaryMethods img {
-  display: block;
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-}
-.discoverySummaryMethods img[alt="Wise"] {
-  background: #9fe870;
-  border-radius: 4px;
-  padding: 3px;
 }
 .story[data-active-step="1"] .discoveryNetwork,
 .story[data-active-step="2"] .discoveryNetwork,
@@ -771,7 +748,7 @@
     inset 0 0 0 1px #ff754a55,
     0 0 25px #ff754a20;
 }
-.story[data-active-step="3"][data-step-halfway="true"] [data-summary-currency="BTC"],
+.story[data-active-step="3"][data-step-halfway="true"] [data-summary-rail="bitcoin-onchain"],
 .story[data-active-step="4"] [data-currency="BTC"] {
   color: #ffac7f;
   text-shadow: 0 0 15px #ff754a70;
@@ -1239,10 +1216,12 @@
   }
   .optionsLabel {
     top: 118px;
+    width: calc(var(--node-inset) - 8px);
     padding: 3px 4px;
-  }
-  .discoverySummary {
-    grid-template-columns: repeat(2, max-content);
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: center;
+    line-height: 1.15;
   }
   .caption {
     min-height: 0;
