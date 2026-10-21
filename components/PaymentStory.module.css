@@ -438,7 +438,7 @@
   letter-spacing: -0.02em;
 }
 .discoverySummaryMethods {
-  width: 100%;
+  width: max-content;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 56px 38px 38px;
@@ -1240,9 +1240,6 @@
   }
   .discoverySummary {
     grid-template-columns: repeat(2, max-content);
-  }
-  .discoverySummaryMethods {
-    width: max-content;
   }
   .caption {
     min-height: 0;
