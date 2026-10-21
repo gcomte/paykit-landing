@@ -55,9 +55,13 @@ export default function Features() {
         <div>
           <p className="eyebrow">WHAT PAYKIT MAKES POSSIBLE</p>
           <h2 id="features-title">
-            Shared payment rules.<br />
+            Shared payment features.<br />
             <span className="title-accent">Across payment rails.</span>
           </h2>
+          <p className="features-intro">
+            Recurring payments, allowances and spending limits — independent of
+            the underlying payment rail.
+          </p>
         </div>
       </div>
       <div className="features-grid">

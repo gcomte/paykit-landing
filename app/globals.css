@@ -444,6 +444,12 @@ h3 {
 .features {
   padding-top: 24px;
 }
+.features-intro {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
 .features-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
