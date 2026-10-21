@@ -644,6 +644,65 @@ test("the mobile payment diagram preserves and uniformly scales its desktop arra
 
     await story.locator('button[data-step="1"]').click();
     await expect(node.locator('[data-summary-person="Charlie"]')).toHaveCount(0);
+    const connectionEndpoints = await story.evaluate((element) => {
+      const node = element.querySelector<HTMLElement>(
+        '[data-testid="payment-discovery-node"]',
+      )!;
+      const bounds = node.getBoundingClientRect();
+      const radius =
+        parseFloat(getComputedStyle(node).borderTopLeftRadius) *
+        (bounds.width / node.offsetWidth);
+      return Array.from(
+        element.querySelectorAll<SVGPathElement>("[data-discovery-wallet]"),
+      )
+        .filter((path) => {
+          const rect = path.getBoundingClientRect();
+          return rect.width > 0 && rect.height > 0;
+        })
+        .map((path) => {
+          const walletName = path.getAttribute("data-discovery-wallet")!;
+          const wallet = element
+            .querySelector(`[data-wallet="${walletName}"]`)!
+            .getBoundingClientRect();
+          const left = ["Bitkit", "PayPal", "Wise"].includes(walletName);
+          const matrix = path.getScreenCTM()!;
+          const toScreen = (point: DOMPoint) =>
+            new DOMPoint(point.x, point.y).matrixTransform(matrix);
+          const start = toScreen(path.getPointAtLength(0));
+          const end = toScreen(path.getPointAtLength(path.getTotalLength()));
+          return {
+            wallet: walletName,
+            nodeBorderGap: Math.abs(end.x - (left ? bounds.left : bounds.right)),
+            nodeEndY: end.y,
+            nodeStraightTop: bounds.top + radius + 2,
+            nodeStraightBottom: bounds.bottom - radius - 2,
+            walletBorderGap: Math.abs(
+              start.x - (left ? wallet.right : wallet.left),
+            ),
+            walletStartY: start.y,
+            walletTop: wallet.top,
+            walletBottom: wallet.bottom,
+          };
+        });
+    });
+    expect(connectionEndpoints).toHaveLength(6);
+    for (const endpoint of connectionEndpoints) {
+      const context = `${endpoint.wallet} connection at ${width}px`;
+      expect(endpoint.nodeBorderGap, context).toBeLessThanOrEqual(0.5);
+      expect(endpoint.nodeEndY, context).toBeGreaterThanOrEqual(
+        endpoint.nodeStraightTop,
+      );
+      expect(endpoint.nodeEndY, context).toBeLessThanOrEqual(
+        endpoint.nodeStraightBottom,
+      );
+      expect(endpoint.walletBorderGap, context).toBeLessThanOrEqual(0.5);
+      expect(endpoint.walletStartY, context).toBeGreaterThanOrEqual(
+        endpoint.walletTop,
+      );
+      expect(endpoint.walletStartY, context).toBeLessThanOrEqual(
+        endpoint.walletBottom,
+      );
+    }
     const portrait = alice.locator('img[alt=""]');
     if (width <= 700) await expect(portrait).toBeHidden();
     else await expect(portrait).toBeVisible();

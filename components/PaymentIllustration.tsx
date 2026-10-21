@@ -93,12 +93,12 @@ const discoveryLinks = [
   },
   {
     wallet: "PayPal",
-    desktop: "M0 236C35 236 65 150 100 150",
+    desktop: "M0 236C35 236 65 125 100 125",
     mobile: "M0 236C24 236 16 58 29 -66",
   },
   {
     wallet: "Wise",
-    desktop: "M0 322C35 322 65 220 100 220",
+    desktop: "M0 322C35 322 65 175 100 175",
     mobile: "M0 322C33 322 22 74 43 -66",
   },
   {
@@ -108,12 +108,12 @@ const discoveryLinks = [
   },
   {
     wallet: "Revolut",
-    desktop: "M100 236C65 236 35 170 0 170",
+    desktop: "M100 236C65 236 35 145 0 145",
     mobile: "M100 236C76 236 84 58 71 -66",
   },
   {
     wallet: "WDK",
-    desktop: "M100 322C65 322 35 235 0 235",
+    desktop: "M100 322C65 322 35 195 0 195",
     mobile: "M100 322C67 322 78 74 57 -66",
   },
 ];
