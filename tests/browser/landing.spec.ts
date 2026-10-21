@@ -310,6 +310,10 @@ test("the payment story separates discovery from payment and supports reduced mo
       "opacity",
       [1, 2, 3].includes(step) ? "1" : "0",
     );
+    await expect(story.getByTestId("payment-discovery-node")).toHaveCSS(
+      "opacity",
+      step === 2 ? "0.5" : "1",
+    );
     await expect(discoveryLinks).toHaveCSS("opacity", step === 1 ? "1" : "0");
     await expect(query).toHaveCSS("opacity", step === 3 ? "1" : "0");
     if (step === 1) {

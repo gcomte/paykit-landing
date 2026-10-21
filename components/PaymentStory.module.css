@@ -394,6 +394,7 @@
   font-weight: 550;
   letter-spacing: -0.045em;
   color: #edf5ff;
+  transition: opacity 0.4s;
 }
 .discoveryNodeTitle {
   display: flex;
@@ -463,6 +464,9 @@
 }
 .story[data-active-step="1"] .discoveryLinks {
   opacity: 1;
+}
+.story[data-active-step="2"] .discoveryNode {
+  opacity: 0.5;
 }
 .story[data-active-step="1"] .discoveryData {
   animation: discoverOptions 6s 0.25s linear infinite;
