@@ -15,15 +15,14 @@ test("the server gate protects HTML, RSC, and invalid sessions", async ({
     const response = await request.get("/", { headers, maxRedirects: 0 });
     expect(response.status()).toBe(307);
     expect(response.headers().location).toBe("/access");
-    expect(await response.text()).not.toContain("Skip the back-and-forth");
+    expect(await response.text()).not.toContain("BitBox");
     expect(await response.text()).not.toContain("payment-story");
     expect(response.headers()["cache-control"]).toContain("no-store");
   }
   const rsc = await request.get("/?_rsc=security-check", {
     headers: { RSC: "1", "Next-Router-Prefetch": "1" },
   });
-  expect(await rsc.text()).not.toContain("Skip the back-and-forth");
-  expect(await rsc.text()).not.toContain("Pay. Get paid.");
+  expect(await rsc.text()).not.toContain("payment-story");
   expect(await rsc.text()).not.toContain("BitBox");
   const calendar = await request.get("/api/calendar", { maxRedirects: 0 });
   expect(calendar.status()).toBe(303);
@@ -45,6 +44,84 @@ test("the server gate protects HTML, RSC, and invalid sessions", async ({
     headers: { Origin: baseURL! },
   });
   expect(oversized.status()).toBe(413);
+});
+
+test("anonymous social previews are public while the landing page stays gated", async ({
+  request,
+}) => {
+  const canonical = "https://paykit-landing-page.vercel.app/";
+  const imageUrl = new URL("/social-preview.png", canonical).href;
+  const title = "Paykit — Pay. Get paid.";
+  const description =
+    "Paykit is the open payment coordination protocol. Pay a person and let your wallet handle the payment logistics.";
+  for (const userAgent of [
+    "Mozilla/5.0",
+    "Twitterbot/1.0",
+    "facebookexternalhit/1.1",
+    "Slackbot-LinkExpanding 1.0 (+https://api.slack.com/robots)",
+  ]) {
+    const headers = { "User-Agent": userAgent };
+    const redirect = await request.get("/", { headers, maxRedirects: 0 });
+    expect(redirect.status(), userAgent).toBe(307);
+    expect(redirect.headers().location).toBe("/access");
+    const response = await request.get("/", { headers });
+    expect(response.ok(), userAgent).toBe(true);
+    expect(new URL(response.url()).pathname).toBe("/access");
+    expect(response.headers()["x-robots-tag"]).toContain("noindex");
+    const html = await response.text();
+    const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1];
+    expect(
+      head,
+      `social metadata must be in the head for ${userAgent}`,
+    ).toBeTruthy();
+    const metadata = new Map<string, string>();
+    for (const tag of head!.matchAll(/<meta\b[^>]*>/gi)) {
+      const attributes = new Map(
+        [...tag[0].matchAll(/([\w:-]+)\s*=\s*"([^"]*)"/g)].map(
+          ([, name, value]) => [name.toLowerCase(), value] as const,
+        ),
+      );
+      const name = attributes.get("property") || attributes.get("name");
+      if (name && attributes.has("content"))
+        metadata.set(name, attributes.get("content")!);
+    }
+    for (const [name, value] of Object.entries({
+      "og:title": title,
+      "og:description": description,
+      "og:url": canonical,
+      "og:image": imageUrl,
+      "og:image:width": "1200",
+      "og:image:height": "630",
+      "og:image:type": "image/png",
+      "twitter:card": "summary_large_image",
+      "twitter:title": title,
+      "twitter:description": description,
+      "twitter:image": imageUrl,
+    })) {
+      const actual = metadata.get(name);
+      expect(
+        name === "og:url" && actual ? new URL(actual).href : actual,
+        `${name} for ${userAgent}`,
+      ).toBe(value);
+    }
+    expect(metadata.get("robots")).toContain("noindex");
+    expect(html).not.toContain('data-testid="payment-story"');
+    expect(html).not.toContain("BitBox");
+  }
+
+  const image = await request.get("/social-preview.png", { maxRedirects: 0 });
+  expect(image.status()).toBe(200);
+  expect(image.headers()["content-type"]).toContain("image/png");
+  const png = await image.body();
+  expect(
+    png.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])),
+  ).toBe(true);
+  expect(png.readUInt32BE(16)).toBe(1200);
+  expect(png.readUInt32BE(20)).toBe(630);
+  const robots = await request.get("/robots.txt");
+  expect(robots.status()).toBe(200);
+  expect(await robots.text()).toMatch(/^Allow:\s*\/$/m);
+  expect(await robots.text()).not.toMatch(/^Disallow:\s*\/$/m);
 });
 
 test("visitors can unlock the page and browse it at desktop and phone widths", async ({
