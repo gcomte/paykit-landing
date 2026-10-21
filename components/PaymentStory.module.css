@@ -93,6 +93,7 @@
   position: relative;
   width: var(--card-width);
   z-index: 2;
+  transition: opacity 0.4s;
 }
 .profile::before {
   content: "";
@@ -466,6 +467,10 @@
   opacity: 1;
 }
 .story[data-active-step="2"] .discoveryNode {
+  opacity: 0.2;
+}
+.story[data-active-step="2"] .profile[data-person="Bob"],
+.story[data-active-step="3"] .profile[data-person="Bob"] {
   opacity: 0.2;
 }
 .story[data-active-step="1"] .discoveryData {

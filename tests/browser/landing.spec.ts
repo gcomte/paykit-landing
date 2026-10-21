@@ -314,6 +314,14 @@ test("the payment story separates discovery from payment and supports reduced mo
       "opacity",
       step === 2 ? "0.2" : "1",
     );
+    await expect(story.locator('[data-person="Alice"]')).toHaveCSS(
+      "opacity",
+      "1",
+    );
+    await expect(story.locator('[data-person="Bob"]')).toHaveCSS(
+      "opacity",
+      [2, 3].includes(step) ? "0.2" : "1",
+    );
     await expect(discoveryLinks).toHaveCSS("opacity", step === 1 ? "1" : "0");
     await expect(query).toHaveCSS("opacity", step === 3 ? "1" : "0");
     if (step === 1) {
