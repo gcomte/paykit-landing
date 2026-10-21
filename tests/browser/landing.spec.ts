@@ -372,23 +372,33 @@ test("the payment story separates discovery from payment and supports reduced mo
     }
     if (step === 3) {
       await expect(title).toContainText(/rail/i);
+      await expect(query.getByText("Pay Bob how?", { exact: true })).toHaveCount(
+        1,
+      );
+      await expect(query.getByText("BTC", { exact: true })).toHaveCount(1);
       const discoveryCards = await cardStyles();
       expect(discoveryCards[0]).not.toEqual(neutralCards[0]);
       expect(discoveryCards.slice(1)).toEqual(neutralCards.slice(1));
-      const btcLabels = story.locator('[data-wallet] [data-currency="BTC"]');
+      const btcLabels = discovery.locator('[data-summary-currency="BTC"]');
       await expect(btcLabels).toHaveCount(2);
       for (const btc of await btcLabels.all()) {
         await expect(btc).toHaveCSS("color", "rgb(255, 172, 127)");
       }
       const otherCurrencies = story.locator(
-        '[data-wallet] [data-currency]:not([data-currency="BTC"])',
+        '[data-wallet] [data-currency], [data-summary-currency]:not([data-summary-currency="BTC"])',
       );
       for (const currency of await otherCurrencies.all()) {
         await expect(currency).toHaveCSS("color", "rgb(196, 208, 223)");
       }
     }
-    if (step === 4) await expect(title).toContainText(/direct/i);
-    if (step === 4) await expectDirectPaymentWithoutPaykit();
+    if (step === 4) {
+      await expect(title).toContainText(/direct/i);
+      await expectDirectPaymentWithoutPaykit();
+      const btcLabels = story.locator('[data-wallet] [data-currency="BTC"]');
+      for (const btc of await btcLabels.all()) {
+        await expect(btc).toHaveCSS("color", "rgb(255, 172, 127)");
+      }
+    }
   }
   await story.locator('button[data-step="1"]').focus();
   await page.keyboard.press("Enter");
@@ -565,7 +575,7 @@ test("the mobile payment diagram preserves and uniformly scales its desktop arra
           "1",
         );
         for (const label of width <= 700
-          ? ["Bob’s payment options?", "options"]
+          ? ["Pay Bob how?", "BTC"]
           : []) {
           const bounds = (await story
             .getByTestId("payment-query")
@@ -731,7 +741,9 @@ test("the payment story autoplays, loops, and pauses", async ({ page }) => {
     timeout: 18_000,
   });
   await expect(story).toHaveAttribute("data-step-halfway", "false");
-  const btcLabels = story.locator('[data-wallet] [data-currency="BTC"]');
+  const btcLabels = story.locator('[data-summary-currency="BTC"]');
+  await expect(btcLabels).toHaveCount(2);
+  const outerBtcLabels = story.locator('[data-wallet] [data-currency="BTC"]');
   for (const btc of await btcLabels.all()) {
     await expect(btc).toHaveCSS("color", "rgb(196, 208, 223)");
   }
@@ -749,10 +761,16 @@ test("the payment story autoplays, loops, and pauses", async ({ page }) => {
   for (const btc of await btcLabels.all()) {
     await expect(btc).toHaveCSS("color", "rgb(255, 172, 127)");
   }
+  for (const btc of await outerBtcLabels.all()) {
+    await expect(btc).toHaveCSS("color", "rgb(196, 208, 223)");
+  }
   await expect(story).toHaveAttribute("data-active-step", "4", {
     timeout: 18_000,
   });
   await expect(story.getByTestId("payment-route")).toHaveCSS("opacity", "1");
+  for (const btc of await outerBtcLabels.all()) {
+    await expect(btc).toHaveCSS("color", "rgb(255, 172, 127)");
+  }
   await story.getByTestId("payment-story-toggle").click();
   await expect(story).toHaveAttribute("data-playing", "false");
   await story.getByTestId("payment-story-toggle").click();

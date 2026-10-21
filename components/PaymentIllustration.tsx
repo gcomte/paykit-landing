@@ -370,8 +370,8 @@ export default function PaymentIllustration() {
           </svg>
           <span className={styles.mobileQueryRequestHead} />
           <span className={styles.mobileQueryResponseHead} />
-          <span className={styles.queryLabel}>Bob’s payment options?</span>
-          <span className={styles.optionsLabel}>options</span>
+          <span className={styles.queryLabel}>Pay Bob how?</span>
+          <span className={styles.optionsLabel}>BTC</span>
         </div>
         <div
           className={styles.route}
