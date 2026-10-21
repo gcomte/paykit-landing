@@ -19,7 +19,7 @@ const profiles = [
   {
     person: "Bob",
     methods: [
-      { name: "BitBox", currencies: ["ETH", "XMR"], shared: false },
+      { name: "BitBox", currencies: ["ETH"], shared: false },
       { name: "Revolut", currencies: ["EUR", "CHF"], shared: false },
       { name: "WDK", currencies: ["BTC", "ETH"], shared: true },
     ],
@@ -49,7 +49,6 @@ const paymentOptions = [
     rails: [
       { id: "bitcoin-onchain", label: "Bitcoin on-chain" },
       { id: "ethereum", label: "Ethereum" },
-      { id: "monero", label: "Monero" },
       { id: "bank-eur", label: "EUR transfer" },
       { id: "bank-chf", label: "CHF transfer" },
     ],

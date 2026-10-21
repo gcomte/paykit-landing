@@ -247,6 +247,7 @@ test("the payment story separates discovery from payment and supports reduced mo
   await page.goto("/");
   const story = page.getByTestId("payment-story");
   await story.scrollIntoViewIfNeeded();
+  await expect(story.getByText(/XMR|Monero/)).toHaveCount(0);
   await expect(story).toHaveAttribute("data-active-step", "4");
   expect(publicScriptBodies.length).toBeGreaterThan(0);
   const loadedScripts = await Promise.all(publicScriptBodies);
@@ -335,7 +336,6 @@ test("the payment story separates discovery from payment and supports reduced mo
           [
             "Bitcoin on-chain",
             "Ethereum",
-            "Monero",
             "EUR transfer",
             "CHF transfer",
           ],
@@ -442,7 +442,7 @@ test("the payment story separates discovery from payment and supports reduced mo
   for (const [wallet, currencies] of [
     ["Bitkit", ["BTC", "Lightning", "USDT"]],
     ["Wise", ["USD", "GBP"]],
-    ["BitBox", ["ETH", "XMR"]],
+    ["BitBox", ["ETH"]],
     ["WDK", ["BTC", "ETH"]],
     ["Revolut", ["EUR", "CHF"]],
   ] as const) {
