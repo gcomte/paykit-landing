@@ -12,6 +12,15 @@ export const metadata: Metadata = {
   title: "Paykit",
   description: "Paykit — private preview.",
   robots: { index: false, follow: false, nocache: true },
+  icons: {
+    icon: [
+      {
+        url: "/favicon-dark.ico",
+        type: "image/x-icon",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
