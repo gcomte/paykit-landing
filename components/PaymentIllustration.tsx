@@ -47,10 +47,9 @@ const paymentOptions = [
   {
     person: "Bob",
     rails: [
-      { id: "bitcoin-onchain", label: "Bitcoin on-chain" },
       { id: "ethereum", label: "Ethereum" },
-      { id: "bank-eur", label: "EUR transfer" },
-      { id: "bank-chf", label: "CHF transfer" },
+      { id: "bank-eur-chf", label: "EUR/CHF transfer" },
+      { id: "bitcoin-onchain", label: "Bitcoin on-chain" },
     ],
   },
 ];

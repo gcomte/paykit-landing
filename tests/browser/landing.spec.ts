@@ -334,10 +334,9 @@ test("the payment story separates discovery from payment and supports reduced mo
         [
           "Bob",
           [
-            "Bitcoin on-chain",
             "Ethereum",
-            "EUR transfer",
-            "CHF transfer",
+            "EUR/CHF transfer",
+            "Bitcoin on-chain",
           ],
         ],
       ] as const) {
