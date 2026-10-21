@@ -238,9 +238,9 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
               <span className="title-accent">Skip the back‑and‑forth.</span>
             </h1>
             <p className="hero-intro">
-              Paykit is the open protocol for paying contacts. Your wallet
-              handles the methods, addresses, and invoices. You just review and
-              pay.
+              Paykit is an open protocol for coordinating payments across any
+              existing payment rail. Users choose <em>who</em> to pay. Paykit
+              figures out <em>how</em> — finding shared payment rails.
             </p>
           </div>
           <div className="hero-video" id="watch">
