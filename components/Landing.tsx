@@ -235,7 +235,9 @@ export default function Landing({ contactEmail }: { contactEmail: string }) {
             <h1 id="hero-title">
               Pay. Get paid.
               <br />
-              <span className="title-accent">Skip the back‑and‑forth.</span>
+              <span className="title-accent">
+                Leave the <em>how</em> to Paykit.
+              </span>
             </h1>
             <p className="hero-intro">
               Paykit is an open protocol for coordinating payments across

@@ -256,6 +256,7 @@ h3 {
 }
 .hero h1 > span {
   color: #9ea5b4;
+  font-style: normal;
 }
 .hero-intro {
   max-width: 650px;
