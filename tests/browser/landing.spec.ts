@@ -1,11 +1,7 @@
 import { test, expect } from "@playwright/test";
 
-const password =
-  process.env.TEST_LANDING_PASSWORD || process.env.LANDING_PASSWORD;
-
-test("the server gate protects HTML, RSC, and invalid sessions", async ({
+test("the public launch serves HTML, RSC, and calendars without a session", async ({
   request,
-  baseURL,
 }) => {
   const attempts: Record<string, string>[] = [
     {},
@@ -13,40 +9,43 @@ test("the server gate protects HTML, RSC, and invalid sessions", async ({
   ];
   for (const headers of attempts) {
     const response = await request.get("/", { headers, maxRedirects: 0 });
-    expect(response.status()).toBe(307);
-    expect(response.headers().location).toBe("/access");
-    expect(await response.text()).not.toContain("BitBox");
-    expect(await response.text()).not.toContain("payment-story");
-    expect(response.headers()["cache-control"]).toContain("no-store");
+    expect(response.status()).toBe(200);
+    expect(response.headers().location).toBeUndefined();
+    expect(await response.text()).toContain("BitBox");
+    expect(await response.text()).toContain('data-testid="payment-story"');
+    expect(response.headers()["x-robots-tag"]).toBeUndefined();
+    expect(response.headers()["content-security-policy"]).toContain(
+      "frame-ancestors 'none'",
+    );
+    expect(response.headers()["x-content-type-options"]).toBe("nosniff");
+    expect(response.headers()["x-frame-options"]).toBe("DENY");
+    expect(response.headers()["set-cookie"]).toBeUndefined();
   }
   const rsc = await request.get("/?_rsc=security-check", {
     headers: { RSC: "1", "Next-Router-Prefetch": "1" },
   });
-  expect(await rsc.text()).not.toContain("payment-story");
-  expect(await rsc.text()).not.toContain("BitBox");
+  expect(rsc.status()).toBe(200);
+  expect(rsc.headers()["content-type"]).toContain("text/x-component");
+  expect(await rsc.text()).toContain("payment-scene");
+  expect(await rsc.text()).toContain("BitBox");
   const calendar = await request.get("/api/calendar", { maxRedirects: 0 });
-  expect(calendar.status()).toBe(303);
-  expect(calendar.headers().location).toContain("/access");
-  const wrong = await request.post("/api/access", {
-    form: { password: "invalid-test-value" },
-    headers: { Origin: baseURL! },
-    maxRedirects: 0,
-  });
-  expect(wrong.headers().location).toContain("error=invalid");
-  expect(wrong.headers()["set-cookie"]).toBeUndefined();
-  const foreign = await request.post("/api/access", {
-    form: { password: "invalid-test-value" },
-    headers: { Origin: "https://foreign.example" },
-  });
-  expect(foreign.status()).toBe(403);
-  const oversized = await request.post("/api/access", {
-    form: { password: "x".repeat(3000) },
-    headers: { Origin: baseURL! },
-  });
-  expect(oversized.status()).toBe(413);
+  expect(calendar.status()).toBe(200);
+  expect(calendar.headers()["content-type"]).toContain("text/calendar");
+  expect(calendar.headers()["cache-control"]).toBe("public, max-age=3600");
+  expect(await calendar.text()).toContain("BEGIN:VCALENDAR");
+  for (const path of ["/access", "/api/access", "/api/logout"]) {
+    expect((await request.get(path, { maxRedirects: 0 })).status(), path).toBe(
+      404,
+    );
+  }
+  for (const path of ["/api/access", "/api/logout"]) {
+    const legacyPost = await request.post(path, { maxRedirects: 0 });
+    expect(legacyPost.status(), path).toBe(404);
+    expect(legacyPost.headers()["set-cookie"]).toBeUndefined();
+  }
 });
 
-test("anonymous social previews are public while the landing page stays gated", async ({
+test("anonymous social previews describe the public landing page", async ({
   request,
 }) => {
   const canonical = "https://paykit-landing-page.vercel.app/";
@@ -61,13 +60,10 @@ test("anonymous social previews are public while the landing page stays gated", 
     "Slackbot-LinkExpanding 1.0 (+https://api.slack.com/robots)",
   ]) {
     const headers = { "User-Agent": userAgent };
-    const redirect = await request.get("/", { headers, maxRedirects: 0 });
-    expect(redirect.status(), userAgent).toBe(307);
-    expect(redirect.headers().location).toBe("/access");
-    const response = await request.get("/", { headers });
-    expect(response.ok(), userAgent).toBe(true);
-    expect(new URL(response.url()).pathname).toBe("/access");
-    expect(response.headers()["x-robots-tag"]).toContain("noindex");
+    const response = await request.get("/", { headers, maxRedirects: 0 });
+    expect(response.status(), userAgent).toBe(200);
+    expect(new URL(response.url()).pathname).toBe("/");
+    expect(response.headers()["x-robots-tag"]).toBeUndefined();
     const html = await response.text();
     const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1];
     expect(
@@ -106,12 +102,16 @@ test("anonymous social previews are public while the landing page stays gated", 
         `${name} for ${userAgent}`,
       ).toBe(value);
     }
-    expect(metadata.get("robots")).toContain("noindex");
-    expect(html).not.toContain('data-testid="payment-story"');
-    expect(html).not.toContain("BitBox");
+    expect(metadata.get("robots")).toMatch(/\bindex\b/);
+    expect(metadata.get("robots")).toMatch(/\bfollow\b/);
+    expect(metadata.get("robots")).not.toContain("noindex");
+    expect(html).toContain('data-testid="payment-story"');
+    expect(html).toContain("BitBox");
   }
 
-  const image = await request.get("/social-preview-v2.png", { maxRedirects: 0 });
+  const image = await request.get("/social-preview-v2.png", {
+    maxRedirects: 0,
+  });
   expect(image.status()).toBe(200);
   expect(image.headers()["content-type"]).toContain("image/png");
   const png = await image.body();
@@ -126,31 +126,18 @@ test("anonymous social previews are public while the landing page stays gated", 
   expect(await robots.text()).not.toMatch(/^Disallow:\s*\/$/m);
 });
 
-test("visitors can unlock the page and browse it at desktop and phone widths", async ({
+test("visitors can browse the public page at desktop and phone widths", async ({
   page,
-  context,
 }) => {
-  expect(
-    password,
-    "Provide TEST_LANDING_PASSWORD to exercise the real gate",
-  ).toBeTruthy();
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  await expect(page.getByLabel("Password", { exact: true })).toBeVisible();
-  await page.getByLabel("Password", { exact: true }).fill(password!);
-  await page.getByRole("button", { name: "Enter Paykit" }).click();
   await expect(page).toHaveURL(/\/$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "Pay. Get paid.",
   );
-  const cookie = (await context.cookies()).find(
-    (cookie) => cookie.name === "paykit_access",
-  );
-  expect(cookie?.httpOnly).toBe(true);
-  expect(cookie?.sameSite).toBe("Lax");
   await expect(page.locator("iframe")).toHaveCount(0);
   await expect(
     page.getByRole("link", { name: /Bitkit/i }).first(),
@@ -161,14 +148,12 @@ test("visitors can unlock the page and browse it at desktop and phone widths", a
   await expect(
     page.getByText("16:15–17:00", { exact: false }).first(),
   ).toBeVisible();
-  const calendar = await page.request.get("/api/calendar", {
-    headers: { Cookie: `paykit_access=${cookie?.value}` },
-  });
+  const calendar = await page.request.get("/api/calendar");
   expect(calendar.headers()["content-type"]).toContain("text/calendar");
   expect(calendar.headers()["content-disposition"]).toContain(
     "paykit-lugano-2026.ics",
   );
-  expect(calendar.headers()["cache-control"]).toContain("no-store");
+  expect(calendar.headers()["cache-control"]).toBe("public, max-age=3600");
   expect(await calendar.text()).toContain("DTSTART:20261024T141500Z");
   await expect(
     page.getByRole("link", { name: "Add to calendar" }),
@@ -205,13 +190,9 @@ test("visitors can unlock the page and browse it at desktop and phone widths", a
 
 test("video loads on demand and the inquiry composer prepares a structured email", async ({
   page,
-  baseURL,
 }) => {
-  expect(password).toBeTruthy();
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/access");
-  await page.getByLabel("Password", { exact: true }).fill(password!);
-  await page.getByRole("button", { name: "Enter Paykit" }).click();
+  await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await expect(page.locator("iframe")).toHaveCount(0);
   await page.route("https://www.youtube-nocookie.com/**", (route) =>
@@ -223,7 +204,7 @@ test("video loads on demand and the inquiry composer prepares a structured email
   await page.getByRole("button", { name: /Play the Paykit teaser/ }).click();
   await expect(page.locator("iframe")).toHaveAttribute(
     "src",
-    /youtube-nocookie\.com\/embed\/yUkBWQ1J7bQ/,
+    /youtube-nocookie\.com\/embed\/cQi8QkG_y4Y/,
   );
   const cdp = await page.context().newCDPSession(page);
   await cdp.send("Page.enable");
@@ -246,19 +227,11 @@ test("video loads on demand and the inquiry composer prepares a structured email
   expect(uri.searchParams.get("body")).toContain("Example Wallet");
   expect(uri.searchParams.get("body")).toContain("test@example.com");
   await expect(page.getByRole("status")).toContainText("email app");
-  const response = await page.request.post("/api/logout", {
-    headers: { Origin: baseURL! },
-    maxRedirects: 0,
-  });
-  expect(response.status()).toBe(303);
-  await page.goto("/");
-  await expect(page).toHaveURL(/\/access$/);
 });
 
 test("the payment story separates discovery from payment and supports reduced motion", async ({
   page,
 }) => {
-  expect(password).toBeTruthy();
   const publicScriptBodies: Promise<string>[] = [];
   page.on("response", (response) => {
     if (
@@ -271,9 +244,7 @@ test("the payment story separates discovery from payment and supports reduced mo
   });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto("/access");
-  await page.getByLabel("Password", { exact: true }).fill(password!);
-  await page.getByRole("button", { name: "Enter Paykit" }).click();
+  await page.goto("/");
   const story = page.getByTestId("payment-story");
   await story.scrollIntoViewIfNeeded();
   await expect(story).toHaveAttribute("data-active-step", "4");
@@ -487,11 +458,8 @@ test("the payment story separates discovery from payment and supports reduced mo
 test("the mobile payment diagram preserves and uniformly scales its desktop arrangement", async ({
   page,
 }) => {
-  expect(password).toBeTruthy();
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/access");
-  await page.getByLabel("Password", { exact: true }).fill(password!);
-  await page.getByRole("button", { name: "Enter Paykit" }).click();
+  await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
   const story = page.getByTestId("payment-story");
   const viewport = story.getByTestId("payment-scene-viewport");
@@ -674,12 +642,9 @@ test("the mobile payment diagram preserves and uniformly scales its desktop arra
 test("step descriptions stay readable during manual playback and reduced motion", async ({
   page,
 }) => {
-  expect(password).toBeTruthy();
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.setViewportSize({ width: 360, height: 780 });
-  await page.goto("/access");
-  await page.getByLabel("Password", { exact: true }).fill(password!);
-  await page.getByRole("button", { name: "Enter Paykit" }).click();
+  await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
   const story = page.getByTestId("payment-story");
   const caption = story.getByTestId("payment-story-caption");
@@ -718,12 +683,9 @@ test("step descriptions stay readable during manual playback and reduced motion"
 
 test("the payment story autoplays, loops, and pauses", async ({ page }) => {
   test.setTimeout(150_000);
-  expect(password).toBeTruthy();
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto("/access");
-  await page.getByLabel("Password", { exact: true }).fill(password!);
-  await page.getByRole("button", { name: "Enter Paykit" }).click();
+  await page.goto("/");
   const story = page.getByTestId("payment-story");
   await story.scrollIntoViewIfNeeded();
   await expect(story).toHaveAttribute("data-playing", "true");

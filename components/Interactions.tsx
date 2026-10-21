@@ -8,7 +8,7 @@ export function Teaser({ children }: { children: ReactNode }) {
     <div className={`video-frame ${loaded ? "is-playing" : ""}`}>
       {loaded ? (
         <iframe
-          src="https://www.youtube-nocookie.com/embed/yUkBWQ1J7bQ?autoplay=1&rel=0"
+          src="https://www.youtube-nocookie.com/embed/cQi8QkG_y4Y?autoplay=1&rel=0"
           title="Paykit teaser"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"

@@ -126,8 +126,8 @@ These claims were rechecked against current Paykit commit `84239143fa17a5a0b2ba0
 
 - [Bitkit](https://bitkit.to/): present as a supporting wallet, use the official logo, and invite visitors to try contact payments. Do not imply all published Bitkit builds have identical protocol or asset support.
 - [Payky](https://payky.app/): include as a practical destination without inventing product capabilities.
-- [Pubky Market](https://staging.pubky.app/shop): use this exact product name. Individual shops are third-party stores within the Market. The supplied staging destination returned an access restriction during research; describe it as staging and do not imply the landing password grants access. Replace the link when the public destination is available.
-- [Teaser](https://youtu.be/yUkBWQ1J7bQ): click to load an embedded player using `youtube-nocookie.com`; no video iframe before interaction.
+- [Pubky Market](https://staging.pubky.app/shop): use this exact product name. Individual shops are third-party stores within the Market. The supplied staging destination returned an access restriction during research; its access requirements are separate from this public landing page. Replace the link when the public destination is available.
+- [Teaser](https://www.youtube.com/watch?v=cQi8QkG_y4Y): click to load an embedded player using `youtube-nocookie.com`; no video iframe before interaction.
 - [Pubky](https://pubky.org/), [Paykit repository](https://github.com/pubky/paykit-rs), [SDK](https://github.com/pubky/paykit-rs/tree/master/paykit-sdk), [Swift/Kotlin bindings](https://github.com/pubky/paykit-rs/tree/master/paykit-ffi), and [Paykit Server](https://github.com/pubky/paykit-server): deeper resources.
 
 Use a restrained “More wallets coming soon” placeholder as requested, without fabricated wallet names, logos, or integration commitments. Offer an integration contact action beside it.
@@ -164,28 +164,23 @@ Direction: a cohesive graphite technology site, cool-white Geist typography, res
 7. **Pubky foundation:** compact explanation of identity, DHT routing, and chosen/self-hosted data storage, with a matching original illustration and links to the underlying infrastructure. Images are conceptual rather than topology specifications.
 8. **Resources:** a consistent two-column grid of source, specifications, receiving server, and Pubky overview links.
 9. **Lugano:** title “Meet us in Lugano”, subtitle “Let’s talk Paykit”, and “Find us at the Synonym booth” as requested by the user. Group verified workshop details with direct Google Calendar and `.ics` download actions. Keep accurate UTC times and the thirty-minute download reminder.
-10. **FAQ/contact/footer:** short expandable answers, a straightforward integration-interest email composer, direct email fallback, and preview logout.
+10. **FAQ/contact/footer:** short expandable answers, a straightforward integration-interest email composer, and direct email fallback.
 
-Both conceptual illustrations were generated using the built-in image generation tool. The exact prompts, provenance, and project asset paths are documented in [illustration-prompts.md](illustration-prompts.md). The teaser poster is the supplied video’s [official YouTube thumbnail](https://i.ytimg.com/vi/yUkBWQ1J7bQ/maxresdefault.jpg). Bitkit's original SVG preserves its white lettering, black outline, and orange mark; do not apply a monochrome brightness filter.
+Both conceptual illustrations were generated using the built-in image generation tool. The exact prompts, provenance, and project asset paths are documented in [illustration-prompts.md](illustration-prompts.md). The teaser poster is the supplied video’s [official YouTube thumbnail](https://i.ytimg.com/vi/cQi8QkG_y4Y/maxresdefault.jpg). Bitkit's original SVG preserves its white lettering, black outline, and orange mark; do not apply a monochrome brightness filter.
 
 The payment illustration's current version shows two hypothetical profiles: PayPal / Bitkit with Bitcoin / Wise, and Ethereum / a WDK wallet with Bitcoin / Revolut. Only Bitcoin connects the profiles. The orange frame labels discovery and detail exchange as handled by Paykit; the caption retains wallet approval. Named methods illustrate matching rather than announcing integrations. WDK is a developer toolkit; its [official Bitcoin wallet module](https://docs.wdk.tether.io/sdk/wallet-modules/wallet-btc/) supports Bitcoin accounts, signing, and sending. On screens up to 900px, a responsive HTML equivalent replaces raster text so method names remain readable.
 
 The FAQ is the main useful addition to the original brief: it reinforces that Paykit is an adoptable protocol and clarifies data control without lengthening the introduction.
 
-## Preview hosting and verification plan
+## Public launch — 21 October 2026
 
-Build with Next.js 16 App Router and deploy on Vercel. Keep `LANDING_PASSWORD` and a random `SESSION_SECRET` of at least 32 characters in server-only environment variables. Never place the preview password in repository content or public JavaScript.
+The project owner authorized removing the temporary password gate. The landing page and workshop calendar are public, with no password, session cookie, or secret environment-variable requirement. The old access/logout routes and session helpers/tests have been removed. Search indexing is enabled; CSP and the other security headers remain in place. Sharing metadata and the preview image remain public.
 
-Authenticate on the server before rendering protected content. Use a signed seven-day HTTP-only cookie, `SameSite=Lax`, secure in production; bind sessions to the configured password so rotation revokes them. Fail closed if either variable is absent. Do not store the raw password in a cookie.
+The introductory video is now https://www.youtube.com/watch?v=cQi8QkG_y4Y, with its official local thumbnail and the same click-to-load privacy behavior.
 
-Apply `noindex` metadata, robots exclusion, and response headers during the gated preview. These are indexing controls, not the access-control mechanism. At public launch remove the gate deliberately and revise the indexing/preview metadata together.
+Validation covers anonymous HTML/RSC/calendar access, retired endpoint responses, public sharing metadata, desktop/mobile layout, calendar actions, the new video embed and contact-draft behavior. Production URL: https://paykit-landing-page.vercel.app.
 
-The Vercel project has a published persistent WAF rule limiting `/api/access` to ten requests per sixty seconds per IP. This lives in Vercel platform configuration and must be recreated if the site moves to a new project.
-
-Validation includes session integrity/expiry/configuration tests, TypeScript checking, a production build, and browser checks for password access, desktop/mobile layout, contact-draft behavior, and click-to-load video. Review the implemented authentication and data handling before deployment. Check deployed headers, unauthenticated redirects, failed/successful login, and protected responses on the final Vercel URL.
-
-Verified production URL: [paykit-landing-page.vercel.app](https://paykit-landing-page.vercel.app).
-
+The following delivery record describes the earlier gated preview, rather than the current public launch.
 
 ## Delivery verification — 20 October 2026
 

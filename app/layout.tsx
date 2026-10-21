@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description,
     images: [socialImage],
   },
-  robots: { index: false, follow: false, nocache: true },
+  robots: { index: true, follow: true },
   icons: {
     icon: [
       {
