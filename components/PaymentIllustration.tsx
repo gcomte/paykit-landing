@@ -323,13 +323,6 @@ export default function PaymentIllustration() {
                   </span>
                 </div>
               ))}
-              <div
-                className={styles.discoverySummaryPerson}
-                data-summary-person="Charlie"
-              >
-                <strong>Charlie</strong>
-                <span className={styles.discoverySummaryPlaceholder}>...</span>
-              </div>
             </div>
           </div>
         </div>

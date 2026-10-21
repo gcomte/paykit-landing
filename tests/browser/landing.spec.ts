@@ -588,9 +588,7 @@ test("the mobile payment diagram preserves and uniformly scales its desktop arra
     }
 
     await story.locator('button[data-step="1"]').click();
-    const charlie = node.locator('[data-summary-person="Charlie"]');
-    if (width <= 700) await expect(charlie).toHaveCSS("display", "none");
-    else await expect(charlie).not.toHaveCSS("display", "none");
+    await expect(node.locator('[data-summary-person="Charlie"]')).toHaveCount(0);
     const portrait = alice.locator('img[alt=""]');
     if (width <= 700) await expect(portrait).toBeHidden();
     else await expect(portrait).toBeVisible();
